@@ -8,13 +8,13 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.3.0'],
+        ['id' => '1.4.0'],
     'bot' =>
-        ['id' => '1.3.0'],
+        ['id' => '1.4.0'],
     'release' => [
-        'name' => 'Seventeen SVT',
-        'description' => 'Bug fixes and conversation download and view plain conversation',
-        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.3.0',
+        'name' => 'SVT Tachycardia',
+        'description' => 'Statistics fixes - make sure we only count human turns and include processing turns',
+        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.4.0',
     ],
 
 ];
