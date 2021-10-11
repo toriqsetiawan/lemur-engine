@@ -216,7 +216,7 @@
                                 <!-- /.tab-pane -->
                                 @endhasrole
 
-                            @if(!empty($response))
+                            @if(!empty($response) && !empty($conversation))
                                 <!-- /.tab-pane -->
 
                                     <div class="tab-pane" id="chat-plain">
