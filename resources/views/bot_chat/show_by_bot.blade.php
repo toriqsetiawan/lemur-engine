@@ -127,7 +127,7 @@
                                 @if(!empty($sentences))
                                     <li><a href="#sentence-debug" data-toggle="tab">Sentences Debug</a></li>
                                 @endif
-                                @if(!empty($response))
+                                @if( !empty($response) && !empty($bot) && !empty($conversation))
                                     <li><a href="#chat-plain" data-toggle="tab">Plain Chat</a></li>
                                     <li><a href="{!! url('/bot/logs/'.$bot->slug.'/'.$conversation->slug.'/download') !!}">Download</a></li>
                                 @endif
@@ -216,7 +216,7 @@
                                 <!-- /.tab-pane -->
                                 @endhasrole
 
-                            @if(!empty($response))
+                            @if(!empty($response) && !empty($conversation))
                                 <!-- /.tab-pane -->
 
                                     <div class="tab-pane" id="chat-plain">
