@@ -25,8 +25,8 @@ class UploadCategoryFileRequest extends FormRequest
      */
     public function rules()
     {
-        $rules['aiml_file'] = 'required|max:80000|file|mimes:application/xml,xml,csv,txt';
-        
+        //had to add html to the list because it was getting confused html e.g. <a> where in the aiml/csv files
+        $rules['aiml_file'] = 'required|max:80000|file|mimes:application/xml,xml,csv,txt,html';
         return $rules;
     }
 
