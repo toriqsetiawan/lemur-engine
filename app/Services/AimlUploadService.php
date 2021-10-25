@@ -121,7 +121,14 @@ class AimlUploadService
     {
 
         $path = $file->getRealPath();
-        $data = array_map('str_getcsv', file($path));
+
+        //this has been adapted as poeple are just uploading badly formed csvs
+        //i am going to leave the other csv uploads as they are
+        //but if i need to update then i will
+        $handle = fopen($path, "r");
+        while (($dataItem = fgetcsv($handle, 0, ",", "\"", "\\"))!== false) {
+            $data[] =  $dataItem;
+        }
         //ignore the first line
         array_shift($data);
 
@@ -139,10 +146,17 @@ class AimlUploadService
                 );
             }
 
-
+            if (!isset($record[1])) {
+                throw new AimlUploadException('Row: '.$index.' - Cannot read pattern (column 2), please check the data');
+            }
             $pattern = trim($record[1]);
+
             $topic = trim($record[2]);
             $that = trim($record[3]);
+
+            if (!isset($record[4])) {
+                throw new AimlUploadException('Row: '.$index.' - Cannot read template (column 5), please check the data');
+            }
             $template = trim($record[4]);
             $status = $input['status'];
             $categoryGroupId = $categoryGroupIds[$categoryGroupName];
@@ -211,11 +225,11 @@ class AimlUploadService
             $input['status']
         );
 
-        try{
+        try {
             $xml = simplexml_load_string($content);
-        }catch(\ErrorException $e){
-            $message = str_replace("simplexml_load_string(): ","",$e->getMessage());
-            Throw new AimlUploadException($message);
+        } catch (\ErrorException $e) {
+            $message = str_replace("simplexml_load_string(): ", "", $e->getMessage());
+            throw new AimlUploadException($message);
         }
 
 

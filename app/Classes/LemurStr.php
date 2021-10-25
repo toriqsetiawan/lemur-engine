@@ -194,8 +194,7 @@ class LemurStr
         //strip any tags... except the allowed tags
         $str = strip_tags($str,$allowedTags);
 
-
-        preg_match_all("~<[^/|^>]+>(.*?)</[^>]+>|<[^/>]+/>|[a-z0-9\^\*#\$_]+~i",$str, $m);
+        preg_match_all("~<[^/|^>]+>(.*?)</[^>]+>|<[^/>]+/>|[\pL0-9\^\*#\$_]+~ui",$str, $m);
 
         //trim
         $str = trim(implode(' ',$m[0]));
