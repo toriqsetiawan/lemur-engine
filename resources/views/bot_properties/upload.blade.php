@@ -15,7 +15,7 @@
 
                         <div class="col-md-12">
                             <h4>Format:</h4>
-                            <p>The format of your cvs file should be:</p>
+                            <p>The format of your csv file should be:</p>
                             <code>"BotId","Name","Value"<br/>
                                 "dilly","ethics","I am always trying to stop fights"<br/>
                                 "dilly","favoritedj","Derrick Carter"<br/>

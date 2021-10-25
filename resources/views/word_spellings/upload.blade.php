@@ -15,7 +15,7 @@
 
                         <div class="col-md-12">
                             <h4>Format:</h4>
-                            <p>The format of your cvs file should be:</p>
+                            <p>The format of your csv file should be:</p>
                             <code>"WordSpellingGroupName","Language", "Word","Replacement"<br/>
                                 "Default Spelling Set","en","hte","the"<br/>
                                 "Default Spelling Set","en","recieve","receive"<br/>

@@ -29,4 +29,16 @@ class UploadCategoryFileRequest extends FormRequest
         
         return $rules;
     }
+
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        $mineType = $this->file('aiml_file')->getMimeType();
+        return [
+            'aiml_file.mimes' => 'Incorrect mime type - please make sure your file has one of the following mime types: application/xml,xml,csv,txt.
+                                    It is '.$mineType,
+        ];
+    }
 }

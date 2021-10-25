@@ -411,7 +411,7 @@ class AimlUploadService
             $categoryGroup->name = ucwords($categoryGroupName);
             $categoryGroup->user_id = $userId;
             $categoryGroup->language_id = $languageId;
-            $categoryGroup->description = "Category Group created when uploading CVS";
+            $categoryGroup->description = "Category Group created when uploading CSV";
             $categoryGroup->is_master = false;
             $categoryGroup->status = $status;
             $categoryGroup->save();

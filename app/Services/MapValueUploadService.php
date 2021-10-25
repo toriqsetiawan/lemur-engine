@@ -109,7 +109,7 @@ class MapValueUploadService
             $map = new Map;
             $map->name = ucwords($mapName);
             $map->user_id = $userId;
-            $map->description = "Map created when uploading CVS";
+            $map->description = "Map created when uploading CSV";
             $map->is_master = false;
             $map->save();
         } elseif ($map->deleted_at !== null) {

@@ -14,12 +14,12 @@
                     <div class="col-md-12">
 
                         <div class="col-md-12">
-                            <h4>AIML or CVS:</h4>
+                            <h4>AIML or CSV:</h4>
                             <p>You can use this form to upload a csv file or an aiml file</p>
                         </div>
                         <div class="col-md-6">
                             <h4>CSV Format:</h4>
-                            <p>The format of your cvs file should be:</p>
+                            <p>The format of your csv file should be:</p>
                             <code>"Filename","Pattern","Topic","That","Template","Status"<br/>
                                 "Unit Test","BYE","","","{!! htmlentities("<template>Bye!</template>") !!}","A"<br/>
                                 "Unit Test","HI","","","{!! htmlentities("<template>Hello!</template>") !!}","A"<br/>

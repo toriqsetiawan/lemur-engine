@@ -111,7 +111,7 @@ class SetValueUploadService
             $set = new Set;
             $set->name = ucwords($setName);
             $set->user_id = $userId;
-            $set->description = "Set created when uploading CVS";
+            $set->description = "Set created when uploading CSV";
             $set->is_master = false;
             $set->save();
         } elseif ($set->deleted_at !== null) {

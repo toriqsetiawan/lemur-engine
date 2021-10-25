@@ -15,7 +15,7 @@
 
                         <div class="col-md-12">
                             <h4>Format:</h4>
-                            <p>The format of your cvs file should be:</p>
+                            <p>The format of your csv file should be:</p>
                             @hasRole('admin')
                             Admin Example
                             <code>"Lang","1stPerson","2ndPerson","3rdPerson","3rdPerson Female","3rdPerson Male","Master Data?"

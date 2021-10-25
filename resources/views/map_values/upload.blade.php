@@ -15,7 +15,7 @@
 
                         <div class="col-md-12">
                             <h4>Format:</h4>
-                            <p>The format of your cvs file should be:</p>
+                            <p>The format of your csv file should be:</p>
                             <code>"MapName","Word","Value"<br/>
                                 "Capital Cities","France","Paris"<br/>
                                 "Capital Cities","England","London"<br/>

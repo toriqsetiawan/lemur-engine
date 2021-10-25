@@ -82,7 +82,7 @@
                                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fa fa-download'></i>
                                                     <span class="fa fa-caret-down"></span></button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="{!! url('/categories/'.$categoryGroup->category_group_id.'/download/csv') !!}" type='link' id='{!! $categoryGroup->category_group_id !!}_download_csv_button' data-test='{!! $categoryGroup->category_group_id !!}_download_csv_button'>CVS</a></li>
+                                                        <li><a href="{!! url('/categories/'.$categoryGroup->category_group_id.'/download/csv') !!}" type='link' id='{!! $categoryGroup->category_group_id !!}_download_csv_button' data-test='{!! $categoryGroup->category_group_id !!}_download_csv_button'>CSV</a></li>
                                                         <li><a href="{!! url('/categories/'.$categoryGroup->category_group_id.'/download/aiml') !!}" type='link' id='{!! $categoryGroup->category_group_id !!}_download_csv_button' data-test='{!! $categoryGroup->category_group_id !!}_download_csv_button'>AIML</a></li>
                                                     </ul>
                                             </div>
