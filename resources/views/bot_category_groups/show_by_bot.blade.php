@@ -27,23 +27,37 @@
                 </div>
             </div>
 
-            <div class="clearfix"></div>
+            <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='check_all_div'>
+                <div class='input-group'>
+                    <span class='input-group-addon'>
+                        <input type='checkbox' name="all" id="checksuggested" data-test='check_suggested_field'>
+                    </span>
+                    <input type='text' value='Check Suggested Files' class='form-control' readonly="readonly">
+                </div>
+                <small class="help-block text-muted-wrapped" data-test="">Select the default suggested files to capture 90% of all conversations</small>
+            </div>
+
+
+
 
 
 
             {!! Form::open(['route' => 'botCategoryGroups.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
 
 
-                    @foreach($categoryGroups as $index => $categoryGroup)
+            <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                <button type="reset" class="btn btn-default">Reset</button>
+            </div>
 
+            <div class="clearfix"></div>
+
+        @foreach($categoryGroups as $index => $categoryGroup)
 
                                 {!! Form::hidden('bulk', 1) !!}
                                 {!! Form::hidden('redirect_url', url()->current(),['data-test'=>$categoryGroup->category_group_id."-redirect-url"] ) !!}
                                 {!! Form::hidden('bot_id', $bot->slug,['data-test'=>$categoryGroup->category_group_id."-bot_id"] ) !!}
-
                                 {!! Form::hidden('category_group_id['.$index.']', $categoryGroup->category_group_id,['data-test'=>$categoryGroup->category_group_id."-category_group_id"] ) !!}
-
-
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $categoryGroup->name !!}_div'>
                                     <label for='{!! $categoryGroup->name !!}_field' data-test='{!! $categoryGroup->name !!}_label'>{!! $categoryGroup->name !!} categories:</label>
@@ -59,7 +73,7 @@
 
                                             @endif
 
-                                        <input type='checkbox' class="cb-element" name='linked[{!! $index !!}]' value='1' {!! $checked !!}  id='{!! $categoryGroup->name !!}_link_field' {$validation} data-test='{!! $categoryGroup->name !!}_link_field'>
+                                        <input type='checkbox' class="cb-element" name='linked[{!! $index !!}]' value='1' {!! $checked !!}  id='{!! $categoryGroup->category_group_id !!}_link_field' data-test='{!! $categoryGroup->name !!}_link_field'>
                                         </span>
 
                                         <input type='text' value='{!! strtolower($categoryGroup->name) !!}' class='form-control' id='{!! $categoryGroup->name !!}_value_field' data-test='{!! $categoryGroup->name !!}_value_field'>
@@ -170,6 +184,34 @@
                 $('#checkall').prop('checked',false);
             }
         });
+
+        $('#checksuggested').change(function () {
+            if($('#checksuggested').is(":checked")){
+
+                var items = {!! json_encode(config('lemur_dropdown.suggested_category_groups'))!!}
+
+                for(var i = 0; i < items.length; i++) {
+                    if($('#'+items[i]+'_link_field').length) {
+                        $('#' + items[i] + '_link_field').prop('checked', true);
+                    }
+                }
+
+
+
+            }
+        });
+
+        var criticalItems = {!! json_encode(config('lemur_dropdown.critical_category_groups'))!!}
+        for(var i = 0; i < criticalItems.length; i++) {
+            if($('#'+criticalItems[i]+'_link_field').length){
+                $('#'+criticalItems[i]+'_link_field').prop('checked',true).prop('disabled',true);
+                text = $('#'+criticalItems[i]+'_value_field').val();
+                $('#'+criticalItems[i]+'_value_field').prop('readonly',true).val(text+' (critical - cannot unset)');
+            }
+        }
+
+
+
     </script>
 @endpush
 
