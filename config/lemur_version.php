@@ -8,13 +8,14 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.4.1'],
+        ['id' => '1.5.0'],
     'bot' =>
         ['id' => '1.4.0'],
     'release' => [
-        'name' => 'SVT Tachycardia',
-        'description' => 'Statistics fixes - make sure we only count human turns and include processing turns',
-        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.4.0',
+        'version' => '1.5.0',
+        'name' => 'Cardi B',
+        'description' => 'A number of fixes that include feature to prevent the deleting of critical files, CORS updates, normalization of accented characters',
+        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.5.0',
     ],
 
 ];
