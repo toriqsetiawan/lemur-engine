@@ -35,7 +35,7 @@ class AimlUploadService
                 $fileName = strtolower(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
                 $categoryGroupNames[$fileName] = $fileName;
             } else {
-                $categoryGroupNames = $file->getAllCategoryGroupNames($file);
+                $categoryGroupNames = $this->getAllCategoryGroupNames($file);
             }
 
             $this->deleteAllCategoriesFromThisGroup($categoryGroupNames, $loggedInUser);
