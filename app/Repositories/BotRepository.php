@@ -28,6 +28,7 @@ class BotRepository extends BaseRepository
         'summary',
         'description',
         'default_response',
+        'critical_category_group',
         'lemurtar_url',
         'image',
         'status',

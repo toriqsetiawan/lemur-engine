@@ -101,6 +101,11 @@
     <small class="help-block text-muted-wrapped" data-test="">This is the response which is returned if no matching AIML category is found</small>
 </div>
 
+<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="critical_category_group">
+    {!! Form::label('critical_category_group', 'Critical Category Group:', ['data-test'=>"critical_category_group_label"]) !!}
+    {!! Form::text('critical_category_group', null, ['placeholder'=>'std-critical', 'readonly'=>$readonly,  'class' => 'form-control', 'id'=>"critical_category_group_field", 'data-test'=>"critical_category_group_field"] ) !!}
+    <small class="help-block text-muted-wrapped" data-test="">The critical file that will always be linked to this bot. This contains the catchall AIML categories</small>
+</div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="lemurtar_div">
     {!! Form::label('lemurtar_url', 'Lemurtar URL:', ['data-test'=>"lemurtar_label"]) !!}
