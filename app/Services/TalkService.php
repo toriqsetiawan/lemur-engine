@@ -82,6 +82,9 @@ class TalkService
         }else{
 
             $origin = $request->headers->get('Origin');
+
+            dd($origin);
+
             $botAllowedSitesArr = $botAllowedSites->pluck('website_url','website_url');
             if (in_array($origin, $botAllowedSitesArr)) {
                 return true;
