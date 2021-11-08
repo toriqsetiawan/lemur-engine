@@ -21,7 +21,7 @@
 
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="thumbnail">
-                                <span class=""><img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture"></span>
+                                <span class=""><img class="profile-user-img img-responsive img-circle pull-left" src="{!! $bot->imageUrl !!}" alt="Bot Avatar"></span>
                                 <div class="home-info-box-content">
                                     <span class="info-box-text">{!! $bot->name !!}</span>
                                     <span class="info-box-number" style="word-break: break-all">{!! $bot->summary !!}<br/></span>
@@ -72,7 +72,7 @@
 
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="thumbnail">
-                            <span class=""><img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture"></span>
+                            <span class=""><img class="profile-user-img img-responsive img-circle pull-left" src="{!! $bot->imageUrl !!}" alt="Bot avatar"></span>
                             <div class="home-info-box-content">
                                 <span class="info-box-text">{!! $bot->name !!}</span>
                                 <span class="info-box-number" style="word-break: break-all">{!! $bot->summary !!}<br/></span>

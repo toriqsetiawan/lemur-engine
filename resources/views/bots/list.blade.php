@@ -23,7 +23,7 @@
                         <!-- Profile Image -->
                         <div class="box">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture">
+                                <img class="profile-user-img img-responsive img-circle pull-left" src="{!! $bot->imageUrl !!}" alt="Bot avatar">
 
                                 <h3 class="profile-username text-center">{!! $bot->name !!}</h3>
 
