@@ -207,6 +207,14 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
+    public function botAllowedSites()
+    {
+        return $this->hasMany(\App\Models\BotAllowedSite::class, 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
     public function bots()
     {
         return $this->hasMany(\App\Models\Bot::class, 'user_id');

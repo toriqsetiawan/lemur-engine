@@ -231,8 +231,5 @@ return [
         'std-suffixes',
         'std-that',
         'std-yesno',
-    ],
-    'critical_category_groups' => [
-        env('CRITICAL_CATEGORY_GROUP','std-critical')
     ]
 ];

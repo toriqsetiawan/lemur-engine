@@ -10,6 +10,7 @@ use App\Http\Requests\CreateTalkRequest;
 use App\Http\Requests\UpdateBotRequest;
 use App\Http\Requests\UpdateBotSlugRequest;
 use App\Http\Requests\UpdateClientSlugRequest;
+use App\Models\BotAllowedSite;
 use App\Models\BotAvatar;
 use App\Models\BotCategoryGroup;
 use App\Models\BotKey;
@@ -571,6 +572,49 @@ class BotController extends AppBaseController
             'botList'=>$botList]
         );
     }
+
+
+    /**
+     * Display all the allowed sites for this bot in the tab
+     *
+     * @param $id
+     * @return Response
+     */
+    public function botSites($id)
+    {
+
+        $bot = $this->botRepository->find($id);
+
+
+        if (empty($bot)) {
+            Flash::error('Bot not found');
+
+            return redirect(route('bots.index'));
+        }
+
+        //to help with data testing and form settings
+        $link = 'botAllowedSites';
+        $htmlTag = 'bot-allowed-sites';
+        $title = 'Bot Allowed Sites';
+        $resourceFolder = 'bot_allowed_sites';
+
+        //set a list of all keys for this bot
+        $botAllowedSites = BotAllowedSite::orderBy('website_url')->where('bot_id', $bot->id)->get();
+        //list of bots for forms (but in this view we only want the bot we are looking at)
+        $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
+
+        session(['target_bot' => $bot]);
+
+
+        return view('bots.edit_all')->with(
+            ['bot'=> $bot,'botAllowedSites'=> $botAllowedSites,
+                'link'=>$link, 'htmlTag'=>$htmlTag,
+                'title'=>$title,
+                'resourceFolder'=>$resourceFolder,
+                'botList'=>$botList]
+        );
+    }
+
 
     /**
      * Display all the properties for this bot in the tab

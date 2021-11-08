@@ -74,15 +74,14 @@
         });
     </script>
 @endpush
-<!-- Language Id Field -->
-<div class="form-group col-lg-6 col-md-6 col-sm-12 select2" data-test="language_id_div">
-    {!! Form::label('language_id', 'Language:', ['data-test'=>"language_id_label"]) !!}
-    {!! Form::select('language_id', $languageList, (!empty($bot)?$bot->language->slug:(!empty($bot)?$bot->language->slug:"")), ['disabled'=>$readonly, 'readonly'=>$readonly, 'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Bot::getFormValidation('language_id'), 'data-test'=>"$htmlTag-language_id-select", 'id'=>"$htmlTag-language_id-select"]) !!}
-</div>
-
-<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="name_div">
+<div class="form-group col-lg-4 col-md-4 col-sm-12" data-test="name_div">
     {!! Form::label('name', 'Name:', ['data-test'=>"name_label"]) !!}
     {!! Form::text('name', null, ['placeholder'=>'Movie Bot', 'readonly'=>$readonly, 'class' => 'form-control', App\Models\Bot::getFormValidation('name'),'id'=>"name_field", 'data-test'=>"name_field"] ) !!}
+</div>
+<!-- Language Id Field -->
+<div class="form-group col-lg-2 col-md-2 col-sm-12 select2" data-test="language_id_div">
+    {!! Form::label('language_id', 'Language:', ['data-test'=>"language_id_label"]) !!}
+    {!! Form::select('language_id', $languageList, (!empty($bot)?$bot->language->slug:(!empty($bot)?$bot->language->slug:"")), ['disabled'=>$readonly, 'readonly'=>$readonly, 'placeholder'=>'Please Select', 'class' => 'form-control select2 generic', App\Models\Bot::getFormValidation('language_id'), 'data-test'=>"$htmlTag-language_id-select", 'id'=>"$htmlTag-language_id-select"]) !!}
 </div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="summary_div">
@@ -92,7 +91,7 @@
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="description_div">
     {!! Form::label('description', 'Description:', ['data-test'=>"description_label"]) !!}
-    {!! Form::textarea('description', null, ['placeholder'=>'This bot talks about movies', 'readonly'=>$readonly, 'rows'=>2, 'class' => 'form-control', App\Models\Bot::getFormValidation('description'),'id'=>"description_field", 'data-test'=>"description_field"] ) !!}
+    {!! Form::textarea('description', null, ['placeholder'=>'This bot talks about movies', 'readonly'=>$readonly, 'rows'=>4, 'class' => 'form-control', App\Models\Bot::getFormValidation('description'),'id'=>"description_field", 'data-test'=>"description_field"] ) !!}
 </div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="default_response">
@@ -101,16 +100,16 @@
     <small class="help-block text-muted-wrapped" data-test="">This is the response which is returned if no matching AIML category is found</small>
 </div>
 
+<div class="form-group col-lg-12 col-md-12 col-sm-12" data-test="lemurtar_div">
+    {!! Form::label('lemurtar_url', 'Lemurtar URL:', ['data-test'=>"lemurtar_label"]) !!}
+    {!! Form::textarea('lemurtar_url', null, ['readonly'=>$readonly, 'rows'=>4, 'class' => 'form-control', App\Models\Bot::getFormValidation('lemurtar_url'),'id'=>"lemurtar_urlfield", 'data-test'=>"lemurtar_url_field"] ) !!}
+    <small class="help-block text-muted-wrapped" data-test="">Visit <a href="{!! config('lemur.lemurtar_url') !!}">{!! config('lemur.lemurtar_url') !!}</a> to generate a talking head avatar for your bot.</small>
+</div>
+
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="critical_category_group">
     {!! Form::label('critical_category_group', 'Critical Category Group:', ['data-test'=>"critical_category_group_label"]) !!}
     {!! Form::text('critical_category_group', null, ['placeholder'=>'std-critical', 'readonly'=>$readonly,  'class' => 'form-control', 'id'=>"critical_category_group_field", 'data-test'=>"critical_category_group_field"] ) !!}
-    <small class="help-block text-muted-wrapped" data-test="">The critical file that will always be linked to this bot. This contains the catchall AIML categories</small>
-</div>
-
-<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="lemurtar_div">
-    {!! Form::label('lemurtar_url', 'Lemurtar URL:', ['data-test'=>"lemurtar_label"]) !!}
-    {!! Form::textarea('lemurtar_url', null, ['readonly'=>$readonly, 'rows'=>2, 'class' => 'form-control', App\Models\Bot::getFormValidation('lemurtar_url'),'id'=>"lemurtar_urlfield", 'data-test'=>"lemurtar_url_field"] ) !!}
-    <small class="help-block text-muted-wrapped" data-test="">Visit <a href="{!! config('lemur.lemurtar_url') !!}">{!! config('lemur.lemurtar_url') !!}</a> to generate a talking head avatar for your bot.</small>
+    <small class="help-block text-muted-wrapped" data-test="">The critical category group that should always be linked to this bot. This contains the catchall AIML categories (optional)</small>
 </div>
 
 <!-- Status Field -->

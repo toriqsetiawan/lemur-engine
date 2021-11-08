@@ -2,6 +2,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Bot;
+use App\Models\BotAllowedSite;
 use App\Models\CategoryGroup;
 use App\Models\Client;
 use App\Models\ClientCategory;
@@ -68,6 +69,8 @@ class TransformData
                 $item = false;
                 if ($key == 'bot_id') {
                     $item = Bot::where('slug', $value)->firstOrFail();
+                } elseif ($key == 'bot_allowed_site_id') {
+                    $item = BotAllowedSite::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'language_id') {
                     $item = Language::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'category_group_id' && !is_array($value)) {

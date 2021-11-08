@@ -144,7 +144,7 @@ class Bot extends Model
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['botCategoryGroups', 'botKeys','botProperties',
-                                    'botWordSpellingGroups' ,'conversations','conversations'];
+                                    'botWordSpellingGroups' ,'conversations','conversations','botAllowedSites'];
 
 
     public $fillable = [
@@ -257,6 +257,13 @@ class Bot extends Model
         return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function botAllowedSites()
+    {
+        return $this->hasMany(\App\Models\BotAllowedSite::class, 'bot_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
