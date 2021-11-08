@@ -93,7 +93,7 @@ class TalkService
             }
 
             //return no access....
-            throw new AuthorizationException('This site is authorised to talk to this bot');
+            throw new AuthorizationException('This website is not authorised to talk to this bot');
 
 
         }
