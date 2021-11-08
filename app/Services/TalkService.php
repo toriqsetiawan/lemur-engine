@@ -76,6 +76,12 @@ class TalkService
         }
 
         $botAllowedSites = BotAllowedSite::where('bot_id', $botFound->id);
+
+        $origin = $request->headers->get('Origin');
+
+
+        dd($botAllowedSites->count(), $origin);
+
         //there are no allowed sites specified which means all sites are allowed
         if($botAllowedSites->count()<=0){
             return true;
