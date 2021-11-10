@@ -21,7 +21,7 @@
 
 LOCK TABLES `category_groups` WRITE;
 /*!40000 ALTER TABLE `category_groups` DISABLE KEYS */;
-INSERT INTO `category_groups` (`id`, `user_id`, `language_id`, `slug`, `name`, `description`, `status`, `is_master`, `section`, `deleted_at`, `created_at`, `updated_at`) VALUES
+INSERT INTO `category_groups` (`id`, `user_id`, `language_id`, `slug`, `name`, `description`, `status`, `is_master`, `section_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1,1,1,'dev-testcases','dev-testcases','Part of the master set of Lemur Engine AIML categories. This group is used in development to test everything is working as expected.','A',1,1,NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 (2,1,1,'std-critical','std-critical','Part of the master set of Lemur Engine AIML categories. This group contains a few critical categories. Make sure this is always linked to your bot .','A',1,2,NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
 (3,1,1,'std-rating','std-rating','Part of the master set of Lemur Engine AIML categories. This group contains patterns to request clients to rate your bot.','A',1,7,NULL,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP),
