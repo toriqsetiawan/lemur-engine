@@ -10,6 +10,7 @@ use App\Models\Conversation;
 use App\Models\EmptyResponse;
 use App\Models\Language;
 use App\Models\Map;
+use App\Models\Section;
 use App\Models\Set;
 use App\Models\Turn;
 use App\Models\WordSpellingGroup;
@@ -63,12 +64,16 @@ class TransformData
             //just return it
             if (is_array($value)) {
                 return $value;
+            }elseif($key == 'section_id' && empty($value) ){
+                return $value;
             }
 
             if (substr($key, -3)=='_id') {
                 $item = false;
                 if ($key == 'bot_id') {
                     $item = Bot::where('slug', $value)->firstOrFail();
+                } elseif ($key == 'section_id') {
+                    $item = Section::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'bot_allowed_site_id') {
                     $item = BotAllowedSite::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'language_id') {

@@ -42,5 +42,6 @@ class CreateBotAllowedSitesTable extends Migration
         });
 
         Schema::dropIfExists('bot_allowed_sites');
+
     }
 }

@@ -85,7 +85,7 @@ class BotPropertyDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 5
+                    var maxColumn = 6
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0]
                     var noSearchFields = [maxColumn]
@@ -109,7 +109,6 @@ class BotPropertyDataTable extends DataTable
             ]);
     }
 
-
     /**
      * Get columns.
      *
@@ -121,6 +120,7 @@ class BotPropertyDataTable extends DataTable
             'bot'=> ['name'=>'bots.slug','data'=>'bot','title'=>'BotId'],
             'name',
             'value',
+            'section'=> ['name'=>'sections.name','data'=>'sname','title'=>'Section', 'exportable'=>true],
             'email'=> ['name'=>'users.email','data'=>'email','title'=>'Owner', 'exportable'=>false],
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>

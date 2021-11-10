@@ -8,6 +8,7 @@ use App\Http\Requests\CreateBotPropertyRequest;
 use App\Http\Requests\UpdateBotPropertyRequest;
 use App\Http\Requests\UploadBotPropertyFileRequest;
 use App\Models\Bot;
+use App\Models\Section;
 use App\Repositories\BotPropertyRepository;
 use App\Services\BotPropertyUploadService;
 use Exception;
@@ -68,12 +69,15 @@ class BotPropertyController extends AppBaseController
         $this->authorize('create', BotProperty::class);
 
         $botList = Bot::orderBy('name')->pluck('name', 'slug');
+        $botPropertySectionList = Section::where('type','BOT_PROPERTY')->orderBy('order')->pluck('name', 'slug');
 
         return view('bot_properties.create')->with(
-            ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
-            'title'=>$this->title,
-            'resourceFolder'=>$this->resourceFolder,
-            'botList'=>$botList]
+            ['link'=>$this->link,
+                'htmlTag'=>$this->htmlTag,
+                'title'=>$this->title,
+                'resourceFolder'=>$this->resourceFolder,
+                'botList'=>$botList,
+                'botPropertySectionList'=>$botPropertySectionList]
         );
     }
 
@@ -153,13 +157,16 @@ class BotPropertyController extends AppBaseController
         }
 
         $botList = Bot::orderBy('name')->pluck('name', 'slug');
+        $botPropertySectionList = Section::where('type','BOT_PROPERTY')->orderBy('order')->pluck('name', 'slug');
+
 
         return view('bot_properties.edit')->with(
             ['botProperty'=> $botProperty, 'link'=>$this->link,
             'htmlTag'=>$this->htmlTag,
             'title'=>$this->title,
             'resourceFolder'=>$this->resourceFolder,
-            'botList'=>$botList]
+            'botList'=>$botList,
+                'botPropertySectionList'=>$botPropertySectionList]
         );
     }
 

@@ -119,6 +119,7 @@ class CategoryGroupDataTable extends DataTable
         return [
             'id'=> ['name'=>'category_groups.id','data'=>'id','title'=>'#'],
             'language'=> ['name'=>'languages.name','data'=>'language','title'=>'Lang'],
+            'section'=> ['name'=>'sections.name','data'=>'sname','title'=>'Section', 'exportable'=>true],
             'slug'=> ['name'=>'category_groups.slug','data'=>'slug','title'=>'Slug'],
             'name',
             'description' => ['name'=>'description','data'=>'description','title'=>'Desc','searchable'=>true,

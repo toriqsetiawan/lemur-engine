@@ -22,6 +22,7 @@ use App\Models\ClientProperty;
 use App\Models\Conversation;
 use App\Models\ConversationProperty;
 use App\Models\Language;
+use App\Models\Section;
 use App\Models\Turn;
 use App\Models\Wildcard;
 use App\Models\WordSpellingGroup;
@@ -362,17 +363,22 @@ class BotController extends AppBaseController
 
         //set a list of all the available properties for the ui
         $savedProperties = BotProperty::getFullPropertyList($bot->id);
+        $allSections = Section::getAllSectionsForCategoryGroups($savedProperties);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
         session(['target_bot' => $bot]);
+
+        $botPropertySectionList = Section::where('type','BOT_PROPERTY')->orderBy('order')->pluck('name', 'slug');
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'botProperties'=> $savedProperties, 'link'=>$link,
             'htmlTag'=>$htmlTag,
             'title'=>$title,
             'resourceFolder'=>$resourceFolder,
-            'botList'=>$botList]
+            'botList'=>$botList,
+                'botPropertySectionList'=>$botPropertySectionList,
+                'allSections'=>$allSections]
         );
     }
 
@@ -403,17 +409,25 @@ class BotController extends AppBaseController
 
         //set a list of all the available category groups for the ui
         $allCategoryGroups = BotCategoryGroup::getAllCategoryGroupsForBot($bot->id);
+        $allSections = Section::getAllSectionsForCategoryGroups($allCategoryGroups);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
         session(['target_bot' => $bot]);
+
+
+        $categoryGroupSectionList = Section::where('type','CATEGORY_GROUP')->orderBy('order')->pluck('name', 'slug');
+
+
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'categoryGroups'=> $allCategoryGroups,
             'link'=>$link, 'htmlTag'=>$htmlTag,
                 'title'=>$title,
             'resourceFolder'=>$resourceFolder,
-            'botList'=>$botList]
+            'botList'=>$botList,
+                'categoryGroupSectionList'=>$categoryGroupSectionList,
+                'allSections'=>$allSections]
         );
     }
 

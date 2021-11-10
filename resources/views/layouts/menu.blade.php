@@ -170,6 +170,10 @@
             </li>
 
 
+            <li class="{{ Request::is('sections*') ? 'active' : '' }}">
+                <a href="{{ route('sections.index') }}" data-test="sidebar-link-users"><i class="fa fa-circle-o"></i><span>Sections</span></a>
+            </li>
+
             <li class="{{ Request::is('users*') ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}" data-test="sidebar-link-users"><i class="fa fa-circle-o"></i><span>Users</span></a>
             </li>

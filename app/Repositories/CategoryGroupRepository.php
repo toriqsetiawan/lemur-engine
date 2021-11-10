@@ -23,6 +23,7 @@ class CategoryGroupRepository extends BaseRepository
     protected $fieldSearchable = [
         'user_id',
         'language_id',
+        'section_id',
         'slug',
         'name',
         'description',

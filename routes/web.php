@@ -68,6 +68,9 @@ Route::resource('maps', 'MapController')
 Route::resource('mapValues', 'MapValueController')
     ->middleware(['auth:web','data.transform']);
 
+Route::resource('sections', 'SectionController')
+    ->middleware('auth:web');
+
 Route::resource('sets', 'SetController')
     ->middleware('auth:web');
 

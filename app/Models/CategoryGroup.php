@@ -13,7 +13,7 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @SWG\Definition(
  *      definition="CategoryGroup",
- *      required={"user_id", "language_id", "slug", "name", "description", "status", "is_master"},
+ *      required={"user_id", "language_id", "section_id", "slug", "name", "description", "status","is_master"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -32,6 +32,12 @@ use Spatie\Sluggable\SlugOptions;
  *          type="integer",
  *          format="int32"
  *      ),
+ *      @SWG\Property(
+ *          property="section_id",
+ *          description="section_id",
+ *          type="integer",
+ *          format="int32"
+ *      }
  *      @SWG\Property(
  *          property="slug",
  *          description="slug",
@@ -100,6 +106,7 @@ class CategoryGroup extends Model
     public $fillable = [
         'user_id',
         'language_id',
+        'section_id',
         'slug',
         'name',
         'description',
@@ -116,6 +123,7 @@ class CategoryGroup extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'language_id' => 'integer',
+        'section_id' => 'integer',
         'slug' => 'string',
         'name' => 'string',
         'description' => 'string',
@@ -180,6 +188,14 @@ class CategoryGroup extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function section()
+    {
+        return $this->belongsTo(\App\Models\Section::class, 'section_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function botCategoryGroups()
@@ -207,7 +223,8 @@ class CategoryGroup extends Model
 
         $query = CategoryGroup::select([$this->table.'.*',
             'users.email as email',
-            'languages.name as language'])
+            'languages.name as language','sections.name as sname'])
+            ->leftJoin('sections', 'sections.id', '=', $this->table.'.section_id')
             ->leftJoin('users', 'users.id', '=', $this->table.'.user_id')
             ->leftJoin('languages', 'languages.id', '=', $this->table.'.language_id');
 

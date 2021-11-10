@@ -254,7 +254,7 @@ class Bot extends Model
      **/
     public function botCategoryGroups()
     {
-        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id');
+        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id')->orderBy('section_id');
     }
 
     /**
@@ -270,7 +270,7 @@ class Bot extends Model
      **/
     public function botProperties()
     {
-        return $this->hasMany(\App\Models\BotProperty::class, 'bot_id');
+        return $this->hasMany(\App\Models\BotProperty::class, 'bot_id')->orderBy('section_id');
     }
 
     /**

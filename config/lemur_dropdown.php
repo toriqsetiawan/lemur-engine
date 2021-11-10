@@ -6,6 +6,8 @@ return [
     |--------------------------------------------------------------------------
     |
     */
+    'default_state' => ['open' => 'open','closed' => 'closed'],
+    'sections' => ['BOT_PROPERTY' => 'Bot Properties','CATEGORY_GROUP' => 'Category Groups'],
     'item_status' => ['A' => 'Active','H' => 'Hidden', 'T' => 'Test'],
     'turn_status' => ['O' => 'Open', 'C' => 'Closed', 'F' => 'Failed', 'E' => 'Error', 'I' => 'In Progress'],
     'turn_source' => ['human' => 'Human', 'multiple' => 'Multiple', 'tag' => 'Tag', 'srai' => 'SRAI'],
