@@ -156,7 +156,7 @@ class CorrectBadlyGroupedCategories extends Migration
             $all = \App\Models\CategoryGroup::whereIn('slug',$mismatchedFiles)->withTrashed();
 
             if($all->count()<=0){
-                echo "No Data - nothing to correct";
+                //Fresh install - nothing to correct
                 return true;
             }
 
