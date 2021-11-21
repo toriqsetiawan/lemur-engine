@@ -86,7 +86,7 @@ class CategoryGroupDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 9
+                    var maxColumn = 10
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,1,2]
                     var noSearchFields = [maxColumn]

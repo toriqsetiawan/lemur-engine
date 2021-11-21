@@ -62,7 +62,7 @@
                 @php $sectionSlug = $sectionGroup['slug']; @endphp
                 @if($sectionGroup['default_state'] == 'open')
                     @php $sectionShow = 'true'; @endphp
-                    @php $collapseShow = 'collapse show'; @endphp
+                    @php $collapseShow = 'collapse in'; @endphp
 
                 @else
                     @php $sectionShow = 'false'; @endphp
@@ -149,6 +149,7 @@
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
+                    <div class="clearfix"></div>
                                                @endif
             @endforeach
 

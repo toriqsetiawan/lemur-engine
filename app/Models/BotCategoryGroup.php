@@ -177,6 +177,7 @@ class BotCategoryGroup extends Model
      */
     public static function getAllCategoryGroupsForBot($botId)
     {
+        $cleanAllCategoryGroup = [];
 
         //below is a list of categories linked to this bot
         $ids = BotCategoryGroup::select([
