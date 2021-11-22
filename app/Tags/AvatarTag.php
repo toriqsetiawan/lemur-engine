@@ -30,7 +30,6 @@ class AvatarTag extends AimlTag
     public function closeTag()
     {
 
-
         LemurLog::debug(
             __FUNCTION__,
             [
@@ -40,8 +39,6 @@ class AvatarTag extends AimlTag
                 'attributes'=>$this->getAttributes()
             ]
         );
-
-        $contents = $this->getCurrentTagContents(true);
 
         if ($this->hasAttribute('ACTION')) {
             $action = $this->getAttribute('ACTION');
