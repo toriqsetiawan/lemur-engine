@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSectionsTable extends Migration
+class UpdateSectionsTable extends Migration
 {
     /**
      * Run the migrations.
