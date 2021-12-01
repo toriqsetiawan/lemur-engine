@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Section;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Map;
 
