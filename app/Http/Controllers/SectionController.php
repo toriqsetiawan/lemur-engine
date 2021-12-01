@@ -78,10 +78,6 @@ class SectionController extends AppBaseController
         $this->authorize('create', Section::class);
         $input = $request->all();
 
-        if (!empty($input['is_protected'])) {
-            $input['is_protected']=0;
-        }
-
         $section = $this->sectionRepository->create($input);
 
         Flash::success('Section saved successfully.');
