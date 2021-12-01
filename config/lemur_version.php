@@ -10,7 +10,7 @@ return [
     'portal' =>
         ['id' => '1.6.0'],
     'bot' =>
-        ['id' => '1.5.0'],
+        ['id' => '1.4.0'],
     'release' => [
         'version' => '1.6.0',
         'name' => 'Cardigan Bay',
