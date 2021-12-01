@@ -68,6 +68,9 @@ Route::resource('maps', 'MapController')
 Route::resource('mapValues', 'MapValueController')
     ->middleware(['auth:web','data.transform']);
 
+Route::resource('sections', 'SectionController')
+    ->middleware('auth:web');
+
 Route::resource('sets', 'SetController')
     ->middleware('auth:web');
 
@@ -207,6 +210,9 @@ Route::resource('wildcards', 'WildcardController')
 Route::resource('botKeys', 'BotKeyController')
     ->middleware(['auth:web','data.transform']);
 
+Route::resource('botAllowedSites', 'BotAllowedSiteController')
+    ->middleware(['auth:web','data.transform']);
+
 Route::delete('botRatings/reset', 'BotRatingController@reset')
     ->middleware(['auth:web','data.transform']);
 
@@ -329,7 +335,8 @@ Route::group(['prefix' => '/bot'], function () {
     ->middleware('auth:web');
     Route::GET('/keys/{botSlug}/list', 'BotController@botKeys')
     ->middleware('auth:web');
-
+    Route::GET('/sites/{botSlug}/list', 'BotController@botSites')
+        ->middleware('auth:web');
 
     Route::GET('/categories/{botSlug}/list', 'BotController@botCategoryGroups')
     ->middleware('auth:web');

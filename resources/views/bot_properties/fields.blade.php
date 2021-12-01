@@ -76,3 +76,11 @@
 <div class="clearfix"></div>
 
 
+<!-- Section Field -->
+<div class="form-group col-lg-6 col-md-6 col-sm-12 select2" data-test="section_div">
+    {!! Form::label('section_id', 'Section:', ['data-test'=>"section_id_label"]) !!}
+    {!! Form::select('section_id', $botPropertySectionList, (!empty($botProperty)&&!empty($botProperty->section)?$botProperty->section->slug:(!empty($botProperty)&&!empty($botProperty->section)?$botProperty->section->slug:"")), [  'placeholder'=>'Please select', 'class' => 'form-control select2 first-option', App\Models\BotProperty::getFormValidation('section_id'), 'data-test'=>"$htmlTag-section-id-select", 'id'=>"$htmlTag-section-id-select"]) !!}
+</div>
+
+<div class="clearfix"></div>
+

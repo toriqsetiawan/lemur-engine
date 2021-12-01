@@ -12,7 +12,7 @@
 
             <div class="pull-right">
 
-                @if($htmlTag==='bot-keys' || $htmlTag==='bot-properties' || $htmlTag==='bots'|| $htmlTag==='bot-category-groups' || $htmlTag==='bots-readonly' )
+                @if($htmlTag==='bot-allowed-sites' || $htmlTag==='bot-keys' || $htmlTag==='bot-properties' || $htmlTag==='bots'|| $htmlTag==='bot-category-groups' || $htmlTag==='bots-readonly' )
                      @if($htmlTag=='bot-properties')
                         <button class="btn-sm btn btn-primary" id="openAddModal" data-test="{!! $htmlTag !!}-add-new-button"><i class="fa fa-plus"></i> Add New</button>
                         <a class="btn-sm btn btn-primary" href="{!! url("/botPropertiesUpload") !!}" data-test="{!! $htmlTag !!}-upload-button"><i class="fa fa-upload"></i> Upload</a>

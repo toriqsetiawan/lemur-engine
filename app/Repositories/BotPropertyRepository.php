@@ -23,6 +23,7 @@ class BotPropertyRepository extends BaseRepository
     protected $fieldSearchable = [
         'bot_id',
         'user_id',
+        'section_id',
         'slug',
         'name',
         'value'

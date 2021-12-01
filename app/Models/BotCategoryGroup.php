@@ -177,13 +177,17 @@ class BotCategoryGroup extends Model
      */
     public static function getAllCategoryGroupsForBot($botId)
     {
+        $cleanAllCategoryGroup = [];
 
         //below is a list of categories linked to this bot
         $ids = BotCategoryGroup::select([
             'category_groups.slug'])
             ->join('category_groups', 'category_groups.id', '=', 'bot_category_groups.category_group_id')
+            ->leftjoin('sections', 'sections.id', '=', 'category_groups.section_id')
             ->join('bots', 'bots.id', '=', 'bot_category_groups.bot_id')
             ->Where('bots.id', $botId)
+            ->orderBy('sections.order')
+            ->orderBy('category_groups.name')
             ->pluck('category_groups.slug')
             ->toArray();
 
@@ -194,27 +198,34 @@ class BotCategoryGroup extends Model
         $allCategoryGroups = CategoryGroup::select([
             'category_groups.id as category_group_id',
             'category_groups.user_id',
+            'category_groups.section_id',
             'category_groups.language_id',
             'category_groups.slug as category_group_id',
             'category_groups.name',
             'category_groups.description',
+            'sections.order',
             'category_groups.is_master'])
+            ->leftjoin('sections', 'sections.id', '=', 'category_groups.section_id')
             ->where('category_groups.user_id', Auth::user()->id)
             ->orWhere('category_groups.is_master', 1)
+            ->orderBy('sections.order')
             ->orderBy('category_groups.name')
             ->get();
 
 
         foreach ($allCategoryGroups as $index => $categoryGroup) {
+
+            $cleanAllCategoryGroup[$categoryGroup->section_id][$index]=$categoryGroup;
+
+
             if (isset($linkedCategoryGroupIds[$categoryGroup->category_group_id])) {
-                $allCategoryGroups[$index]->is_linked = 1;
+                $cleanAllCategoryGroup[$categoryGroup->section_id][$index]->is_linked = 1;
             } else {
-                $allCategoryGroups[$index]->is_linked = 0;
+                $cleanAllCategoryGroup[$categoryGroup->section_id][$index]->is_linked = 0;
             }
         }
 
-
-        return $allCategoryGroups;
+        return $cleanAllCategoryGroup;
     }
 
     /**

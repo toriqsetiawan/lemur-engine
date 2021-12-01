@@ -103,7 +103,7 @@
 
 @can('read any data')
 
-    <li class="treeview {{ Request::is('botRatings*') ||  Request::is('botKeys*') || Request::is('wildcards*') || Request::is('bots*') ||  Request::is('normalizations*') || Request::is('botWordSpellingGroups*') || Request::is('botProperties*') || Request::is('botCategoryGroups*')  ||  Request::is('users*')||  Request::is('wordSpellingGroups*') || Request::is('wordSpellings*') || Request::is('languages*') || Request::is('wordTransformations*') }} side-bar-top-level-menu" data-test="sidebar-parent-master-data-li">
+    <li class="treeview {{ Request::is('sections*')  || Request::is('botAllowedSites*') || Request::is('botRatings*') ||  Request::is('botKeys*') || Request::is('wildcards*') || Request::is('bots*') ||  Request::is('normalizations*') || Request::is('botWordSpellingGroups*') || Request::is('botProperties*') || Request::is('botCategoryGroups*')  ||  Request::is('users*')||  Request::is('wordSpellingGroups*') || Request::is('wordSpellings*') || Request::is('languages*') || Request::is('wordTransformations*') }} side-bar-top-level-menu" data-test="sidebar-parent-master-data-li">
 
         <a href="#">
             <i class="fa fa-th-list"></i>
@@ -116,6 +116,10 @@
 
             <li class="{{ Request::is('bots*') ? 'active' : '' }}">
                 <a href="{{ url('bots') }}" data-test="sidebar-link-bots"><i class="fa fa-circle-o"></i><span>Bots</span></a>
+            </li>
+
+            <li class="{{ Request::is('botAllowedSites*') ? 'active' : '' }}">
+                <a href="{{ route('botAllowedSites.index') }}" data-test="sidebar-link-botAllowedSites"><i class="fa fa-circle-o"></i><span>Bot Allowed Sites</span></a>
             </li>
 
             <li class="{{ Request::is('botProperties*') ? 'active' : '' }}">
@@ -165,6 +169,10 @@
                 <a href="{{ route('wildcards.index') }}" data-test="sidebar-link-wildcards"><i class="fa fa-circle-o"></i><span>Wildcards</span></a>
             </li>
 
+
+            <li class="{{ Request::is('sections*') ? 'active' : '' }}">
+                <a href="{{ route('sections.index') }}" data-test="sidebar-link-users"><i class="fa fa-circle-o"></i><span>Sections</span></a>
+            </li>
 
             <li class="{{ Request::is('users*') ? 'active' : '' }}">
                 <a href="{{ route('users.index') }}" data-test="sidebar-link-users"><i class="fa fa-circle-o"></i><span>Users</span></a>

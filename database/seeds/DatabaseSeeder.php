@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
+        $this->call(SectionTableSeeder::class);
         $this->call(BotsTableSeeder::class);
         $this->call(BotPropertiesTableSeeder::class);
         $this->call(WordSpellingGroupsTableSeeder::class);
@@ -93,7 +94,7 @@ class DatabaseSeeder extends Seeder
             $all = CategoryGroup::whereIn('slug',$mismatchedFiles)->withTrashed();
 
             if($all->count()<=0){
-                echo "No Data - nothing to correct";
+                //Fresh install - nothing to correct
                 return true;
             }
 

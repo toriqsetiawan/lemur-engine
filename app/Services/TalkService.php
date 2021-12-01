@@ -9,6 +9,7 @@ use App\Classes\LemurStr;
 use App\Factories\ConversationFactory;
 use App\Factories\TurnFactory;
 use App\Models\Bot;
+use App\Models\BotAllowedSite;
 use App\Models\BotKey;
 use App\Models\BotWordSpellingGroup;
 use App\Models\Client;
@@ -74,8 +75,36 @@ class TalkService
             }
         }
 
+        $botAllowedSites = BotAllowedSite::where('bot_id', $botFound->id);
+
+        //there are no allowed sites specified which means all sites are allowed
+        if($botAllowedSites->count()<=0){
+            return true;
+        }else{
+
+            $origin = $request->headers->get('Origin');
+
+            $botAllowedSitesArr = $botAllowedSites->pluck('website_url','website_url');
+            if (in_array($origin, $botAllowedSitesArr)) {
+                return true;
+            }
+            foreach ($botAllowedSitesArr as $pattern) {
+                if (preg_match($pattern, $origin)) {
+                    return true;
+                }
+            }
+
+            //return no access....
+            throw new AuthorizationException('This website is not authorised to talk to this bot');
+
+
+        }
+
         return true;
     }
+
+
+
 
     public function validateRequest($request)
     {

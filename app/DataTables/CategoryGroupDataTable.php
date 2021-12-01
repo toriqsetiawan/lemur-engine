@@ -86,7 +86,7 @@ class CategoryGroupDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
                     
-                    var maxColumn = 9
+                    var maxColumn = 10
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,1,2]
                     var noSearchFields = [maxColumn]
@@ -119,6 +119,7 @@ class CategoryGroupDataTable extends DataTable
         return [
             'id'=> ['name'=>'category_groups.id','data'=>'id','title'=>'#'],
             'language'=> ['name'=>'languages.name','data'=>'language','title'=>'Lang'],
+            'section'=> ['name'=>'sections.name','data'=>'sname','title'=>'Section', 'exportable'=>true],
             'slug'=> ['name'=>'category_groups.slug','data'=>'slug','title'=>'Slug'],
             'name',
             'description' => ['name'=>'description','data'=>'description','title'=>'Desc','searchable'=>true,

@@ -55,6 +55,15 @@
 
 <div class="clearfix"></div>
 
+
+<!-- Section Field -->
+<div class="form-group col-lg-6 col-md-6 col-sm-12 select2" data-test="section_div">
+    {!! Form::label('section_id', 'Section:', ['data-test'=>"section_id_label"]) !!}
+    {!! Form::select('section_id', $categoryGroupSectionList, (!empty($categoryGroup)&&!empty($categoryGroup->section)?$categoryGroup->section->slug:(!empty($categoryGroup)&&!empty($categoryGroup->section)?$categoryGroup->section->slug:"")), [  'placeholder'=>'Please Select','class' => 'form-control select2 first-option', App\Models\CategoryGroup::getFormValidation('section_id'), 'data-test'=>"$htmlTag-section-id-select", 'id'=>"$htmlTag-section-id-select"]) !!}
+</div>
+
+<div class="clearfix"></div>
+
 @role('admin')
 
 <!-- 'Boolean FIELD_NAME_TITLE$ Field' checked by default -->

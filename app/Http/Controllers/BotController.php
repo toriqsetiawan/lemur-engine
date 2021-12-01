@@ -10,6 +10,7 @@ use App\Http\Requests\CreateTalkRequest;
 use App\Http\Requests\UpdateBotRequest;
 use App\Http\Requests\UpdateBotSlugRequest;
 use App\Http\Requests\UpdateClientSlugRequest;
+use App\Models\BotAllowedSite;
 use App\Models\BotAvatar;
 use App\Models\BotCategoryGroup;
 use App\Models\BotKey;
@@ -21,6 +22,7 @@ use App\Models\ClientProperty;
 use App\Models\Conversation;
 use App\Models\ConversationProperty;
 use App\Models\Language;
+use App\Models\Section;
 use App\Models\Turn;
 use App\Models\Wildcard;
 use App\Models\WordSpellingGroup;
@@ -361,17 +363,22 @@ class BotController extends AppBaseController
 
         //set a list of all the available properties for the ui
         $savedProperties = BotProperty::getFullPropertyList($bot->id);
+        $allSections = Section::getAllSectionsForCategoryGroups($savedProperties);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
         session(['target_bot' => $bot]);
+
+        $botPropertySectionList = Section::where('type','BOT_PROPERTY')->orderBy('order')->pluck('name', 'slug');
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'botProperties'=> $savedProperties, 'link'=>$link,
             'htmlTag'=>$htmlTag,
             'title'=>$title,
             'resourceFolder'=>$resourceFolder,
-            'botList'=>$botList]
+            'botList'=>$botList,
+                'botPropertySectionList'=>$botPropertySectionList,
+                'allSections'=>$allSections]
         );
     }
 
@@ -402,17 +409,25 @@ class BotController extends AppBaseController
 
         //set a list of all the available category groups for the ui
         $allCategoryGroups = BotCategoryGroup::getAllCategoryGroupsForBot($bot->id);
+        $allSections = Section::getAllSectionsForCategoryGroups($allCategoryGroups);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
         session(['target_bot' => $bot]);
+
+
+        $categoryGroupSectionList = Section::where('type','CATEGORY_GROUP')->orderBy('order')->pluck('name', 'slug');
+
+
 
         return view('bots.edit_all')->with(
             ['bot'=> $bot,'categoryGroups'=> $allCategoryGroups,
             'link'=>$link, 'htmlTag'=>$htmlTag,
                 'title'=>$title,
             'resourceFolder'=>$resourceFolder,
-            'botList'=>$botList]
+            'botList'=>$botList,
+                'categoryGroupSectionList'=>$categoryGroupSectionList,
+                'allSections'=>$allSections]
         );
     }
 
@@ -571,6 +586,49 @@ class BotController extends AppBaseController
             'botList'=>$botList]
         );
     }
+
+
+    /**
+     * Display all the allowed sites for this bot in the tab
+     *
+     * @param $id
+     * @return Response
+     */
+    public function botSites($id)
+    {
+
+        $bot = $this->botRepository->find($id);
+
+
+        if (empty($bot)) {
+            Flash::error('Bot not found');
+
+            return redirect(route('bots.index'));
+        }
+
+        //to help with data testing and form settings
+        $link = 'botAllowedSites';
+        $htmlTag = 'bot-allowed-sites';
+        $title = 'Bot Allowed Sites';
+        $resourceFolder = 'bot_allowed_sites';
+
+        //set a list of all keys for this bot
+        $botAllowedSites = BotAllowedSite::orderBy('website_url')->where('bot_id', $bot->id)->get();
+        //list of bots for forms (but in this view we only want the bot we are looking at)
+        $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
+
+        session(['target_bot' => $bot]);
+
+
+        return view('bots.edit_all')->with(
+            ['bot'=> $bot,'botAllowedSites'=> $botAllowedSites,
+                'link'=>$link, 'htmlTag'=>$htmlTag,
+                'title'=>$title,
+                'resourceFolder'=>$resourceFolder,
+                'botList'=>$botList]
+        );
+    }
+
 
     /**
      * Display all the properties for this bot in the tab

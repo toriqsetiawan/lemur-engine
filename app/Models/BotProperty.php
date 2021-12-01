@@ -12,7 +12,7 @@ use Spatie\Sluggable\HasSlug;
 /**
  * @SWG\Definition(
  *      definition="BotProperty",
- *      required={"bot_id", "slug", "name", "value"},
+ *      required={"bot_id","section_id", "slug", "name", "value", "section"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -31,6 +31,12 @@ use Spatie\Sluggable\HasSlug;
  *          type="integer",
  *          format="int32"
  *      ),
+ *      @SWG\Property(
+ *          property="section_id",
+ *          description="section_id",
+ *          type="integer",
+ *          format="int32"
+ *      }
  *      @SWG\Property(
  *          property="slug",
  *          description="slug",
@@ -86,9 +92,10 @@ class BotProperty extends Model
     public $fillable = [
         'bot_id',
         'user_id',
+        'section_id',
         'slug',
         'name',
-        'value'
+        'value',
     ];
 
     /**
@@ -100,9 +107,10 @@ class BotProperty extends Model
         'id' => 'integer',
         'bot_id' => 'integer',
         'user_id' => 'integer',
+        'section_id' => 'integer',
         'slug' => 'string',
         'name' => 'string',
-        'value' => 'string'
+        'value' => 'string',
     ];
 
     /**
@@ -145,6 +153,14 @@ class BotProperty extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function section()
+    {
+        return $this->belongsTo(\App\Models\Section::class, 'section_id');
+    }
+
+    /**
      * Scope a query a specific property.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -173,7 +189,8 @@ class BotProperty extends Model
     public function dataTableQuery()
     {
 
-            return BotProperty::select([$this->table.'.*','users.email','bots.slug as bot'])
+            return BotProperty::select([$this->table.'.*','users.email','bots.slug as bot','sections.name as sname'])
+                ->leftJoin('sections', 'sections.id', '=', $this->table.'.section_id')
                 ->leftJoin('bots', 'bots.id', '=', $this->table.'.bot_id')
                 ->leftJoin('users', 'users.id', '=', $this->table.'.user_id');
     }
@@ -199,28 +216,70 @@ class BotProperty extends Model
      */
     public static function getFullPropertyList($botId)
     {
+        $sectionSlugIds['misc']=null;
+        $cleanSavedProperties = [];
 
         $recommendedProperties = config('lemur.required_bot_properties');
-        $recommendedProperties = array_flip($recommendedProperties);
-        $savedProperties = BotProperty::where('bot_id', $botId)->get();
+        foreach ($recommendedProperties as $sectionSlug => $property) {
+
+            if(!isset($sectionSlugIds[$sectionSlug])){
+                $section = Section::where('slug',$sectionSlug)->first();
+                $sectionSlugIds[$sectionSlug]=($section->id??null);
+            }
+
+            foreach ($property as $propertyValue) {
+                $cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$propertyValue] = $propertyValue;
+            }
+
+        }
+
+
+        //$recommendedProperties = array_flip($recommendedProperties);
+        $savedProperties = BotProperty::where('bot_id', $botId)
+            ->get();
+
 
 
         foreach ($savedProperties as $property) {
-            if (isset($recommendedProperties[$property->name])) {
-                unset($recommendedProperties[$property->name]);
+
+            if(empty($property->section->name)){
+                $sectionSlug = 'misc';
+            }else{
+                $sectionSlug = $property->section->slug;
+            }
+
+            if(!isset($sectionSlugIds[$sectionSlug])){
+                $section = Section::where('slug',$sectionSlug)->first();
+                $sectionSlugIds[$sectionSlug]=($section->id??null);
+            }
+
+            if (isset($cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$property->name])) {
+                unset($cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$property->name]);
             }
         }
 
-        $recommendedProperties = array_flip($recommendedProperties);
 
-        foreach ($recommendedProperties as $property) {
-            $newProperty = new BotProperty();
-            $newProperty->bot_id = $botId;
-            $newProperty->name = $property;
-            $newProperty->value = '';
-            $savedProperties->push($newProperty);
+
+        foreach ($cleanRecommendedProperties as $sectionId => $property) {
+            foreach ($property as $propertyValue) {
+                $newProperty = new BotProperty();
+                $newProperty->bot_id = $botId;
+                $newProperty->section_id = $sectionId;
+                $newProperty->slug = $propertyValue;
+                $newProperty->name = $propertyValue;
+                $newProperty->value = '';
+                $savedProperties->push($newProperty);
+            }
         }
 
-        return $savedProperties->sortBy('name');
+
+        foreach($savedProperties as $savedProperty){
+
+            $cleanSavedProperties[$savedProperty->section_id][$savedProperty->slug]=$savedProperty;
+
+        }
+
+
+        return $cleanSavedProperties;
     }
 }

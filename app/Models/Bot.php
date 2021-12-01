@@ -144,7 +144,7 @@ class Bot extends Model
     protected $dates = ['deleted_at'];
 
     protected $cascadeDeletes = ['botCategoryGroups', 'botKeys','botProperties',
-                                    'botWordSpellingGroups' ,'conversations','conversations'];
+                                    'botWordSpellingGroups' ,'conversations','conversations','botAllowedSites'];
 
 
     public $fillable = [
@@ -155,6 +155,7 @@ class Bot extends Model
         'summary',
         'description',
         'default_response',
+        'critical_category_group',
         'lemurtar_url',
         'image',
         'status',
@@ -175,6 +176,7 @@ class Bot extends Model
         'summary' => 'string',
         'description' => 'string',
         'default_response' => 'string',
+        'critical_category_group' => 'string',
         'lemurtar_url' => 'string',
         'image' => 'string',
         'status' => 'string',
@@ -252,16 +254,23 @@ class Bot extends Model
      **/
     public function botCategoryGroups()
     {
-        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id');
+        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id')->orderBy('section_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function botAllowedSites()
+    {
+        return $this->hasMany(\App\Models\BotAllowedSite::class, 'bot_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function botProperties()
     {
-        return $this->hasMany(\App\Models\BotProperty::class, 'bot_id');
+        return $this->hasMany(\App\Models\BotProperty::class, 'bot_id')->orderBy('section_id');
     }
 
     /**

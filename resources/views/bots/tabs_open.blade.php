@@ -9,6 +9,7 @@
         <li @if($htmlTag=='bot-widgets')class="active" @endif><a href="{!! url('/bot/widget/'.$bot->slug.'/list') !!}" data-test="widgets-tab-link">Widgets</a></li>
         <li @if($htmlTag=='bot-stats')class="active" @endif><a href="{!! url('/bot/stats/'.$bot->slug.'/list') !!}" data-test="rating-tab-link">Stats</a></li>
         <li @if($htmlTag=='bot-keys')class="active" @endif><a href="{!! url('/bot/keys/'.$bot->slug.'/list') !!}" data-test="widgets-tab-link">Keys</a></li>
+        <li @if($htmlTag=='bot-allowed-sites')class="active" @endif><a href="{!! url('/bot/sites/'.$bot->slug.'/list') !!}" data-test="widgets-tab-link">Sites</a></li>
     </ul>
 
     <div class="tab-content">

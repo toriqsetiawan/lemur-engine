@@ -23,16 +23,16 @@
                         <!-- Profile Image -->
                         <div class="box">
                             <div class="box-body box-profile">
-                                <img class="profile-user-img img-responsive img-circle" src="{!! $bot->imageUrl !!}" alt="User profile picture">
+                                <img class="profile-user-img img-responsive img-circle pull-left" src="{!! $bot->imageUrl !!}" alt="Bot avatar">
 
                                 <h3 class="profile-username text-center">{!! $bot->name !!}</h3>
 
                                 <p class="text-muted text-center">{!! $bot->description !!}</p>
 
-                                <div class="btn-group bot-commands" role="group" aria-label="Bot Commands">
+                                <div class="btn-group btn-group-sm bot-commands" role="group" aria-label="Bot Commands">
                                     <a href="{!! url('/chat/'.$bot->slug) !!}" class="btn btn-primary">Chat</a>
                                     @if($bot->user_id == Auth::user()->id )
-                                        <a href="{!! url('/bots/'.$bot->slug.'/edit') !!}" class="btn btn-info">Edit</a>
+                                        <a href="{!! url('/bots/'.$bot->slug.'/edit') !!}" class="btn btn-sm btn-info">Edit</a>
                                     @endif
                                 </div>
                             </div>

@@ -8,14 +8,14 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.5.0'],
+        ['id' => '1.6.0'],
     'bot' =>
-        ['id' => '1.4.0'],
+        ['id' => '1.5.0'],
     'release' => [
-        'version' => '1.5.0',
-        'name' => 'Cardi B',
-        'description' => 'A number of fixes that include feature to prevent the deleting of critical files, CORS updates, normalization of accented characters',
-        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.5.0',
+        'version' => '1.6.0',
+        'name' => 'Cardigan Bay',
+        'description' => 'Adding a sections table so that large data collections can be group to make admining easier',
+        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.6.0',
     ],
 
 ];

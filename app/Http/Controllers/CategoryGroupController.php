@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Requests\CreateCategoryGroupRequest;
 use App\Http\Requests\UpdateCategoryGroupRequest;
 use App\Models\Language;
+use App\Models\Section;
 use App\Repositories\CategoryGroupRepository;
 use Flash;
 use App\Http\Controllers\AppBaseController;
@@ -63,10 +64,13 @@ class CategoryGroupController extends AppBaseController
 
         $languageList = Language::orderBy('name')->pluck('name', 'slug');
 
+        $categoryGroupSectionList = Section::where('type','CATEGORY_GROUP')->orderBy('order')->pluck('name', 'slug');
+
         return view('category_groups.create')->with(
             ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
             'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
-            'languageList'=>$languageList]
+            'languageList'=>$languageList,
+                'categoryGroupSectionList'=>$categoryGroupSectionList]
         );
     }
 
@@ -132,6 +136,7 @@ class CategoryGroupController extends AppBaseController
      */
     public function edit($slug)
     {
+
         $categoryGroup = $this->categoryGroupRepository->getBySlug($slug);
 
         $this->authorize('update', $categoryGroup);
@@ -144,12 +149,15 @@ class CategoryGroupController extends AppBaseController
 
         $languageList = Language::orderBy('name')->pluck('name', 'slug');
 
+        $categoryGroupSectionList = Section::where('type','CATEGORY_GROUP')->orderBy('order')->pluck('name', 'slug');
+
         return view('category_groups.edit')->with(
             ['categoryGroup'=> $categoryGroup,
             'link'=>$this->link, 'htmlTag'=>$this->htmlTag,
                 'title'=>$this->title,
             'resourceFolder'=>$this->resourceFolder,
-            'languageList'=>$languageList]
+            'languageList'=>$languageList,
+                'categoryGroupSectionList'=>$categoryGroupSectionList]
         );
     }
 
