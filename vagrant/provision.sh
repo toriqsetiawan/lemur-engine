@@ -17,6 +17,7 @@ rm composer-setup.php
 
 composer self-update
 
+rm -rf /etc/nginx/sites-enabled/lemurengine.conf
 sudo cp /vagrant/vagrant/lemurengine.conf /etc/nginx/sites-available/lemurengine.conf
 sudo ln -s /etc/nginx/sites-available/lemurengine.conf /etc/nginx/sites-enabled/lemurengine.conf
 sudo service nginx restart

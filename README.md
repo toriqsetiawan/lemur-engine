@@ -21,6 +21,9 @@ You will need the following installed on your machine to run the Lemur Engine lo
 * Virtual Box
 * Vagrant
 
+Dont forget to install the hostupdater plugin
+>vagrant plugin install vagrant-hostsupdater
+
 Follow the steps below to set this up on your machine.
 
 ##### Step One

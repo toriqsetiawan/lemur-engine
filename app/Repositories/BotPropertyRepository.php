@@ -8,6 +8,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 
 /**
  * Class BotPropertyRepository
@@ -86,16 +87,28 @@ class BotPropertyRepository extends BaseRepository
                     ->first();
 
                 if ($botProperty==null) {
-                    $botProperty = new BotProperty(['bot_id' => $input['bot_id'],
+
+                    //do we have a default section to set?
+                    $sectionId = config('lemur_section.bot_properties.'.$name, null);
+
+                    $botProperty = new BotProperty([
+                        'bot_id' => $input['bot_id'],
+                        'section_id' => $sectionId,
                         'name' => $name,
-                        'value' => $value]);
+                        'value' => $value
+                    ]);
+                    $botProperty->save();
+
+                } elseif ($botProperty->trashed()) {
+                    $botProperty->restore();
+                    $botProperty->value = $value;
                     $botProperty->save();
                 } else {
                     $botProperty->value = $value;
-                    $botProperty->deleted_at = null;
                     $botProperty->save();
                 }
             }
+
         }
 
         return true;

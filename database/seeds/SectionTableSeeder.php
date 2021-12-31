@@ -122,7 +122,6 @@ class SectionTableSeeder extends Seeder
         BotProperty::where('slug','celebrities')->update(['section_id'=>5]);
         BotProperty::where('slug','celebrity')->update(['section_id'=>5]);
         BotProperty::where('slug','class')->update(['section_id'=>5]);
-        BotProperty::where('slug','email')->update(['section_id'=>6]);
         BotProperty::where('slug','emotions')->update(['section_id'=>5]);
         BotProperty::where('slug','ethics')->update(['section_id'=>5]);
         BotProperty::where('slug','etype')->update(['section_id'=>5]);
@@ -170,8 +169,13 @@ class SectionTableSeeder extends Seeder
         BotProperty::where('slug','version')->update(['section_id'=>5]);
         BotProperty::where('slug','vocabulary')->update(['section_id'=>5]);
         BotProperty::where('slug','wear')->update(['section_id'=>5]);
+        BotProperty::where('slug','email')->update(['section_id'=>6]);
         BotProperty::where('slug','website')->update(['section_id'=>6]);
-
+        BotProperty::where('slug','facebook')->update(['section_id'=>6]);
+        BotProperty::where('slug','twitter')->update(['section_id'=>6]);
+        BotProperty::where('slug','linkedin')->update(['section_id'=>6]);
+        BotProperty::where('slug','tiktok')->update(['section_id'=>6]);
+        BotProperty::where('slug','instragram')->update(['section_id'=>6]);
 
         CategoryGroup::where('slug','dev-testcases')->update(['section_id'=>1]);
         CategoryGroup::where('slug','std-critical')->update(['section_id'=>2]);
