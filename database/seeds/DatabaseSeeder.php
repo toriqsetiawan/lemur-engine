@@ -62,7 +62,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
-        $this->call(SectionTableSeeder::class);
         $this->call(BotsTableSeeder::class);
         $this->call(BotPropertiesTableSeeder::class);
         $this->call(WordSpellingGroupsTableSeeder::class);
@@ -71,6 +70,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryGroupsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(BotCategoryGroupsTableSeeder::class);
+        $this->call(SectionTableSeeder::class);
 
         $this->fixCategoryMisMatch();
 

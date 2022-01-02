@@ -21,10 +21,12 @@
             {!! Form::hidden('redirect_url', url()->current(),['data-test'=>"$htmlTag-redirect-url"] ) !!}
 
 
+            <!-- loop through all the sections in their 'order' and then populate with the items which exist for them -->
 
             @foreach($allSections as $sectionId => $sectionGroup)
 
-                @if(!empty($botProperties[$sectionId]))
+
+            @if(!empty($botProperties[$sectionGroup->slug]))
 
                 @php $sectionName = $sectionGroup['name']; @endphp
                 @php $sectionSlug = $sectionGroup['slug']; @endphp
@@ -36,6 +38,7 @@
                         @php $sectionShow = 'false'; @endphp
                         @php $collapseShow = 'collapse'; @endphp
                     @endif
+
 
                 <!--open the previous collaspe box-->
                     <div class="box box-primary">
@@ -53,12 +56,13 @@
 
 
 
-                        @foreach($botProperties[$sectionId] as $index => $item)
+                        @foreach($botProperties[$sectionSlug] as $name => $value)
 
 
-                                <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $item->name !!}_div'>
-                                    <label for='{!! $item->name !!}_field' data-test='{!! $item->name !!}_label'>{!! $item->name !!}:</label>
-                                    <input type='text' name='name[{!! $item->name !!}]' value='{!! $item->value !!}' class='form-control' id='{!! $item->name !!}_value_field' data-test='{!! $item->name !!}_value_field'>
+
+                                <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $name !!}_div'>
+                                    <label for='{!! $name !!}_field' data-test='{!! $name !!}_label'>{!! $name !!}:</label>
+                                    <input type='text' name='name[{!! $name !!}]' value='{!! $value !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
                                 </div>
 
 

@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Bot;
 use App\Models\BotProperty;
+use App\Models\Section;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,7 +64,7 @@ class BotPropertyRepository extends BaseRepository
         //we can only update the value
         $newInput['value']=$input['value'];
 
-        return parent::update($input, $id);
+        return parent::update($newInput, $id);
     }
 
 
@@ -76,41 +77,80 @@ class BotPropertyRepository extends BaseRepository
      */
     public function bulkCreate($input)
     {
-
         //firstly we will just blank all existing....
         BotProperty::where('bot_id', $input['bot_id'])->update(['value'=>'']);
 
         foreach ($input['name'] as $name => $value) {
-            if ($value!='') {
-                $botProperty = BotProperty::where('bot_id', $input['bot_id'])->where('name', $name)
+
+            $botProperty = BotProperty::where('bot_id', $input['bot_id'])->where('name', $name)
                     ->withTrashed()
                     ->first();
 
-                if ($botProperty==null) {
+            //do we have a sectionId?
+            $sectionId = $this->getSectionId($name, $input['bot_id']);
 
-                    //do we have a default section to set?
-                    $sectionId = config('lemur_section.bot_properties.'.$name, null);
+            if ($botProperty === null && $value != '') {
 
-                    $botProperty = new BotProperty([
-                        'bot_id' => $input['bot_id'],
-                        'section_id' => $sectionId,
-                        'name' => $name,
-                        'value' => $value
-                    ]);
-                    $botProperty->save();
+                $botProperty = new BotProperty([
+                    'bot_id' => $input['bot_id'],
+                    'section_id' => $sectionId,
+                    'name' => $name,
+                    'value' => $value
+                ]);
+                $botProperty->save();
 
-                } elseif ($botProperty->trashed()) {
-                    $botProperty->restore();
-                    $botProperty->value = $value;
-                    $botProperty->save();
-                } else {
-                    $botProperty->value = $value;
-                    $botProperty->save();
+            } elseif ($botProperty !== null && $botProperty->trashed()) {
+                $botProperty->restore();
+                if($botProperty->section_id === null){
+                    $botProperty->section_id = $sectionId;
                 }
+                $botProperty->value = $value;
+                $botProperty->save();
+            } elseif ($botProperty !== null) {
+
+                if($botProperty->section_id === null){
+                    $botProperty->section_id = $sectionId;
+                }
+
+                if($sectionId === null){
+                    dd($botProperty, $name);
+                }
+
+                $botProperty->value = $value;
+                $botProperty->save();
             }
+
+
 
         }
 
+
         return true;
+    }
+
+
+    /**
+     * Returns the botproperty section
+     * It will check the DB first and if it doesnt exist it will check the config
+     * @param $name
+     * @param null $botId
+     * @return int $sectionId
+     */
+    public function getSectionId($name, $botId = null){
+
+        $sectionId = null;
+        $botProperty = BotProperty::where('bot_id', $botId)->where('name', $name)->first();
+        if($botProperty === null || $botProperty->section_id ===  null){
+            $sectionSlug = config('lemur_section.bot_properties.fields.'.$name, null);
+            $section = Section::where('slug', $sectionSlug)->where('type', 'BOT_PROPERTY')->first();
+            if($section !== null){
+                $sectionId = $section->id;
+            }
+        }else{
+            $sectionId = $botProperty->section_id;
+        }
+        return $sectionId;
+
+
     }
 }

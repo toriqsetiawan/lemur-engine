@@ -148,7 +148,11 @@ class BotController extends AppBaseController
 
             $bot = $this->botRepository->create($input);
             $bot = $this->uploadImage($request, $bot);
-            $this->botPropertyRepository->create(['bot_id'=>$bot->id, 'name'=>'name', 'value'=>$input['name']]);
+
+            //do we have a sectionId? (else null)
+            $sectionId = $this->botPropertyRepository->getSectionId('name', $bot->id);
+
+            $this->botPropertyRepository->create(['bot_id'=>$bot->id, 'name'=>'name', 'value'=>$input['name'], 'section_id'=>$sectionId]);
 
             Flash::success('Bot saved successfully.');
             // Commit the transaction
@@ -362,8 +366,9 @@ class BotController extends AppBaseController
         $resourceFolder = 'bot_properties';
 
         //set a list of all the available properties for the ui
-        $savedProperties = BotProperty::getFullPropertyList($bot->id);
-        $allSections = Section::getAllSectionsForCategoryGroups($savedProperties);
+        $recommendedAndSavedProperties = BotProperty::getFullPropertyList($bot->id);
+        $allSections = Section::getAllSectionsForBotProperties();
+
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
@@ -371,14 +376,16 @@ class BotController extends AppBaseController
 
         $botPropertySectionList = Section::where('type','BOT_PROPERTY')->orderBy('order')->pluck('name', 'slug');
 
-        return view('bots.edit_all')->with(
-            ['bot'=> $bot,'botProperties'=> $savedProperties, 'link'=>$link,
+        return view('bots.edit_all')->with([
+            'bot'=> $bot,
+            'botProperties'=> $recommendedAndSavedProperties,
+            'link'=>$link,
             'htmlTag'=>$htmlTag,
             'title'=>$title,
             'resourceFolder'=>$resourceFolder,
             'botList'=>$botList,
-                'botPropertySectionList'=>$botPropertySectionList,
-                'allSections'=>$allSections]
+            'botPropertySectionList'=>$botPropertySectionList,
+            'allSections'=>$allSections]
         );
     }
 

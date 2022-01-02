@@ -98,10 +98,11 @@ class BotPropertyController extends AppBaseController
             $this->botPropertyRepository->bulkCreate($input);
             Flash::success('Bot Properties updated and saved successfully.');
         } else {
+            //do we have a sectionId?
+            $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
             $botProperty = $this->botPropertyRepository->create($input);
             Flash::success('Bot Property saved successfully.');
         }
-
 
         if (!empty($input['redirect_url'])) {
             return redirect($input['redirect_url']);
@@ -181,6 +182,7 @@ class BotPropertyController extends AppBaseController
      */
     public function update($slug, UpdateBotPropertyRequest $request)
     {
+
         $botProperty = $this->botPropertyRepository->getBySlug($slug);
 
 
@@ -194,6 +196,7 @@ class BotPropertyController extends AppBaseController
 
         $input = $request->all();
 
+        $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
         $botProperty = $this->botPropertyRepository->update($input, $botProperty->id);
 
         Flash::success('Bot Property updated successfully.');
@@ -311,7 +314,7 @@ class BotPropertyController extends AppBaseController
         ];
 
 
-        $recommendedProperties = config('lemur.required_bot_properties');
+        $recommendedProperties = config('lemur_section.bot_properties.fields');
         $recommendedProperties = array_flip($recommendedProperties);
         $savedProperties = BotProperty::selectRaw('? as botId, name as Name, value as Value', [$bot->slug])
             ->where('bot_id', $id)->get()->toArray();

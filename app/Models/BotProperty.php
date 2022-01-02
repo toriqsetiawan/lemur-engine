@@ -80,7 +80,7 @@ class BotProperty extends Model
 
 
     public $table = 'bot_properties';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -216,70 +216,35 @@ class BotProperty extends Model
      */
     public static function getFullPropertyList($botId)
     {
-        $sectionSlugIds['misc']=null;
-        $cleanSavedProperties = [];
-
-        $recommendedProperties = config('lemur.required_bot_properties');
-        foreach ($recommendedProperties as $sectionSlug => $property) {
-
+        $recommendedProperties = config('lemur_section.bot_properties.fields');
+        foreach ($recommendedProperties as $property => $sectionSlug) {
             if(!isset($sectionSlugIds[$sectionSlug])){
-                $section = Section::where('slug',$sectionSlug)->first();
-                $sectionSlugIds[$sectionSlug]=($section->id??null);
+                $section = Section::where('slug',$sectionSlug)->where('type', 'BOT_PROPERTY')->first();
+                $sectionSlugIds[$sectionSlug]['id']=($section->id??null);
+                $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
-
-            foreach ($property as $propertyValue) {
-                $cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$propertyValue] = $propertyValue;
-            }
-
+            $cleanProperties[$sectionSlug][$property] = '';
         }
 
-
-        //$recommendedProperties = array_flip($recommendedProperties);
-        $savedProperties = BotProperty::where('bot_id', $botId)
-            ->get();
-
-
+        $savedProperties = BotProperty::with('section')->where('bot_id', $botId)->get();
 
         foreach ($savedProperties as $property) {
 
-            if(empty($property->section->name)){
+            if(empty($property->section->slug)){
                 $sectionSlug = 'misc';
             }else{
                 $sectionSlug = $property->section->slug;
             }
 
             if(!isset($sectionSlugIds[$sectionSlug])){
-                $section = Section::where('slug',$sectionSlug)->first();
-                $sectionSlugIds[$sectionSlug]=($section->id??null);
+                $section = Section::where('slug',$sectionSlug)->where('type', 'BOT_PROPERTY')->first();
+                $sectionSlugIds[$sectionSlug]['id']=($section->id??null);
+                $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
 
-            if (isset($cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$property->name])) {
-                unset($cleanRecommendedProperties[$sectionSlugIds[$sectionSlug]][$property->name]);
-            }
-        }
-
-
-
-        foreach ($cleanRecommendedProperties as $sectionId => $property) {
-            foreach ($property as $propertyValue) {
-                $newProperty = new BotProperty();
-                $newProperty->bot_id = $botId;
-                $newProperty->section_id = $sectionId;
-                $newProperty->slug = $propertyValue;
-                $newProperty->name = $propertyValue;
-                $newProperty->value = '';
-                $savedProperties->push($newProperty);
-            }
-        }
-
-
-        foreach($savedProperties as $savedProperty){
-
-            $cleanSavedProperties[$savedProperty->section_id][$savedProperty->slug]=$savedProperty;
+            $cleanProperties[$sectionSlug][$property->name] = $property->value;
 
         }
-
-
-        return $cleanSavedProperties;
+        return $cleanProperties;
     }
 }

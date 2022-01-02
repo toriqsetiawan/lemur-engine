@@ -84,7 +84,7 @@ class Section extends Model
 
 
     public $table = 'sections';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -211,6 +211,20 @@ class Section extends Model
         return $cleanAllSections;
     }
 
+    public static function getAllSectionsForBotProperties(){
+
+        $botPropertySections = Section::where('type','BOT_PROPERTY')->orderBy('order')->get();
+
+        $miscSection = new Section();
+        $miscSection->id = null;
+        $miscSection->slug = 'misc';
+        $miscSection->name = 'Misc';
+        $miscSection->order = 999;
+        $miscSection->default_state = 'closed';
+        $botPropertySections->push($miscSection);
+
+        return $botPropertySections;
+    }
 
 
 }
