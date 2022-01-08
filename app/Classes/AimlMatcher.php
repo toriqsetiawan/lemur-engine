@@ -308,10 +308,10 @@ class AimlMatcher
                 $points = 30;
                 $scoreArray[$i]['total'] = $this->addScoreToCategory($points, $scoreArray[$i]);
                 $scoreArray[$i]['messages'][]=$category->topic .'==='. $topicNormalised;
-                $scoreArray[$i]['messages'][]=$points.' points added for exact actual topic match 
+                $scoreArray[$i]['messages'][]=$points.' points added for exact actual topic match
                                                     (both items are  NOT empty and they are the SAME)';
             } else {
-                $scoreArray[$i]['messages'][]='no points topic does not match and the category topic is not empty 
+                $scoreArray[$i]['messages'][]='no points topic does not match and the category topic is not empty
                                                     (\''.$category->topic.'\' & \''.$topicNormalised.'\')';
             }
 
@@ -325,10 +325,10 @@ class AimlMatcher
                 $points = 30;
                 $scoreArray[$i]['total'] = $this->addScoreToCategory($points, $scoreArray[$i]);
                 $scoreArray[$i]['messages'][]=$category->that .'==='. $thatNormalised;
-                $scoreArray[$i]['messages'][]=$points.' points added for exact actual that match 
+                $scoreArray[$i]['messages'][]=$points.' points added for exact actual that match
                                                     (both items are  NOT empty and they are the SAME)';
             } else {
-                $scoreArray[$i]['messages'][]='no points that does not match and the category that is not empty 
+                $scoreArray[$i]['messages'][]='no points that does not match and the category that is not empty
                                                     (\''.$category->that.'\' & \''.$thatNormalised.'\')';
             }
 
@@ -471,10 +471,7 @@ class AimlMatcher
      */
     public function match($preparedSentence)
     {
-
-
         $allowedCategoryGroupIds = $this->getListOfAllowedCategoryGroups();
-
 
         $botId = $this->bot->id;
         $topicNormalised = $this->conversation->normalisedTopic();
@@ -520,7 +517,6 @@ class AimlMatcher
             ->where('categories.status', 'A');
 
 
-
         //is this sentence with multiple words?
         if (strpos($preparedSentence, ' ') !== false) {
             $sqlBuilder = $sqlBuilder->where(function ($query) use ($preparedSentence) {
@@ -530,13 +526,13 @@ class AimlMatcher
                     ->where(function ($query) use ($preparedSentence) {
                         $query->orWhere(function ($query) use ($preparedSentence) {
                             $query->where('first_letter_pattern', $preparedSentence[0])
-                                ->orWhere('regexp_pattern', 'LIKE', $preparedSentence[0] . '%')
-                                ->orWhereRaw("'$preparedSentence' LIKE `regexp_pattern`");
+                                ->where('regexp_pattern', 'LIKE', $preparedSentence[0] . '%')
+                                ->whereRaw("'$preparedSentence' LIKE `regexp_pattern`");
                         })
                             ->orWhere(function ($query) use ($preparedSentence) {
                                 $query->where('first_letter_pattern', '%')
-                                    ->orWhere('regexp_pattern', 'LIKE', '\%%')
-                                    ->orWhereRaw("'$preparedSentence' LIKE `regexp_pattern`");
+                                    ->where('regexp_pattern', 'LIKE', '\%%')
+                                    ->whereRaw("'$preparedSentence' LIKE `regexp_pattern`");
                             });
                     });
             });
@@ -545,7 +541,8 @@ class AimlMatcher
                 $query->where('regexp_pattern', '%')
                     ->orWhere(function ($query) use ($preparedSentence) {
                         $query->where('regexp_pattern', $preparedSentence)
-                            ->orWhere('regexp_pattern', '%');
+                            ->orWhere('regexp_pattern', '%')
+                            ->orWhereRaw("'$preparedSentence' LIKE `regexp_pattern`");
                     });
             });
         }
@@ -558,13 +555,13 @@ class AimlMatcher
                     ->orWhere('regexp_that', $thatNormalised)
                     ->orWhere(function ($query) use ($thatNormalised) {
                         $query->where('first_letter_that', $thatNormalised[0])
-                            ->orWhere('regexp_that', 'LIKE', $thatNormalised[0] . '%')
-                            ->orWhereRaw("'$thatNormalised' LIKE `regexp_that`");
+                            ->where('regexp_that', 'LIKE', $thatNormalised[0] . '%')
+                            ->whereRaw("'$thatNormalised' LIKE `regexp_that`");
                     })
                     ->orWhere(function ($query) use ($preparedSentence, $thatNormalised) {
                         $query->where('first_letter_that', '%')
-                            ->orWhere('regexp_that', 'LIKE', '\%%')
-                            ->orWhereRaw("'$preparedSentence' LIKE `regexp_that`");
+                            ->where('regexp_that', 'LIKE', '\%%')
+                            ->whereRaw("'$preparedSentence' LIKE `regexp_that`");
                     });
             });
         } else {
@@ -579,13 +576,13 @@ class AimlMatcher
                     ->orWhere('regexp_topic', $topicNormalised)
                     ->orWhere(function ($query) use ($topicNormalised) {
                         $query->where('first_letter_topic', $topicNormalised[0])
-                            ->orWhere('regexp_topic', 'LIKE', $topicNormalised[0] . '%')
-                            ->orWhereRaw("'$topicNormalised' LIKE `regexp_topic`");
+                            ->where('regexp_topic', 'LIKE', $topicNormalised[0] . '%')
+                            ->whereRaw("'$topicNormalised' LIKE `regexp_topic`");
                     })
                     ->orWhere(function ($query) use ($preparedSentence, $topicNormalised) {
                         $query->where('first_letter_topic', '%')
-                            ->orWhere('regexp_topic', 'LIKE', '\%%')
-                            ->orWhereRaw("'$preparedSentence' LIKE `regexp_topic`");
+                            ->where('regexp_topic', 'LIKE', '\%%')
+                            ->whereRaw("'$preparedSentence' LIKE `regexp_topic`");
                     });
             });
         } else {
