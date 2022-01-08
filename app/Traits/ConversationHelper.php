@@ -139,7 +139,13 @@ trait ConversationHelper
 
 
         if ($turn!==null) {
-            $allTurnSentences = LemurStr::splitIntoSentences($turn->output);
+
+            $output = $turn->output;
+            $output = str_replace("<br/>",".", $output);
+            $output = strip_tags($output, "<a>");
+            $output = str_replace("..",".", $output);
+
+            $allTurnSentences = LemurStr::splitIntoSentences($output);
             //now flip it as the last sentence = 1 (in AIML world)
             $allTurnSentences = array_reverse($allTurnSentences);
 
