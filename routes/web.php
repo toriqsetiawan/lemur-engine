@@ -83,6 +83,8 @@ Route::GET('/test', 'TestController@index')
 Route::GET('/test/run', 'TestController@run')
     ->middleware(['auth:web']);
 
+Route::resource('customDocs', 'CustomDocController')
+    ->middleware(['auth:web','data.transform']);
 
 /** ---------------------------------------------------------------
  *  Create category from an empty response
@@ -241,6 +243,27 @@ Route::group(['prefix' => '/sa/bots'], function () {
         ->middleware('auth:web');
 });
 
+
+/** ---------------------------------------------------------------
+ *  SUPER ADMIN CUSTOM DOC TASKS
+ ** -------------------------------------------------------------- */
+Route::group(['prefix' => '/sa/customDocs'], function () {
+    Route::bind('saCustomDocSlug', function ($saCustomDocSlug) {
+        try {
+            $customDoc = App\Models\CustomDoc::where('slug', $saCustomDocSlug)->withTrashed()->firstOrFail();
+            return $customDoc;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::PATCH('/slug/{saCustomDocSlug}', 'CustomDocController@slugUpdate')
+        ->middleware('auth:web');
+    Route::PATCH('/restore/{saCustomDocSlug}', 'CustomDocController@restore')
+        ->middleware('auth:web');
+    Route::DELETE('/{saCustomDocSlug}', 'CustomDocController@forceDestroy')
+        ->middleware('auth:web');
+});
 
 /** ---------------------------------------------------------------
  *  SUPER ADMIN USER TASKS

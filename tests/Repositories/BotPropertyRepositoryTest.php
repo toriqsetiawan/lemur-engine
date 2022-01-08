@@ -1,6 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\BotProperty;
+use App\Models\Section;
 use App\Models\User;
 use App\Repositories\BotPropertyRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -25,6 +26,10 @@ class BotPropertyRepositoryTest extends TestCase
         $this->adminUser = $adminUser[0];
         $this->adminUser->assignRole('admin');
         $this->botPropertyRepo = \App::make(BotPropertyRepository::class);
+        //create a section
+        $this->be($this->adminUser);
+        factory(Section::class, 1)->create(['type'=>'BOT_PROPERTY']);
+
     }
 
     /**
@@ -64,14 +69,25 @@ class BotPropertyRepositoryTest extends TestCase
     public function testUpdateBotProperty()
     {
         $this->be($this->adminUser);
+
         $botProperty = factory(BotProperty::class)->create();
-        $fakeBotProperty = factory(BotProperty::class)->make(['user_id'=>$this->adminUser->id])->toArray();
+        //create a completely new bot property with a new value
+        $fakeBotProperty = factory(BotProperty::class)->make(['user_id'=>$this->adminUser->id,'value'=>'test'])->toArray();
+        //the expected changes should only be to the value .. nothing else should change
+        $expectedProperty = factory(BotProperty::class)->make(
+            [
+                'bot_id'=>$botProperty->bot_id,
+                'user_id'=>$botProperty->user_id,
+                'section_id'=>$botProperty->section_id,
+                'slug'=>$botProperty->slug,
+                'name'=>$botProperty->name,
+                'value'=>'test'
+            ])->toArray();
 
         $updatedBotProperty = $this->botPropertyRepo->update($fakeBotProperty, $botProperty->id);
-
-        $this->assertModelData($fakeBotProperty, $updatedBotProperty->toArray());
+        $this->assertModelData($expectedProperty, $updatedBotProperty->toArray());
         $dbBotProperty = $this->botPropertyRepo->find($botProperty->id);
-        $this->assertModelData($fakeBotProperty, $dbBotProperty->toArray());
+        $this->assertModelData($expectedProperty, $dbBotProperty->toArray());
     }
 
     /**

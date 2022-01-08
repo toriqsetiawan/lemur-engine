@@ -136,7 +136,7 @@ class Bot extends Model
 
     public $table = 'bots';
 
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -254,7 +254,7 @@ class Bot extends Model
      **/
     public function botCategoryGroups()
     {
-        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id')->orderBy('section_id');
+        return $this->hasMany(\App\Models\BotCategoryGroup::class, 'bot_id');
     }
 
     /**

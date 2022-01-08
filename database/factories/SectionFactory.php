@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Map;
+use App\Models\Section;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ $factory->define(Section::class, function (Faker $faker) {
     $user_id = $faker->randomElement($user_ids);
 
     return [
-        'user_id' => $user_id,
+        'user_id' => 1,
         'slug' => $word,
         'name' => $word,
         'type' => 'BP',

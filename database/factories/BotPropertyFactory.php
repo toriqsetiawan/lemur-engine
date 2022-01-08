@@ -17,9 +17,13 @@ $factory->define(BotProperty::class, function (Faker $faker) {
     $bot_ids = DB::table('bots')->pluck('id', 'id');
     $bot_id = $faker->randomElement($bot_ids);
 
+    $secton_ids = DB::table('sections')->where('type','BOT_PROPERTY')->pluck('id', 'id');
+    $secton_id = $faker->randomElement($secton_ids);
+
     return [
         'bot_id' => $bot_id,
         'user_id' => $user_id,
+        'section_id' => $secton_id,
         'slug' => $name,
         'name' => $name,
         'value' => $faker->word,
