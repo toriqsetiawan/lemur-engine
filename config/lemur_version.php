@@ -8,14 +8,14 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.6.0'],
+        ['id' => '1.7.0'],
     'bot' =>
-        ['id' => '1.5.0'],
+        ['id' => '1.6.0'],
     'release' => [
-        'version' => '1.6.0',
-        'name' => 'Cardigan Bay',
-        'description' => 'Adding a sections table so that large data collections can be group to make admining easier',
-        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.6.0',
+        'version' => '1.7.0',
+        'name' => 'Bay City Roller',
+        'description' => 'Adding custom docs, fixing tests, refining the AIML matcher and bot property section fixes',
+        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.7.0',
     ],
 
 ];
