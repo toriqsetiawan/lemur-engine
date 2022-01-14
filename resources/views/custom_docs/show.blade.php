@@ -23,7 +23,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <!-- post text -->
-                    {{ $customDoc->body }}
+                    {!!  Illuminate\Mail\Markdown::parse($customDoc->body) !!}
                 </div>
                 <!-- /.box-footer -->
                 <div class="box-footer">
