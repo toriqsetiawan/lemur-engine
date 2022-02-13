@@ -68,7 +68,7 @@ return [
             'url' => env('AWS_URL'),
             'visibility' => 'public',
         ],
-        
+
     ],
 
     /*
@@ -85,6 +85,7 @@ return [
     'links' => [
         public_path('images') => storage_path('app/images'),
         public_path('widgets') => resource_path('widgets'),
+        public_path('widgets/latest') => resource_path('widgets/'.env('LATEST_WIDGET_DIR','')),
     ],
 
 ];
