@@ -415,7 +415,7 @@ class BotController extends AppBaseController
         $resourceFolder = 'bot_category_groups';
 
         //set a list of all the available category groups for the ui
-        $allCategoryGroups = BotCategoryGroup::getAllCategoryGroupsForBot($bot->id);
+        $allCategoryGroups = BotCategoryGroup::getAllCategoryGroupsForBot($bot->id, $bot->language_id);
         $allSections = Section::getAllSectionsForCategoryGroups($allCategoryGroups);
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');

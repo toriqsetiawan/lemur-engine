@@ -13,6 +13,7 @@ use App\Models\BotProperty;
 use App\Models\CategoryGroup;
 use App\Models\ClientCategory;
 use App\Models\EmptyResponse;
+use App\Models\Language;
 use App\Models\Turn;
 use App\Repositories\CategoryRepository;
 use App\Services\AimlUploadService;
@@ -375,9 +376,10 @@ class CategoryController extends AppBaseController
     public function uploadForm()
     {
         $this->authorize('create', Category::class);
+        $languageList = Language::orderBy('name')->pluck('name', 'slug');
         return view('categories.upload')->with(
             ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
-                'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder]
+                'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder, 'languageList'=>$languageList]
         );
     }
 
@@ -437,7 +439,7 @@ class CategoryController extends AppBaseController
 
         $categoryGroup = CategoryGroup::where('slug', $categoryGroupSlug)->first();
         $categoriesArr = Category::selectRaw(
-            '? as Filename, pattern as Pattern, topic as Topic, that as That, 
+            '? as Filename, pattern as Pattern, topic as Topic, that as That,
                                                 template as Template, status as Status',
             [$categoryGroupSlug]
         )->where('category_group_id', $categoryGroup->id)->orderBy('id')->get()->toArray();

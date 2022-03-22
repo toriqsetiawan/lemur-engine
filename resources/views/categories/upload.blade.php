@@ -94,7 +94,8 @@
                         <div class="form-group col-lg-3 col-md-3 col-sm-6 select2-md">
                             {!! Form::label('language_id', 'Language:', ['data-test'=>"language_id_label"]) !!}
                             <div class="form-group">
-                                {!! Form::select('language_id', ['en'=>'en'], 'en' ,[  'placeholder'=>'Please Select', 'class' => 'col-sm-6 form-control select2 generic', 'data-validation'=>'required', 'data-test'=>"$htmlTag-language_id-select", 'id'=>"$htmlTag-language_id-select"]) !!}
+                                {!! Form::select('language_id', $languageList, 'en', [  'placeholder'=>'Please Select', 'class' => 'form-control select2 select2 generic', 'data-validation'=>'required', 'data-test'=>"$htmlTag-language_id-select", 'id'=>"$htmlTag-language_id-select"]) !!}
+
                             </div>
                         </div>
 

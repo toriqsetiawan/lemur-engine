@@ -66,7 +66,7 @@ class BotCategoryGroup extends Model
 
 
     public $table = 'bot_category_groups';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -173,9 +173,10 @@ class BotCategoryGroup extends Model
      * order by name
      *
      * @param $botId
+     * @param $botLanguageId
      * @return mixed
      */
-    public static function getAllCategoryGroupsForBot($botId)
+    public static function getAllCategoryGroupsForBot($botId, $botLanguageId)
     {
         $cleanAllCategoryGroup = [];
 
@@ -185,7 +186,8 @@ class BotCategoryGroup extends Model
             ->join('category_groups', 'category_groups.id', '=', 'bot_category_groups.category_group_id')
             ->leftjoin('sections', 'sections.id', '=', 'category_groups.section_id')
             ->join('bots', 'bots.id', '=', 'bot_category_groups.bot_id')
-            ->Where('bots.id', $botId)
+            ->where('bots.id', $botId)
+            ->where('category_groups.language_id', $botLanguageId)
             ->orderBy('sections.order')
             ->orderBy('category_groups.name')
             ->pluck('category_groups.slug')
@@ -206,8 +208,11 @@ class BotCategoryGroup extends Model
             'sections.order',
             'category_groups.is_master'])
             ->leftjoin('sections', 'sections.id', '=', 'category_groups.section_id')
-            ->where('category_groups.user_id', Auth::user()->id)
-            ->orWhere('category_groups.is_master', 1)
+            ->where('category_groups.language_id', $botLanguageId)
+            ->where(function($q) {
+                $q->where('category_groups.user_id', Auth::user()->id)
+                    ->orWhere('category_groups.is_master', 1);
+            })
             ->orderBy('sections.order')
             ->orderBy('category_groups.name')
             ->get();
