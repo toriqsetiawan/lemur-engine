@@ -78,11 +78,8 @@ class TalkAPIController extends AppBaseController
      */
     public function old_meta(CreateTalkRequest $request, TalkService $talkService)
     {
-
         $botSlug = $request->input('bot', false);
         return $this->meta($botSlug,  $request,  $talkService);
-
-
     }
 
     /**
@@ -95,14 +92,13 @@ class TalkAPIController extends AppBaseController
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
 
-        try {
+        dd($request->all());
 
+        try {
             $request->merge([
                 'bot' => $botSlug,
             ]);
-
             $talkService->checkAuthAccess($request);
-
             if ($botSlug) {
                 $bot = Bot::where('slug', $botSlug)->firstOrFail();
                 return $this->sendResponse(new ChatMetaResource($bot), 'Bot Meta retrieved successfully');
