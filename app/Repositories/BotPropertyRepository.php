@@ -61,8 +61,9 @@ class BotPropertyRepository extends BaseRepository
     {
 
         //we never update the bot or the property name ...
-        //we can only update the value
+        //we can only update the value or the section id
         $newInput['value']=$input['value'];
+        $newInput['section_id']=$input['section_id'];
 
         return parent::update($newInput, $id);
     }

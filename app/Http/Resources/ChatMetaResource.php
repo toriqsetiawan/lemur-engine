@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Bot;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ChatMetaResource extends JsonResource
@@ -14,6 +15,7 @@ class ChatMetaResource extends JsonResource
      */
     public function toArray($request)
     {
+
         if (!empty($this->lemurtar_url)) {
             $lemurtarFields = ['width'=>'width',
                 'height'=>'height',
@@ -45,8 +47,15 @@ class ChatMetaResource extends JsonResource
                 }
                 $cleanFields['style']='transparent';
             }
+
         } else {
             $cleanFields['style']='transparent';
+        }
+        $additionalBotProperties = $this->lemurTarAdditionalProperties;
+
+        if(!empty($additionalBotProperties)){
+            foreach($additionalBotProperties as $additionalBotProperty)
+            $cleanFields[$additionalBotProperty->name]=$additionalBotProperty->value;
         }
 
 

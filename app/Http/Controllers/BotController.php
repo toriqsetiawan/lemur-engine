@@ -149,10 +149,12 @@ class BotController extends AppBaseController
             $bot = $this->botRepository->create($input);
             $bot = $this->uploadImage($request, $bot);
 
-            //do we have a sectionId? (else null)
-            $sectionId = $this->botPropertyRepository->getSectionId('name', $bot->id);
+            if(empty($input['section_id'])){
+                //do we have a sectionId? (else null)
+                $input['section_id'] = $this->botPropertyRepository->getSectionId('name', $bot->id);
+            }
 
-            $this->botPropertyRepository->create(['bot_id'=>$bot->id, 'name'=>'name', 'value'=>$input['name'], 'section_id'=>$sectionId]);
+            $this->botPropertyRepository->create(['bot_id'=>$bot->id, 'name'=>'name', 'value'=>$input['name'], 'section_id'=>$input['section_id']]);
 
             Flash::success('Bot saved successfully.');
             // Commit the transaction

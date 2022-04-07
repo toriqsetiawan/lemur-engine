@@ -99,7 +99,9 @@ class BotPropertyController extends AppBaseController
             Flash::success('Bot Properties updated and saved successfully.');
         } else {
             //do we have a sectionId?
-            $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
+            if(empty($input['section_id'])){
+                $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
+            }
             $botProperty = $this->botPropertyRepository->create($input);
             Flash::success('Bot Property saved successfully.');
         }
@@ -196,7 +198,10 @@ class BotPropertyController extends AppBaseController
 
         $input = $request->all();
 
-        $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
+        if(empty($input['section_id'])){
+            $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
+        }
+
         $botProperty = $this->botPropertyRepository->update($input, $botProperty->id);
 
         Flash::success('Bot Property updated successfully.');

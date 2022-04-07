@@ -274,6 +274,23 @@ class Bot extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     **/
+    public function lemurTarAdditionalProperties()
+    {
+        $section = Section::where('slug','lemurtar')->first();
+
+        if($section !== null){
+            $sectionId = $section->id;
+        }else{
+            $sectionId = -1;
+        }
+
+        return $this->hasMany(\App\Models\BotProperty::class, 'bot_id')->where('section_id', $sectionId);
+
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function botKeys()
