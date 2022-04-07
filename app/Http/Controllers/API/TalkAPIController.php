@@ -91,9 +91,6 @@ class TalkAPIController extends AppBaseController
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
-
-        dd($request->all());
-
         try {
             $request->merge([
                 'bot' => $botSlug,
@@ -109,4 +106,5 @@ class TalkAPIController extends AppBaseController
             return $this->extractSendError($e);
         }
     }
+
 }
