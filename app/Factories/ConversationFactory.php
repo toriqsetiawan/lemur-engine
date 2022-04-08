@@ -18,14 +18,12 @@ class ConversationFactory
     public static function getConversationByBotClientOrCreate($bot, $client, $allowHtml = 1, $forceNew = false)
     {
 
-
         if (!$forceNew) {
             $conversation = \App\Models\Conversation::where('bot_id', $bot->id)
                 ->where('client_id', $client->id)->latest('id')->first();
         } else {
             $conversation = null;
         }
-
 
         if ($conversation == null) {
             $conversation = new Conversation();

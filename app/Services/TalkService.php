@@ -211,7 +211,6 @@ class TalkService
             $showHtml=$input['html'];
         }
 
-
         //get the bot....
         $this->bot = Bot::where('slug', $input['bot'])->firstOrFail();
         //get the client....
@@ -224,10 +223,15 @@ class TalkService
             $forceNew
         );
 
+        if(!empty($input['startingTopic']) && $this->conversation->isFirstTurn()){
+            $this->conversation->setGlobalProperty('topic', $input['startingTopic']);
+        }
+
         LemurLog::debug(
             'conversation started',
             [
-                'conversation_id'=>$this->conversation->id
+                'conversation_id'=>$this->conversation->id,
+                'starting_topic'=>$input['startingTopic']??''
             ]
         );
     }

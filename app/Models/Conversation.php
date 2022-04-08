@@ -252,6 +252,10 @@ class Conversation extends Model
                 ->leftJoin('users', 'users.id', '=', 'bots.user_id');
     }
 
+    public function isFirstTurn() :bool
+    {
+        return empty($this->turns)??false;
+    }
 
     public static function totalInDays($days)
     {
