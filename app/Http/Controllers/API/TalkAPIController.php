@@ -23,6 +23,7 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Response;
 use App\Models\Bot;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -91,7 +92,7 @@ class TalkAPIController extends AppBaseController
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
-        dd($request->input());
+        Log::debug('Meta Post', $request->all());
 
         try {
             $request->merge([
