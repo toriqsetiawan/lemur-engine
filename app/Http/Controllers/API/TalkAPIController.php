@@ -113,7 +113,7 @@ class TalkAPIController extends AppBaseController
                     }
                 }
 
-                $metaBotResource->conversationId = $conversationId);
+                $metaBotResource->conversationId = $conversationId;
 
                 return $this->sendResponse(new ChatMetaResource($metaBotResource), 'Bot Meta retrieved successfully');
             } else {
