@@ -231,7 +231,7 @@ class TalkService
             'conversation started',
             [
                 'conversation_id'=>$this->conversation->id,
-                'starting_topic'=>$input['startingTopic']??''
+                'input'=>$input
             ]
         );
     }
