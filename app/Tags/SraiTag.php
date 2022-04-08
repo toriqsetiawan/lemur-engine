@@ -53,13 +53,14 @@ class SraiTag extends AimlTag
 
         $contents = $this->getCurrentTagContents(true);
 
-        //check if we have reached the max levels of srai recursion
-        //if so through an exception
-
-        if ($this->isInLiTag()) { //if we are in a LI tag...
-            $this->buildResponse("<srai>" . $contents . "</srai>");
-        } else {
-            $this->buildResponse($this->getResponseFromNewTalk($contents));
+        if(trim($contents)!==''){
+            //check if we have reached the max levels of srai recursion
+            //if so through an exception
+            if ($this->isInLiTag()) { //if we are in a LI tag...
+                $this->buildResponse("<srai>" . $contents . "</srai>");
+            } else {
+                $this->buildResponse($this->getResponseFromNewTalk($contents));
+            }
         }
     }
 
