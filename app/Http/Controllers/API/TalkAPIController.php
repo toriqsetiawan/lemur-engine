@@ -91,7 +91,7 @@ class TalkAPIController extends AppBaseController
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
-        dd($request->all());
+        dd($request->input());
 
         try {
             $request->merge([
