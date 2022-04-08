@@ -97,25 +97,25 @@ class TalkAPIController extends AppBaseController
             ]);
             $talkService->checkAuthAccess($request);
             if ($botSlug) {
-                $bot = Bot::where('slug', $botSlug)->firstOrFail();
+                $metaBotResource = Bot::where('slug', $botSlug)->firstOrFail();
                 //add the clientId to the collection so we can return it in the meta resource
                 $clientId = $request->input('clientid', null);
-                $bot->put('clientId', $request->input('clientid', $clientId));
+                $metaBotResource->clientId = $request->input('clientid', $clientId);
                 /**
                  * now we have a bot id and a client id we might be able to find our conversation....
                  */
                 $conversationId = null;
                 if($clientId !== null){
 
-                    $conversation = Conversation::where('bot_id',$bot->id)->where('client_id', $clientId)->first();
+                    $conversation = Conversation::where('bot_id',$metaBotResource->id)->where('client_id', $clientId)->first();
                     if($conversation !== null){
                         $conversationId = $request->input('conversationId', $conversation->slug);
                     }
                 }
 
-                $bot->put('conversationId', $conversationId);
+                $metaBotResource->conversationId = $conversationId);
 
-                return $this->sendResponse(new ChatMetaResource($bot), 'Bot Meta retrieved successfully');
+                return $this->sendResponse(new ChatMetaResource($metaBotResource), 'Bot Meta retrieved successfully');
             } else {
                 throw new UnprocessableEntityHttpException('Missing botId');
             }
