@@ -44,7 +44,8 @@ use Spatie\Sluggable\SlugOptions;
  *      @SWG\Property(
  *          property="order",
  *          description="order",
- *          type="integer"
+ *          type="integer",
+ *          default=1
  *      ),
  *      @SWG\Property(
  *          property="default_state",
