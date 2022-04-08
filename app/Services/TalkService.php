@@ -232,7 +232,7 @@ class TalkService
             [
                 'conversation_id'=>$this->conversation->id,
                 'input'=>$input,
-                'isFirstTurn' => count($this->conversation->turns)
+                'isFirstTurn' => $this->conversation->isFirstTurn()
             ]
         );
     }

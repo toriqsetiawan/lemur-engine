@@ -254,7 +254,7 @@ class Conversation extends Model
 
     public function isFirstTurn() :bool
     {
-        return empty($this->turns)??false;
+        return empty($this->turns);
     }
 
     public static function totalInDays($days)
