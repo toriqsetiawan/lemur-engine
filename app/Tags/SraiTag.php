@@ -41,29 +41,25 @@ class SraiTag extends AimlTag
     public function closeTag()
     {
 
-        $contents = $this->getCurrentTagContents(true);
-
                 LemurLog::debug(
                     __FUNCTION__,
                     [
                     'conversation_id'=>$this->conversation->id,
                     'turn_id'=>$this->conversation->currentTurnId(),
                     'tag_id'=>$this->getTagId(),
-                    'attributes'=>$this->getAttributes(),
-                        'contents'=>$contents
+                    'attributes'=>$this->getAttributes()
                     ]
                 );
 
         $contents = $this->getCurrentTagContents(true);
 
-        if(trim($contents)!==''){
-            //check if we have reached the max levels of srai recursion
-            //if so through an exception
-            if ($this->isInLiTag()) { //if we are in a LI tag...
-                $this->buildResponse("<srai>" . $contents . "</srai>");
-            } else {
-                $this->buildResponse($this->getResponseFromNewTalk($contents));
-            }
+        //check if we have reached the max levels of srai recursion
+        //if so through an exception
+
+        if ($this->isInLiTag()) { //if we are in a LI tag...
+            $this->buildResponse("<srai>" . $contents . "</srai>");
+        } else {
+            $this->buildResponse($this->getResponseFromNewTalk($contents));
         }
     }
 
