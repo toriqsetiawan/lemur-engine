@@ -231,7 +231,8 @@ class TalkService
             'conversation started',
             [
                 'conversation_id'=>$this->conversation->id,
-                'input'=>$input
+                'input'=>$input,
+                'isFirstTurn' => $this->conversation->isFirstTurn()
             ]
         );
     }
