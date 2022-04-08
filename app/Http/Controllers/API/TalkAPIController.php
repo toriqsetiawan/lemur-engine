@@ -79,7 +79,7 @@ class TalkAPIController extends AppBaseController
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
-        LemurLog::debug('Meta Post', $request->all());
+        LemurLog::debug('meta post', $request->all());
 
         try {
             $request->merge([
@@ -89,8 +89,8 @@ class TalkAPIController extends AppBaseController
             if ($botSlug) {
                 $metaBotResource = Bot::where('slug', $botSlug)->firstOrFail();
                 //add the clientId to the collection so we can return it in the meta resource
-                $clientId = $request->input('clientid', null);
-                $metaBotResource->clientId = $request->input('clientid', $clientId);
+                $clientId = $request->input('clientId', null);
+                $metaBotResource->clientId = $clientId;
                 /**
                  * now we have a bot id and a client id we might be able to find our conversation....
                  */
