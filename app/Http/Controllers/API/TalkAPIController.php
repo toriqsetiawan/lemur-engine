@@ -3,27 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Classes\LemurLog;
-use App\Classes\LemurStr;
-use App\DataTables\BotDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateBotRequest;
 use App\Http\Requests\CreateTalkRequest;
-use App\Http\Requests\UpdateBotRequest;
-use App\Http\Resources\BotMetaResource;
 use App\Http\Resources\ChatMetaResource;
-use App\Models\Client;
 use App\Models\Conversation;
-use App\Models\Turn;
-use App\Repositories\BotRepository;
 use App\Repositories\ConversationRepository;
 use App\Services\TalkService;
-use Carbon\Carbon;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Response;
 use App\Models\Bot;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
