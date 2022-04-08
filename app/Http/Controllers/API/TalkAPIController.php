@@ -36,6 +36,8 @@ class TalkAPIController extends AppBaseController
     public function store(CreateTalkRequest $request, TalkService $talkService)
     {
 
+        LemurLog::debug('request',$request->input());
+
         try {
             $talkService->checkAuthAccess($request);
 
