@@ -41,13 +41,16 @@ class SraiTag extends AimlTag
     public function closeTag()
     {
 
+        $contents = $this->getCurrentTagContents(true);
+
                 LemurLog::debug(
                     __FUNCTION__,
                     [
                     'conversation_id'=>$this->conversation->id,
                     'turn_id'=>$this->conversation->currentTurnId(),
                     'tag_id'=>$this->getTagId(),
-                    'attributes'=>$this->getAttributes()
+                    'attributes'=>$this->getAttributes(),
+                        'contents'=>$contents
                     ]
                 );
 
