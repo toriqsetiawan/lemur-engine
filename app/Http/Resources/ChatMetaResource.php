@@ -16,6 +16,7 @@ class ChatMetaResource extends JsonResource
     public function toArray($request)
     {
 
+
         if (!empty($this->lemurtar_url)) {
             $lemurtarFields = ['width'=>'width',
                 'height'=>'height',
@@ -67,7 +68,11 @@ class ChatMetaResource extends JsonResource
                 'lemurtar' => $cleanFields,
             ],
             'client' => [
+                'id' => $this->clientId,
                 'image'=> url(config('lemur.default_client_image'))
+            ],
+            'conversation' => [
+                'id' => $this->conversationId
             ]
         ];
     }
