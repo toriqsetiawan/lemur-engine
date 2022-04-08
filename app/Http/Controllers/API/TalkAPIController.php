@@ -92,7 +92,7 @@ class TalkAPIController extends AppBaseController
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {
-        Log::debug('Meta Post', $request->all());
+        LemurLog::debug('Meta Post', $request->all());
 
         try {
             $request->merge([
