@@ -37,6 +37,7 @@ return [
         'b'=>'wrapped',
         'img'=>'wrapped',
         "strong"=>'wrapped',
+        "respondbutton"=>'wrapped',
     ],
     'recursive' => [
         'srai',
