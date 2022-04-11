@@ -12,12 +12,12 @@ use App\Models\Conversation;
  */
 class InputTag extends AimlTag
 {
-    protected $tagName = "Input";
+    protected string $tagName = "Input";
 
     /**
      * InputTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      * <input/> <input index="1"/> - the current input sentence
      * <input index="2"/> - the previous input sentence
      * <input index="N"/> - the Nth previous input sentence.
@@ -25,9 +25,8 @@ class InputTag extends AimlTag
      * Hello = <input/>
      * My name is Bob = <input index="2"/>
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

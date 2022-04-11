@@ -27,15 +27,15 @@ use App\Models\Conversation;
  */
 class GooglesearchTag extends AimlTag
 {
-    protected $tagName = "Googlesearch";
+    protected string $tagName = "Googlesearch";
 
 
     /**
      * GooglesearchTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

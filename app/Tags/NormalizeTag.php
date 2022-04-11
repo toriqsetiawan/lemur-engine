@@ -13,17 +13,16 @@ use App\Models\Conversation;
  */
 class NormalizeTag extends AimlTag
 {
-    protected $tagName = "Normalize";
+    protected string $tagName = "Normalize";
 
 
     /**
      * NormalizeTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

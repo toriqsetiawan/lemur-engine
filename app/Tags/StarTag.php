@@ -13,16 +13,15 @@ use App\Models\Conversation;
  */
 class StarTag extends AimlTag
 {
-    protected $tagName = "Star";
+    protected string $tagName = "Star";
 
     /**
      * StarTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
 
         //if there is no format set then set default index

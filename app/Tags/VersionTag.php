@@ -12,15 +12,15 @@ use App\Models\Conversation;
  */
 class VersionTag extends AimlTag
 {
-    protected $tagName = "Version";
+    protected string $tagName = "Version";
 
 
     /**
      * VersionTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

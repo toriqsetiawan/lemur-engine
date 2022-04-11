@@ -11,19 +11,18 @@ use App\Models\Conversation;
  */
 class TestTag extends AimlTag
 {
-    protected $tagName = "Test";
+    protected string $tagName = "Test";
     protected $someVar = "something";
 
     /**
      * this is purely used for testing so we can test the abstract AimlTag class
      *
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
 
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 }

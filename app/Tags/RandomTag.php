@@ -18,9 +18,9 @@ class RandomTag extends AimlTag
      * the random item are extracted as part of the aimlParser
      * @param TalkService $talkService
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(TalkService $talkService, Conversation $conversation, $attributes)
+    public function __construct(TalkService $talkService, Conversation $conversation, array $attributes)
     {
         parent::__construct($conversation, $attributes);
     }

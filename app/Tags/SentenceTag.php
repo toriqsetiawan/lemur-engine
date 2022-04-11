@@ -13,17 +13,16 @@ use App\Models\Conversation;
  */
 class SentenceTag extends AimlTag
 {
-    protected $tagName = "Sentence";
+    protected string $tagName = "Sentence";
 
 
     /**
      * SentenceTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

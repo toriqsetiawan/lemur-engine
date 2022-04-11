@@ -11,15 +11,15 @@ use App\Models\Conversation;
  */
 class BeforethatTag extends ThatTag
 {
-    protected $tagName = "Beforethat";
+    protected string $tagName = "Beforethat";
 
     /**
      * BeforethatTag Constructor.
      * Just here for backwards compatibility
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes)
+    public function __construct(Conversation $conversation, array $attributes)
     {
         $attributes['index']='1';
         parent::__construct($conversation, $attributes);

@@ -18,7 +18,7 @@ class AimlTagFactory
     /**
      * @param $conversation
      * @param $tagName
-     * @param $attributes
+     * @param array $attributes
      * @return AimlTag $tag
      */
     public static function create($conversation, $tagName, $attributes)

@@ -14,16 +14,15 @@ use App\Models\Conversation;
 class LiTag extends AimlTag
 {
 
-    protected $tagName = "Li";
-    protected $tag_id;
-
+    protected string $tagName = "Li";
+    protected string $tag_id;
 
     /**
      * LiTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }
@@ -202,13 +201,9 @@ class LiTag extends AimlTag
                 $currentValue = $this->conversation->getVar($name, '');
             }
 
-
-
             $valueToCheck = $this->getAttribute('VALUE');
+            return (strtolower($currentValue) === strtolower($valueToCheck)?'true':'false');
 
-            $response = (strtolower($currentValue) === strtolower($valueToCheck)?'true':'false');
-
-            return $response;
         }
 
         return 'false';

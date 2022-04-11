@@ -11,14 +11,14 @@ use App\Models\Conversation;
  */
 class GettopicTag extends GetTag
 {
-    protected $tagName = "Gettopic";
+    protected string $tagName = "Gettopic";
 
     /**
      * GettopicTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes)
+    public function __construct(Conversation $conversation, array $attributes)
     {
         $attributes['name']='topic';
 

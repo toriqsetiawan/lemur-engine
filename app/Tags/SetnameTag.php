@@ -11,14 +11,14 @@ use App\Models\Conversation;
  */
 class SetnameTag extends SetTag
 {
-    protected $tagName = "Setname";
+    protected string $tagName = "Setname";
 
     /**
      * SetnameTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes)
+    public function __construct(Conversation $conversation, array $attributes)
     {
         $attributes['name']='name';
 

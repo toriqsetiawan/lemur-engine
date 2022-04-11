@@ -11,15 +11,15 @@ use App\Models\Conversation;
  */
 class ProgramTag extends VersionTag
 {
-    protected $tagName = "Program";
+    protected string $tagName = "Program";
 
 
     /**
      * Program Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

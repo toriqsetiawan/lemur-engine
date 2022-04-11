@@ -13,18 +13,17 @@ use App\Models\Conversation;
  */
 class EmptyTag extends AimlTag
 {
-    protected $tagName = "Empty";
+    protected string $tagName = "Empty";
 
 
     /**
      * EmptyTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      * Saves the contents of this tag to the empty_responses table
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

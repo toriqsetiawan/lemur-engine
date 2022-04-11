@@ -12,12 +12,12 @@ use App\Models\Conversation;
  */
 class ResponseTag extends AimlTag
 {
-    protected $tagName = "Response";
+    protected string $tagName = "Response";
 
     /**
      * Response Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
 
      * <response/> - the current response (all sentences in that response)
      * <response index="2"/> - the previous response (all sentences in that response)
@@ -26,9 +26,8 @@ class ResponseTag extends AimlTag
      * Hi Bob. nice to meet you = <that/>
      * 'unknown' = <response index="2"/>
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

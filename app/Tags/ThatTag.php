@@ -13,16 +13,15 @@ use App\Models\Conversation;
  */
 class ThatTag extends AimlTag
 {
-    protected $tagName = "That";
+    protected string $tagName = "That";
 
     /**
      * ThatTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

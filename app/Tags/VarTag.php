@@ -12,14 +12,14 @@ use App\Models\Conversation;
  */
 class VarTag extends AimlTag
 {
-    protected $tagName = "Var";
+    protected string $tagName = "Var";
 
     /**
      * VarTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

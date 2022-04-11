@@ -9,14 +9,14 @@ use App\Models\Conversation;
  */
 class GetversionTag extends VersionTag
 {
-    protected $tagName = "Getversion";
+    protected string $tagName = "Getversion";
 
     /**
      * GetversionTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes)
+    public function __construct(Conversation $conversation, array $attributes)
     {
         parent::__construct($conversation, $attributes);
     }

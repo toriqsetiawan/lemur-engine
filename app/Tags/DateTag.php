@@ -12,15 +12,15 @@ use App\Models\Conversation;
  */
 class DateTag extends AimlTag
 {
-    protected $tagName = "Date";
+    protected string $tagName = "Date";
 
 
     /**
      * DateTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
 
 

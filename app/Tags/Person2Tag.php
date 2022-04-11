@@ -13,18 +13,17 @@ use App\Models\Conversation;
  */
 class Person2Tag extends AimlTag
 {
-    protected $tagName = "Person2";
+    protected string $tagName = "Person2";
 
 
     /**
      * Person2Tag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      * which transforms pronouns between first and third person.
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

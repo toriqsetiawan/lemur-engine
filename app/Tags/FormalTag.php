@@ -12,17 +12,16 @@ use App\Models\Conversation;
  */
 class FormalTag extends AimlTag
 {
-    protected $tagName = "Formal";
+    protected string $tagName = "Formal";
 
 
     /**
      * FormalTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

@@ -12,16 +12,15 @@ use App\Models\Turn;
  */
 class RequestTag extends AimlTag
 {
-    protected $tagName = "Request";
+    protected string $tagName = "Request";
 
     /**
      * Request Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

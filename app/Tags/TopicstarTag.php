@@ -12,16 +12,15 @@ use App\Models\Conversation;
  */
 class TopicstarTag extends AimlTag
 {
-    protected $tagName = "Topicstar";
+    protected string $tagName = "Topicstar";
 
     /**
      * TopicstarTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 

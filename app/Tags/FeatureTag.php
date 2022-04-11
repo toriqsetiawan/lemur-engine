@@ -12,14 +12,14 @@ use App\Models\Conversation;
  */
 class FeatureTag extends AimlTag
 {
-    protected $tagName = "Feature";
+    protected string $tagName = "Feature";
 
     /**
      * FeatureTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

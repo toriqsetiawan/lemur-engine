@@ -13,7 +13,7 @@ use SimpleXMLElement;
  */
 class HtmlTag extends AimlTag
 {
-    protected $tagName;
+    protected string $tagName;
     protected $tagType;
     protected $allowHtml;
 
@@ -22,11 +22,9 @@ class HtmlTag extends AimlTag
      * @param Conversation $conversation
      * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
-
         $this->allowHtml = $conversation->getAllowHtml();
     }
 

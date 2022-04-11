@@ -9,5 +9,5 @@ namespace App\Tags;
  */
 class EvalTag extends EvaluateTag
 {
-    protected $tagName = "Eval";
+    protected string $tagName = "Eval";
 }

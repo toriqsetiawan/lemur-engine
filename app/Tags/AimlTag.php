@@ -17,20 +17,20 @@ use SimpleXMLElement;
 abstract class AimlTag
 {
 
-    protected $attributes;
-    protected $tagName;
-    protected $tagId;
-    protected $conversation;
-    protected $tagContents;
-    protected $tagSettings = [];
-    protected $isTagValid=true;
+    protected array $attributes;
+    protected string $tagName;
+    protected string $tagId;
+    protected Conversation $conversation;
+    protected string $tagContents;
+    protected array $tagSettings = [];
+    protected bool $isTagValid=true;
 
     /**
      * AimlTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
 
         $this->setAttributes($attributes);
@@ -92,7 +92,7 @@ abstract class AimlTag
 
 
     /**
-     * @param $attributes
+     * @param array $attributes
      */
     public function setAttributes($attributes)
     {

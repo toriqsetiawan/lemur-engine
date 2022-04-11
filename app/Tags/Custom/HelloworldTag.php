@@ -26,16 +26,16 @@ use App\Models\Conversation;
  */
 class HelloworldTag extends AimlTag
 {
-    protected $tagName = "Helloworld";
+    protected string $tagName = "Helloworld";
     protected $config;
 
 
     /**
      * HelloWorldTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
         $this->config = config('customtags.helloworld');

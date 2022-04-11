@@ -14,7 +14,7 @@ use App\Models\Conversation;
 class ConditionTag extends AimlTag
 {
 
-    protected $tagName = "Condition";
+    protected string $tagName = "Condition";
     protected $talkService;
 
     private $tmpContents = '';
@@ -23,10 +23,10 @@ class ConditionTag extends AimlTag
     /**
      * ConditionTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
      * @param TalkService $talkService
+     * @param array $attributes
      */
-    public function __construct(TalkService $talkService, Conversation $conversation, $attributes)
+    public function __construct(TalkService $talkService, Conversation $conversation, array $attributes)
     {
         parent::__construct($conversation, $attributes);
         $this->talkService = $talkService;

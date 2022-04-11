@@ -11,14 +11,14 @@ use App\Models\Conversation;
  */
 class NameTag extends AimlTag
 {
-    protected $tagName = "Name";
+    protected string $tagName = "Name";
 
     /**
      * NameTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }

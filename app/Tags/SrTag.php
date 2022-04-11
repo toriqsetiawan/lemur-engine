@@ -12,18 +12,18 @@ use App\Models\Conversation;
  */
 class SrTag extends SraiTag
 {
-    protected $tagName = "Sr";
+    protected string $tagName = "Sr";
 
     /**
      * SrTag Constructor.
      * @param TalkService $talkService
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      *
      * this will never get called as a method called expandSr($template){
      * expands the <sr/> tag to <srai><star/></srai>
      */
-    public function __construct(TalkService $talkService, Conversation $conversation, $attributes)
+    public function __construct(TalkService $talkService, Conversation $conversation, array $attributes)
     {
         parent::__construct($talkService, $conversation, $attributes);
     }

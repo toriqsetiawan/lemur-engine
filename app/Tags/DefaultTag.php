@@ -11,15 +11,15 @@ use App\Models\Conversation;
  */
 class DefaultTag extends AimlTag
 {
-    protected $tagName = "Default";
+    protected string $tagName = "Default";
 
 
     /**
      * DefaultTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
 
 

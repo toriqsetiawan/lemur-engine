@@ -11,22 +11,21 @@ use App\Models\Conversation;
  */
 class PatternTag extends AimlTag
 {
-    protected $tagName = "Pattern";
+    protected string $tagName = "Pattern";
 
 
     /**
      * PatternTag Constructor.
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
 
     //this has been intentionally left empty
     //there are no pattern tests
     //why?
     //because the pattern tag is NOT parsed at run time
      */
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         parent::__construct($conversation, $attributes);
     }
 }

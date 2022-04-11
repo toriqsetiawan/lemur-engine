@@ -13,23 +13,22 @@ use App\Models\Conversation;
  */
 class SraiTag extends AimlTag
 {
-    protected $tagName = "Srai";
-    protected $talkService;
-    protected $sraiCount;
-    protected $maxSraiCount;
+    protected string $tagName = "Srai";
+    protected TalkService $talkService;
+    protected int $sraiCount;
+    protected int $maxSraiCount;
 
     /**
      * SraiTag Constructor.
      * @param TalkService $talkService
      * @param Conversation $conversation
-     * @param $attributes
+     * @param array $attributes
      */
-    public function __construct(TalkService $talkService, Conversation $conversation, $attributes)
+    public function __construct(TalkService $talkService, Conversation $conversation, array $attributes)
     {
         parent::__construct($conversation, $attributes);
         $this->talkService = $talkService;
         $this->sraiCount = $conversation->getVar('srai-count', 0);
-
         $this->maxSraiCount = $this->getMaxSraiCountFromConfig();
     }
 

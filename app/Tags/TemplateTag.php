@@ -11,9 +11,9 @@ use App\Models\Conversation;
  */
 class TemplateTag extends AimlTag
 {
-    protected $tagName = "Template";
+    protected string $tagName = "Template";
 
-    public function __construct(Conversation $conversation, $attributes = [])
+    public function __construct(Conversation $conversation, array $attributes = [])
     {
         parent::__construct($conversation, $attributes);
     }
