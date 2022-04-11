@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\WildcardDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateWildcardRequest;
 use App\Http\Requests\UpdateWildcardRequest;
 use App\Repositories\WildcardRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Wildcard;
 
 class WildcardController extends AppBaseController
 {
-    /** @var  WildcardRepository */
-    private $wildcardRepository;
+    private WildcardRepository $wildcardRepository;
 
     //to help with data testing and form settings
-    public $link = 'wildcards';
-    public $htmlTag = 'wildcards';
-    public $title = 'Wildcards';
-    public $resourceFolder = 'wildcards';
+    public string $link = 'wildcards';
+    public string $htmlTag = 'wildcards';
+    public string $title = 'Wildcards';
+    public string $resourceFolder = 'wildcards';
 
     public function __construct(WildcardRepository $wildcardRepo)
     {

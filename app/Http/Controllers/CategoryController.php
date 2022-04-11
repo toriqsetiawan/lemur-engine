@@ -4,22 +4,19 @@ namespace App\Http\Controllers;
 
 use App\DataTables\CategoryDataTable;
 use App\Exceptions\AimlUploadException;
-use App\Http\Requests;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Requests\UploadCategoryFileRequest;
-use App\Models\Bot;
-use App\Models\BotProperty;
 use App\Models\CategoryGroup;
 use App\Models\ClientCategory;
 use App\Models\EmptyResponse;
 use App\Models\Language;
+use App\Models\MachineLearntCategory;
 use App\Models\Turn;
 use App\Repositories\CategoryRepository;
 use App\Services\AimlUploadService;
 use Exception;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -30,14 +27,13 @@ use SimpleXMLElement;
 
 class CategoryController extends AppBaseController
 {
-    /** @var  CategoryRepository */
-    private $categoryRepository;
+    private CategoryRepository $categoryRepository;
 
     //to help with data testing and form settings
-    public $link = 'categories';
-    public $htmlTag = 'categories';
-    public $title = 'Categories';
-    public $resourceFolder = 'categories';
+    public string $link = 'categories';
+    public string $htmlTag = 'categories';
+    public string $title = 'Categories';
+    public string $resourceFolder = 'categories';
 
     public function __construct(CategoryRepository $categoryRepo)
     {
@@ -165,6 +161,34 @@ class CategoryController extends AppBaseController
             'clientCategory'=>$clientCategory]
         );
     }
+
+
+    /**
+     * Show the form for creating a new Category.
+     *
+     * @return Response
+     * @throws AuthorizationException
+     */
+    public function createFromMachineLearntCategory($id)
+    {
+        $this->authorize('create', Category::class);
+
+        $machineLearntCategory = MachineLearntCategory::find($id);
+
+        $categoryGroupList = CategoryGroup::myEditableItems()->orderBy('name')->pluck('name', 'slug');
+
+        if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
+            $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+        }
+
+        return view('categories.create_from_machine_learnt_category')->with(
+            ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
+                'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
+                'categoryGroupList'=>$categoryGroupList,
+                'machineLearntCategory'=>$machineLearntCategory]
+        );
+    }
+
 
     /**
      * Show the form for creating a new Category.

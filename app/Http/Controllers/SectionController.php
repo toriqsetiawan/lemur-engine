@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SectionDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
 use App\Repositories\SectionRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Section;
 
 class SectionController extends AppBaseController
 {
-    /** @var  SectionRepository */
-    private $sectionRepository;
+    private SectionRepository $sectionRepository;
 
     //to help with data testing and form settings
-    public $link = 'sections';
-    public $htmlTag = 'sections';
-    public $title = 'Sections';
-    public $resourceFolder = 'sections';
+    public string $link = 'sections';
+    public string $htmlTag = 'sections';
+    public string $title = 'Sections';
+    public string $resourceFolder = 'sections';
 
     public function __construct(SectionRepository $sectionRepo)
     {

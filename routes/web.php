@@ -151,6 +151,23 @@ Route::group(['prefix' => '/category/fromClientCategory'], function () {
         ->middleware(['auth:web','data.transform']);
 });
 
+Route::group(['prefix' => '/category/fromMachineLearntCategory'], function () {
+
+    Route::bind('machineLearntCategorySlug', function ($machineLearntCategorySlug) {
+
+        try {
+            $machineLearntCategory = App\Models\MachineLearntCategory::where('slug', $machineLearntCategorySlug)->firstOrFail();
+            return $machineLearntCategory->id;
+        } catch (Exception $e) {
+            abort(404);
+        }
+    });
+
+    Route::GET('/{machineLearntCategorySlug}', 'CategoryController@createFromMachineLearntCategory')
+        ->middleware(['auth:web','data.transform']);
+});
+
+
 Route::group(['prefix' => '/category/fromCopy'], function () {
 
     Route::bind('categorySlug', function ($categorySlug) {
@@ -182,7 +199,13 @@ Route::resource('wordTransformations', 'WordTransformationController')
 Route::resource('conversationProperties', 'ConversationPropertyController')
     ->middleware(['auth:web','data.transform']);
 
+Route::resource('conversationSources', 'ConversationSourceController')
+    ->middleware(['auth:web','data.transform']);
+
 Route::resource('clientCategories', 'ClientCategoryController')
+    ->middleware(['auth:web','data.transform']);
+
+Route::resource('machineLearntCategories', 'MachineLearntCategoryController')
     ->middleware(['auth:web','data.transform']);
 
 Route::resource('emptyResponses', 'EmptyResponseController')

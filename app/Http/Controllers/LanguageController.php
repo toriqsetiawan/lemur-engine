@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\LanguageDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateLanguageRequest;
 use App\Http\Requests\UpdateLanguageRequest;
 use App\Http\Requests\UpdateLanguageSlugRequest;
 use App\Repositories\LanguageRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Language;
 
 class LanguageController extends AppBaseController
 {
-    /** @var  LanguageRepository */
-    private $languageRepository;
+    private LanguageRepository $languageRepository;
 
     //to help with data testing and form settings
-    public $link = 'languages';
-    public $htmlTag = 'languages';
-    public $title = 'Languages';
-    public $resourceFolder = 'languages';
+    public string $link = 'languages';
+    public string $htmlTag = 'languages';
+    public string $title = 'Languages';
+    public string $resourceFolder = 'languages';
 
     public function __construct(LanguageRepository $languageRepo)
     {

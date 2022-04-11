@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SetValueDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateSetValueRequest;
 use App\Http\Requests\UpdateSetValueRequest;
 use App\Http\Requests\UploadSetValueFileRequest;
@@ -12,7 +11,6 @@ use App\Repositories\SetValueRepository;
 use App\Services\SetValueUploadService;
 use Exception;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,14 +20,13 @@ use App\Models\SetValue;
 
 class SetValueController extends AppBaseController
 {
-    /** @var  SetValueRepository */
-    private $setValueRepository;
+    private SetValueRepository $setValueRepository;
 
     //to help with data testing and form settings
-    public $link = 'setValues';
-    public $htmlTag = 'set-values';
-    public $title = 'Set Values';
-    public $resourceFolder = 'set_values';
+    public string $link = 'setValues';
+    public string $htmlTag = 'set-values';
+    public string $title = 'Set Values';
+    public string $resourceFolder = 'set_values';
 
     public function __construct(SetValueRepository $setValueRepo)
     {

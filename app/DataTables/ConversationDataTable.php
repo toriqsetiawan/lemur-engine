@@ -10,10 +10,10 @@ class ConversationDataTable extends DataTable
 {
 
     //to help with data testing and form settings
-    public $link;
-    public $htmlTag;
-    public $title;
-    public $resourceFolder;
+    public string $link;
+    public string $htmlTag;
+    public string $title;
+    public string $resourceFolder;
 
     /**
      * receive the value from the controller to parameterise the display of the table
@@ -59,7 +59,7 @@ class ConversationDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GitDetail $model
+     * @param \App\Models\Conversation $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Conversation $model)
@@ -84,12 +84,12 @@ class ConversationDataTable extends DataTable
                     addRowFeatures(settings, json, "'.$this->link.'","")
                 }',
                 'initComplete' => 'function(settings, json) {
-                    
+
                     var maxColumn = 6
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,2]
-                    var noSearchFields = [maxColumn]     
-                
+                    var noSearchFields = [maxColumn]
+
                     runAutoSearch(settings, json)
                     addFooterSearch(settings, json, dateFields ,exactSearchFields,noSearchFields)
                 }',
@@ -126,8 +126,8 @@ class ConversationDataTable extends DataTable
                 'printable'=>true, 'exportable'=>true,'defaultContent'=>'null', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'allow_html\'); // 
+                {
+                    return getFormattedItem(data, \'allow_html\'); //
                  }
                  ';
                 }],
@@ -135,8 +135,8 @@ class ConversationDataTable extends DataTable
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"        
+                {
+                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"
                  }
                  ';
                 }],

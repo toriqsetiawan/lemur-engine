@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\WordSpellingDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateWordSpellingRequest;
 use App\Http\Requests\UpdateWordSpellingRequest;
 use App\Http\Requests\UploadWordSpellingFileRequest;
@@ -12,7 +11,6 @@ use App\Models\WordSpellingGroup;
 use App\Repositories\WordSpellingRepository;
 use App\Services\WordSpellingUploadService;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use \Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
@@ -21,14 +19,13 @@ use Response;
 
 class WordSpellingController extends AppBaseController
 {
-    /** @var  WordSpellingRepository */
-    private $wordSpellingRepository;
+    private WordSpellingRepository $wordSpellingRepository;
 
     //to help with data testing and form settings
-    public $link = 'wordSpellings';
-    public $htmlTag = 'word-spellings';
-    public $title = 'Word Spellings';
-    public $resourceFolder = 'word_spellings';
+    public string $link = 'wordSpellings';
+    public string $htmlTag = 'word-spellings';
+    public string $title = 'Word Spellings';
+    public string $resourceFolder = 'word_spellings';
 
     public function __construct(WordSpellingRepository $wordSpellingRepo)
     {
@@ -135,7 +132,7 @@ class WordSpellingController extends AppBaseController
     public function edit($slug)
     {
         $wordSpelling = $this->wordSpellingRepository->getBySlug($slug);
-        
+
         $this->authorize('update', $wordSpelling);
 
         if (empty($wordSpelling)) {

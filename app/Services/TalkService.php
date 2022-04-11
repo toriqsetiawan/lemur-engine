@@ -14,6 +14,7 @@ use App\Models\BotKey;
 use App\Models\BotWordSpellingGroup;
 use App\Models\Client;
 use App\Models\Conversation;
+use App\Models\ConversationSource;
 use App\Models\Turn;
 use App\Classes\AimlParser;
 use App\Models\Normalization;
@@ -227,12 +228,18 @@ class TalkService
             $this->conversation->setGlobalProperty('topic', $input['startingTopic']);
         }
 
+        if($this->conversation->isFirstTurn()){
+            ConversationSource::createConversationSource($this->conversation->id);
+        }
+
         LemurLog::debug(
             'conversation started',
             [
                 'conversation_id'=>$this->conversation->id,
                 'input'=>$input,
-                'isFirstTurn' => $this->conversation->isFirstTurn()
+                'isFirstTurn' => $this->conversation->isFirstTurn(),
+                'request' => request()->all(),
+                'headers' => request()->headers->all()
             ]
         );
     }

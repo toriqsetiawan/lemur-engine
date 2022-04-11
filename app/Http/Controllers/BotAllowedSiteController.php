@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotAllowedSiteDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotAllowedSiteRequest;
 use App\Http\Requests\UpdateBotAllowedSiteRequest;
 use App\Models\Bot;
 use App\Repositories\BotAllowedSiteRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\BotAllowedSite;
 
 class BotAllowedSiteController extends AppBaseController
 {
-    /** @var  BotAllowedSiteRepository */
-    private $botAllowedSiteRepository;
+    private BotAllowedSiteRepository $botAllowedSiteRepository;
 
     //to help with data testing and form settings
-    public $link = 'botAllowedSites';
-    public $htmlTag = 'bot-allowed-sites';
-    public $title = 'Bot Allowed Sites';
-    public $resourceFolder = 'bot_allowed_sites';
+    public string $link = 'botAllowedSites';
+    public string $htmlTag = 'bot-allowed-sites';
+    public string $title = 'Bot Allowed Sites';
+    public string $resourceFolder = 'bot_allowed_sites';
 
     public function __construct(BotAllowedSiteRepository $botAllowedSiteRepo)
     {

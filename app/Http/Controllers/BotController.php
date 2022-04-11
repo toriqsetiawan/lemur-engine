@@ -2,61 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\LemurStr;
 use App\DataTables\BotDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotRequest;
 use App\Http\Requests\CreateTalkRequest;
 use App\Http\Requests\UpdateBotRequest;
 use App\Http\Requests\UpdateBotSlugRequest;
-use App\Http\Requests\UpdateClientSlugRequest;
 use App\Models\BotAllowedSite;
-use App\Models\BotAvatar;
 use App\Models\BotCategoryGroup;
 use App\Models\BotKey;
 use App\Models\BotProperty;
 use App\Models\BotWordSpellingGroup;
-use App\Models\CategoryGroup;
 use App\Models\Client;
-use App\Models\ClientProperty;
 use App\Models\Conversation;
 use App\Models\ConversationProperty;
+use App\Models\ConversationSource;
 use App\Models\Language;
 use App\Models\Section;
-use App\Models\Turn;
-use App\Models\Wildcard;
-use App\Models\WordSpellingGroup;
-use App\Providers\BotStatsServiceProvider;
 use App\Repositories\BotPropertyRepository;
 use App\Repositories\BotRepository;
 use App\Services\BotStatsService;
 use App\Services\TalkService;
-use Carbon\Carbon;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Laracasts\Flash\Flash;
-use Mockery\CountValidator\CountValidatorAbstract;
-use mysql_xdevapi\Exception;
 use Response;
 use App\Models\Bot;
 
 class BotController extends AppBaseController
 {
-    /** @var  BotRepository */
-    private $botRepository;
-    /** @var  BotPropertyRepository */
-    private $botPropertyRepository;
+    private BotRepository $botRepository;
+    private BotPropertyRepository $botPropertyRepository;
 
     //to help with data testing and form settings
-    public $link = 'bots';
-    public $htmlTag = 'bots';
-    public $title = 'Bots';
-    public $resourceFolder = 'bots';
+    public string $link = 'bots';
+    public string $htmlTag = 'bots';
+    public string $title = 'Bots';
+    public string $resourceFolder = 'bots';
 
     public function __construct(BotRepository $botRepo, BotPropertyRepository $botPropertyRepo)
     {
@@ -468,6 +452,7 @@ class BotController extends AppBaseController
 
         $fullConversation=null;
         $conversationProperties = null;
+        $conversationSources = null;
         $client = null;
 
 
@@ -494,6 +479,8 @@ class BotController extends AppBaseController
                     ->pluck('value', 'name');
                 //get the properties for this conversation
                 $client = Client::find($fullConversation->client_id);
+                //get the sources for this conversation
+                $conversationSources = ConversationSource::where('conversation_id', $fullConversation->id)->get();
             }
         }
 
@@ -503,15 +490,17 @@ class BotController extends AppBaseController
         session(['target_bot' => $bot]);
 
         return view('bots.edit_all')->with(
-            ['botList'=>$botList, 'bot'=> $bot,
-            'conversations'=> $conversations,
-            'fullConversation'=>$fullConversation,
-            'targetConversationSlug' => ($fullConversation->slug??''),
-            'client'=>$client,
-            'conversationProperties'=> $conversationProperties,
-            'link'=>$link, 'htmlTag'=>$htmlTag,
+            [
+                'botList'=>$botList, 'bot'=> $bot,
+                'conversations'=> $conversations,
+                'fullConversation'=>$fullConversation,
+                'targetConversationSlug' => ($fullConversation->slug??''),
+                'client'=>$client,
+                'conversationProperties'=> $conversationProperties,
+                'conversationSources'=> $conversationSources,
+                'link'=>$link, 'htmlTag'=>$htmlTag,
                 'title'=>$title,
-            'resourceFolder'=>$resourceFolder]
+                'resourceFolder'=>$resourceFolder]
         );
     }
 

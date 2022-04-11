@@ -10,10 +10,10 @@ class BotDataTable extends DataTable
 {
 
     //to help with data testing and form settings
-    public $link;
-    public $htmlTag;
-    public $title;
-    public $resourceFolder;
+    public string $link;
+    public string $htmlTag;
+    public string $title;
+    public string $resourceFolder;
 
     /**
      * receive the value from the controller to parameterise the display of the table
@@ -60,7 +60,7 @@ class BotDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GitDetail $model
+     * @param \App\Models\Bot $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Bot $model)
@@ -86,12 +86,12 @@ class BotDataTable extends DataTable
                     addRowFeatures(settings, json, "'.$this->link.'","inline")
                 }',
                 'initComplete' => 'function(settings, json) {
-                    
+
                     var maxColumn = 8
                     var dateFields =[maxColumn-1]
                     var exactSearchFields = [0]
                     var noSearchFields = [maxColumn]
-                
+
                     runAutoSearch(settings, json)
                     addFooterSearch(settings, json, dateFields ,exactSearchFields,noSearchFields)
                 }',
@@ -128,8 +128,8 @@ class BotDataTable extends DataTable
                 'printable'=>true, 'exportable'=>true,'defaultContent'=>'null', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'is_public\'); // 
+                {
+                    return getFormattedItem(data, \'is_public\'); //
                  }
                  ';
                 }],
@@ -138,8 +138,8 @@ class BotDataTable extends DataTable
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"        
+                {
+                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"
                  }
                  ';
                 }],

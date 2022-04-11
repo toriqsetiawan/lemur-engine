@@ -3,28 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotWordSpellingGroupDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotWordSpellingGroupRequest;
 use App\Http\Requests\UpdateBotWordSpellingGroupRequest;
 use App\Models\Bot;
 use App\Models\WordSpellingGroup;
 use App\Repositories\BotWordSpellingGroupRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\BotWordSpellingGroup;
 
 class BotWordSpellingGroupController extends AppBaseController
 {
-    /** @var  BotWordSpellingGroupRepository */
-    private $botWordSpellingGroupRepository;
+    private BotWordSpellingGroupRepository $botWordSpellingGroupRepository;
 
     //to help with data testing and form settings
-    public $link = 'botWordSpellingGroups';
-    public $htmlTag = 'bot-word-spelling-groups';
-    public $title = 'Bot Word Spelling Groups';
-    public $resourceFolder = 'bot_word_spelling_groups';
+    public string $link = 'botWordSpellingGroups';
+    public string $htmlTag = 'bot-word-spelling-groups';
+    public string $title = 'Bot Word Spelling Groups';
+    public string $resourceFolder = 'bot_word_spelling_groups';
 
     public function __construct(BotWordSpellingGroupRepository $botWordSpellingGroupRepo)
     {

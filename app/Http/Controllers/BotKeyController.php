@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotKeyDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotKeyRequest;
 use App\Http\Requests\UpdateBotKeyRequest;
 use App\Models\Bot;
 use App\Repositories\BotKeyRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\BotKey;
 
 class BotKeyController extends AppBaseController
 {
-    /** @var  BotKeyRepository */
-    private $botKeyRepository;
+    private BotKeyRepository $botKeyRepository;
 
     //to help with data testing and form settings
-    public $link = 'botKeys';
-    public $htmlTag = 'bot-keys';
-    public $title = 'Bot Keys';
-    public $resourceFolder = 'bot_keys';
+    public string $link = 'botKeys';
+    public string $htmlTag = 'bot-keys';
+    public string $title = 'Bot Keys';
+    public string $resourceFolder = 'bot_keys';
 
     public function __construct(BotKeyRepository $botKeyRepo)
     {

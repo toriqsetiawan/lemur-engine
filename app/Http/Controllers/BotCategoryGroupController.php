@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotCategoryGroupDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotCategoryGroupRequest;
-use App\Http\Requests\UpdateBotCategoryGroupRequest;
 use App\Models\Bot;
 use App\Models\CategoryGroup;
 use App\Repositories\BotCategoryGroupRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Response;
@@ -18,14 +15,13 @@ use App\Models\BotCategoryGroup;
 
 class BotCategoryGroupController extends AppBaseController
 {
-    /** @var  BotCategoryGroupRepository */
-    private $botCategoryGroupRepository;
+    private BotCategoryGroupRepository $botCategoryGroupRepository;
 
     //to help with data testing and form settings
-    public $link = 'botCategoryGroups';
-    public $htmlTag = 'bot-category-groups';
-    public $title = 'Bot Category Groups';
-    public $resourceFolder = 'bot_category_groups';
+    public string $link = 'botCategoryGroups';
+    public string $htmlTag = 'bot-category-groups';
+    public string $title = 'Bot Category Groups';
+    public string $resourceFolder = 'bot_category_groups';
 
     public function __construct(BotCategoryGroupRepository $botCategoryGroupRepo)
     {
@@ -170,7 +166,7 @@ class BotCategoryGroupController extends AppBaseController
     public function destroy($slug)
     {
         $botCategoryGroup = $this->botCategoryGroupRepository->getBySlug($slug);
-        
+
         $this->authorize('delete', $botCategoryGroup);
 
         if (empty($botCategoryGroup)) {

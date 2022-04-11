@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ClientCategoryDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateClientCategoryRequest;
 use App\Http\Requests\UpdateClientCategoryRequest;
 use App\Models\Bot;
 use App\Repositories\ClientCategoryRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\ClientCategory;
 
 class ClientCategoryController extends AppBaseController
 {
-    /** @var  ClientCategoryRepository */
-    private $clientCategoryRepository;
+    private ClientCategoryRepository $clientCategoryRepository;
 
     //to help with data testing and form settings
-    public $link = 'clientCategories';
-    public $htmlTag = 'client-categories';
-    public $title = 'Client Categories';
-    public $resourceFolder = 'client_categories';
+    public string $link = 'clientCategories';
+    public string $htmlTag = 'client-categories';
+    public string $title = 'Client Categories';
+    public string $resourceFolder = 'client_categories';
 
     public function __construct(ClientCategoryRepository $clientCategoryRepo)
     {

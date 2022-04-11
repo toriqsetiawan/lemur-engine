@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\BotDataTable;
 use App\Http\Requests\CreateTalkRequest;
 use App\Models\Category;
-use App\Models\Language;
 use App\Repositories\BotRepository;
 use App\Services\TalkService;
 use Exception;
@@ -20,10 +19,10 @@ class TestController extends AppBaseController
 {
 
     //to help with data testing and form settings
-    public $link = 'tests';
-    public $htmlTag = 'test';
-    public $title = 'Tests';
-    public $resourceFolder = 'test';
+    public string $link = 'tests';
+    public string $htmlTag = 'test';
+    public string $title = 'Tests';
+    public string $resourceFolder = 'test';
 
     /** @var  BotRepository */
     private $botRepository;

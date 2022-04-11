@@ -177,6 +177,13 @@ class Conversation extends Model
         return $this->hasMany(\App\Models\Turn::class, 'conversation_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function conversationSources()
+    {
+        return $this->hasMany(\App\Models\ConversationSource::class, 'conversation_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -254,7 +261,7 @@ class Conversation extends Model
 
     public function isFirstTurn() :bool
     {
-        return $this->turns()->exists();
+        return !$this->turns()->exists();
     }
 
     public static function totalInDays($days)

@@ -10,10 +10,10 @@ class WildcardDataTable extends DataTable
 {
 
     //to help with data testing and form settings
-    public $link;
-    public $htmlTag;
-    public $title;
-    public $resourceFolder;
+    public string $link;
+    public string $htmlTag;
+    public string $title;
+    public string $resourceFolder;
 
     /**
      * receive the value from the controller to parameterise the display of the table
@@ -59,7 +59,7 @@ class WildcardDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GitDetail $model
+     * @param \App\Models\Wildcard $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Wildcard $model)
@@ -120,8 +120,8 @@ class WildcardDataTable extends DataTable
                 'searchable'=>true, 'printable'=>true, 'exportable'=>true,'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'long_id\'); // 
+                {
+                    return getFormattedItem(data, \'long_id\'); //
                  }
                  ';
                 }],

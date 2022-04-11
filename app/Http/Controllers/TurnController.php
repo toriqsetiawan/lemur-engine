@@ -3,26 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\TurnDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateTurnRequest;
-use App\Http\Requests\UpdateTurnRequest;
 use App\Repositories\TurnRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Turn;
 
 class TurnController extends AppBaseController
 {
-    /** @var  TurnRepository */
-    private $turnRepository;
+    private TurnRepository $turnRepository;
 
     //to help with data testing and form settings
-    public $link = 'turns';
-    public $htmlTag = 'turns';
-    public $title = 'Turns';
-    public $resourceFolder = 'turns';
+    public string $link = 'turns';
+    public string $htmlTag = 'turns';
+    public string $title = 'Turns';
+    public string $resourceFolder = 'turns';
 
     public function __construct(TurnRepository $turnRepo)
     {

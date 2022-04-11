@@ -3,28 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CategoryGroupDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateCategoryGroupRequest;
 use App\Http\Requests\UpdateCategoryGroupRequest;
 use App\Models\Language;
 use App\Models\Section;
 use App\Repositories\CategoryGroupRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\CategoryGroup;
 
 class CategoryGroupController extends AppBaseController
 {
-    /** @var  CategoryGroupRepository */
-    private $categoryGroupRepository;
+    private CategoryGroupRepository $categoryGroupRepository;
 
     //to help with data testing and form settings
-    public $link = 'categoryGroups';
-    public $htmlTag = 'category-groups';
-    public $title = 'Category Groups';
-    public $resourceFolder = 'category_groups';
+    public string $link = 'categoryGroups';
+    public string $htmlTag = 'category-groups';
+    public string $title = 'Category Groups';
+    public string $resourceFolder = 'category_groups';
 
     public function __construct(CategoryGroupRepository $categoryGroupRepo)
     {

@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CustomDocDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateCustomDocRequest;
 use App\Http\Requests\UpdateCustomDocRequest;
 use App\Http\Requests\UpdateCustomDocSlugRequest;
 use App\Repositories\CustomDocRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -18,14 +16,13 @@ use App\Models\CustomDoc;
 
 class CustomDocController extends AppBaseController
 {
-    /** @var  CustomDocRepository */
-    private $customDocRepository;
+    private CustomDocRepository $customDocRepository;
 
     //to help with data testing and form settings
-    public $link = 'customDocs';
-    public $htmlTag = 'custom-docs';
-    public $title = 'Custom Docs';
-    public $resourceFolder = 'custom_docs';
+    public string $link = 'customDocs';
+    public string $htmlTag = 'custom-docs';
+    public string $title = 'Custom Docs';
+    public string $resourceFolder = 'custom_docs';
 
     public function __construct(CustomDocRepository $customDocRepo)
     {

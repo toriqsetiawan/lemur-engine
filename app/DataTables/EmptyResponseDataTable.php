@@ -10,10 +10,10 @@ class EmptyResponseDataTable extends DataTable
 {
 
     //to help with data testing and form settings
-    public $link;
-    public $htmlTag;
-    public $title;
-    public $resourceFolder;
+    public string $link;
+    public string $htmlTag;
+    public string $title;
+    public string $resourceFolder;
 
     /**
      * receive the value from the controller to parameterise the display of the table
@@ -64,7 +64,7 @@ class EmptyResponseDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GitDetail $model
+     * @param \App\Models\EmptyResponse $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(EmptyResponse $model)
@@ -87,16 +87,16 @@ class EmptyResponseDataTable extends DataTable
              ->addAction(['width' => '120px', 'printable' => false,'searchable'=>false, 'exportable'=>false])
             ->parameters([
                 'drawCallback' => 'function(settings, json) {
-                    
+
                     addRowFeatures(settings, json, "searchDatatable","turns")
                 }',
                 'initComplete' => 'function(settings, json) {
-                
+
                     var maxColumn = 5
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,1]
                     var noSearchFields = [maxColumn]
-                
+
                     runAutoSearch(settings, json)
                     addFooterSearch(settings, json, dateFields ,exactSearchFields,noSearchFields)
                 }',
@@ -130,8 +130,8 @@ class EmptyResponseDataTable extends DataTable
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"        
+                {
+                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"
                  }
                  ';
                 }],

@@ -3,28 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotRatingDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotRatingRequest;
 use App\Http\Requests\ResetBotRatingRequest;
-use App\Http\Requests\UpdateBotRatingRequest;
 use App\Models\Bot;
 use App\Repositories\BotRatingRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\BotRating;
 
 class BotRatingController extends AppBaseController
 {
-    /** @var  BotRatingRepository */
-    private $botRatingRepository;
+    private BotRatingRepository $botRatingRepository;
 
     //to help with data testing and form settings
-    public $link = 'botRatings';
-    public $htmlTag = 'bot-ratings';
-    public $title = 'Bot Ratings';
-    public $resourceFolder = 'bot_ratings';
+    public string $link = 'botRatings';
+    public string $htmlTag = 'bot-ratings';
+    public string $title = 'Bot Ratings';
+    public string $resourceFolder = 'bot_ratings';
 
     public function __construct(BotRatingRepository $botRatingRepo)
     {

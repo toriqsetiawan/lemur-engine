@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\MapValueDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateMapValueRequest;
 use App\Http\Requests\UpdateMapValueRequest;
 use App\Http\Requests\UploadMapValueFileRequest;
@@ -12,7 +11,6 @@ use App\Repositories\MapValueRepository;
 use App\Services\MapValueUploadService;
 use Exception;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,14 +20,13 @@ use App\Models\MapValue;
 
 class MapValueController extends AppBaseController
 {
-    /** @var  MapValueRepository */
-    private $mapValueRepository;
+    private MapValueRepository $mapValueRepository;
 
     //to help with data testing and form settings
-    public $link = 'mapValues';
-    public $htmlTag = 'map-values';
-    public $title = 'Map Values';
-    public $resourceFolder = 'map_values';
+    public string $link = 'mapValues';
+    public string $htmlTag = 'map-values';
+    public string $title = 'Map Values';
+    public string $resourceFolder = 'map_values';
 
     public function __construct(MapValueRepository $mapValueRepo)
     {

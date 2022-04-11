@@ -10,7 +10,7 @@
 
 
 
-    <li class="treeview {{  Request::is('conversations*') || Request::is('conversationProperties*') || Request::is('turns*') || Request::is('clients*')}} side-bar-top-level-menu" data-test="sidebar-parent-logs-li">
+    <li class="treeview {{ Request::is('conversationSources*')|| Request::is('conversations*') || Request::is('conversationProperties*') || Request::is('turns*') || Request::is('clients*')}} side-bar-top-level-menu" data-test="sidebar-parent-logs-li">
 
         <a href="#">
             <i class="fa fa-coffee"></i>
@@ -19,7 +19,7 @@
             <i class="fa fa-angle-left pull-right"  data-test="sidebar-parent-logs-button"></i>
         </span>
         </a>
-        <ul class="treeview-menu" style="{{Request::is('conversations*') || Request::is('conversationProperties*') || Request::is('turns*') || Request::is('clients*') ? 'display:block;' : '' }}">
+        <ul class="treeview-menu" style="{{Request::is('conversationSources*') || Request::is('conversations*') || Request::is('conversationProperties*') || Request::is('turns*') || Request::is('clients*') ? 'display:block;' : '' }}">
 
             <li class="{{ Request::is('conversations*') ? 'active' : '' }}">
                 <a href="{{ route('conversations.index') }}" data-test="sidebar-link-conversations"><i class="fa fa-circle-o"></i><span>Conversations</span></a>
@@ -30,7 +30,11 @@
             </li>
 
             <li class="{{ Request::is('conversationProperties*') ? 'active' : '' }}">
-                <a href="{{ route('conversationProperties.index') }}" data-test="sidebar-link-conversationProperties"><i class="fa fa-circle-o"></i><span>Conversation Properties</span></a>
+                <a href="{{ route('conversationProperties.index') }}" data-test="sidebar-link-conversation-properties"><i class="fa fa-circle-o"></i><span>Conversation Properties</span></a>
+            </li>
+
+            <li class="{{ Request::is('conversationSources*') ? 'active' : '' }}">
+                <a href="{{ route('conversationSources.index') }}" data-test="sidebar-link-conversation-sources"><i class="fa fa-circle-o"></i><span>Conversation Sources</span></a>
             </li>
 
             <li class="{{ Request::is('clients*') ? 'active' : '' }}">
@@ -80,7 +84,7 @@
     </li>
 
 
-<li class="treeview {{ Request::is('clientCategories*') || Request::is('emptyResponses*') }} side-bar-top-level-menu" data-test="sidebar-parent-learning-li">
+<li class="treeview {{ Request::is('machineLearntCategories*') || Request::is('clientCategories*') || Request::is('emptyResponses*') }} side-bar-top-level-menu" data-test="sidebar-parent-learning-li">
 <a href="#">
         <i class="fa fa-mortar-board"></i>
         <span>Learning</span>
@@ -88,7 +92,11 @@
             <i class="fa fa-angle-left pull-right"  data-test="sidebar-parent-learning"></i>
         </span>
     </a>
-    <ul class="treeview-menu" style="{{ Request::is('clientCategories*') || Request::is('emptyResponses*')  ? 'display:block;' : '' }}">
+    <ul class="treeview-menu" style="{{ Request::is('machineLearntCategories*') || Request::is('clientCategories*') || Request::is('emptyResponses*')  ? 'display:block;' : '' }}">
+
+        <li class="{{ Request::is('machineLearntCategories*') ? 'active' : '' }}">
+            <a href="{{ route('machineLearntCategories.index') }}" data-test="sidebar-link-machineLearntCategories"><i class="fa fa-circle-o"></i><span>ML Categories</span></a>
+        </li>
 
         <li class="{{ Request::is('emptyResponses*') ? 'active' : '' }}">
             <a href="{{ route('emptyResponses.index') }}" data-test="sidebar-link-emptyResponses"><i class="fa fa-circle-o"></i><span>Empty Responses</span></a>
@@ -190,7 +198,7 @@
 
 
 
-<li class="treeview {{ Request::is('docs*') ? 'active' : '' }} side-bar-top-level-menu" data-test="sidebar-parent-documentation-li">
+<li class="treeview {{ Request::is('customDocs*') ? 'active' : '' }} side-bar-top-level-menu" data-test="sidebar-parent-documentation-li">
     <a href="#">
         <i class="fa fa-book"></i>
         <span>Documentation</span>
@@ -198,7 +206,7 @@
             <i class="fa fa-angle-left pull-right"  data-test="sidebar-parent-learning"></i>
         </span>
     </a>
-    <ul class="treeview-menu" style="{{ Request::is('clientCategories*') || Request::is('emptyResponses*')  ? 'display:block;' : '' }}">
+    <ul class="treeview-menu" style="{{ Request::is('customDocs*')  ? 'display:block;' : '' }}">
 
         <li>
             <a href="https://docs.lemurengine.com" data-test="sidebar-link-standard-docs"><i class="fa fa-circle-o"></i><span>Standard Docs</span></a>

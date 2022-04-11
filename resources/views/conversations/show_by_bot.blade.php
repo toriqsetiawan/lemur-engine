@@ -56,6 +56,9 @@
                             <a class="nav-link small" id="pills-conversation-properties-tab" data-toggle="pill" href="#pills-conversation-properties" role="tab" aria-controls="pills-conversation-properties" aria-selected="false">Conversation Properties</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link small" id="pills-conversation-source-tab" data-toggle="pill" href="#pills-conversation-sources" role="tab" aria-controls="pills-conversation-sources" aria-selected="false">Conversation Sources</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link small" id="pills-conversation-client-tab" data-toggle="pill" href="#pills-conversation-client" role="tab" aria-controls="pills-conversation-client" aria-selected="false">Client</a>
                         </li>
 
@@ -76,6 +79,9 @@
                         </div>
                         <div class="tab-pane fade" id="pills-conversation-properties" role="tabpanel" aria-labelledby="pills-conversation-properties">
                             @include('conversation_properties.show_by_bot_by_conversation')
+                        </div>
+                        <div class="tab-pane fade" id="pills-conversation-sources" role="tabpanel" aria-labelledby="pills-conversation-sources">
+                            @include('conversation_sources.show_by_bot_by_conversation')
                         </div>
                         <div class="tab-pane fade" id="pills-conversation-client" role="tabpanel" aria-labelledby="pills-conversation-client">
                             @include('clients.show_by_bot_by_conversation')

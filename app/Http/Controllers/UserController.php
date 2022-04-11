@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\UserDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateBotRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UpdateUserSlugRequest;
-use App\Models\Bot;
 use App\Repositories\UserRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +19,13 @@ use App\Models\User;
 
 class UserController extends AppBaseController
 {
-    /** @var  UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     //to help with data testing and form settings
-    public $link = 'users';
-    public $htmlTag = 'users';
-    public $title = 'Users';
-    public $resourceFolder = 'users';
+    public string $link = 'users';
+    public string $htmlTag = 'users';
+    public string $title = 'Users';
+    public string $resourceFolder = 'users';
 
     public function __construct(UserRepository $userRepo)
     {

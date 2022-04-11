@@ -3,31 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ConversationDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateConversationRequest;
-use App\Http\Requests\UpdateConversationRequest;
 use App\Http\Requests\UpdateConversationSlugRequest;
-use App\Http\Requests\UpdateLanguageSlugRequest;
-use App\Models\Bot;
-use App\Models\Language;
 use App\Models\Turn;
 use App\Repositories\ConversationRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Conversation;
 
 class ConversationController extends AppBaseController
 {
-    /** @var  ConversationRepository */
-    private $conversationRepository;
+    private ConversationRepository $conversationRepository;
 
     //to help with data testing and form settings
-    public $link = 'conversations';
-    public $htmlTag = 'conversations';
-    public $title = 'Conversations';
-    public $resourceFolder = 'conversations';
+    public string $link = 'conversations';
+    public string $htmlTag = 'conversations';
+    public string $title = 'Conversations';
+    public string $resourceFolder = 'conversations';
 
     public function __construct(ConversationRepository $conversationRepo)
     {

@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\WordSpellingGroupDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateWordSpellingGroupRequest;
 use App\Http\Requests\UpdateWordSpellingGroupRequest;
 use App\Models\Language;
 use App\Repositories\WordSpellingGroupRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\WordSpellingGroup;
 
 class WordSpellingGroupController extends AppBaseController
 {
-    /** @var  WordSpellingGroupRepository */
-    private $wordSpellingGroupRepository;
+    private WordSpellingGroupRepository $wordSpellingGroupRepository;
 
     //to help with data testing and form settings
-    public $link = 'wordSpellingGroups';
-    public $htmlTag = 'word-spelling-groups';
-    public $title = 'Word Spelling Groups';
-    public $resourceFolder = 'word_spelling_groups';
+    public string $link = 'wordSpellingGroups';
+    public string $htmlTag = 'word-spelling-groups';
+    public string $title = 'Word Spelling Groups';
+    public string $resourceFolder = 'word_spelling_groups';
 
     public function __construct(WordSpellingGroupRepository $wordSpellingGroupRepo)
     {

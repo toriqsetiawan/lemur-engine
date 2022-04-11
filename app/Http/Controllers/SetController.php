@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\SetDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateSetRequest;
 use App\Http\Requests\UpdateSetRequest;
 use App\Repositories\SetRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Set;
 
 class SetController extends AppBaseController
 {
-    /** @var  SetRepository */
-    private $setRepository;
+    private SetRepository $setRepository;
 
     //to help with data testing and form settings
-    public $link = 'sets';
-    public $htmlTag = 'sets';
-    public $title = 'Sets';
-    public $resourceFolder = 'sets';
+    public string $link = 'sets';
+    public string $htmlTag = 'sets';
+    public string $title = 'Sets';
+    public string $resourceFolder = 'sets';
 
     public function __construct(SetRepository $setRepo)
     {

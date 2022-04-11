@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ConversationPropertyDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateConversationPropertyRequest;
 use App\Http\Requests\UpdateConversationPropertyRequest;
 use App\Repositories\ConversationPropertyRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\ConversationProperty;
 
 class ConversationPropertyController extends AppBaseController
 {
-    /** @var  ConversationPropertyRepository */
-    private $conversationPropertyRepository;
+    private ConversationPropertyRepository $conversationPropertyRepository;
 
     //to help with data testing and form settings
-    public $link = 'conversationProperties';
-    public $htmlTag = 'conversation-properties';
-    public $title = 'Conversation Properties';
-    public $resourceFolder = 'conversation_properties';
+    public string $link = 'conversationProperties';
+    public string $htmlTag = 'conversation-properties';
+    public string $title = 'Conversation Properties';
+    public string $resourceFolder = 'conversation_properties';
 
     public function __construct(ConversationPropertyRepository $conversationPropertyRepo)
     {

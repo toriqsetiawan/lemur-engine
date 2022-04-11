@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\BotPropertyDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateBotPropertyRequest;
 use App\Http\Requests\UpdateBotPropertyRequest;
 use App\Http\Requests\UploadBotPropertyFileRequest;
@@ -13,7 +12,6 @@ use App\Repositories\BotPropertyRepository;
 use App\Services\BotPropertyUploadService;
 use Exception;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +21,13 @@ use App\Models\BotProperty;
 
 class BotPropertyController extends AppBaseController
 {
-    /** @var  BotPropertyRepository */
-    private $botPropertyRepository;
+    private BotPropertyRepository $botPropertyRepository;
 
     //to help with data testing and form settings
-    public $link = 'botProperties';
-    public $htmlTag = 'bot-properties';
-    public $title = 'Bot Properties';
-    public $resourceFolder = 'bot_properties';
+    public string $link = 'botProperties';
+    public string $htmlTag = 'bot-properties';
+    public string $title = 'Bot Properties';
+    public string $resourceFolder = 'bot_properties';
 
     public function __construct(BotPropertyRepository $botPropertyRepo)
     {

@@ -10,10 +10,10 @@ class ConversationPropertyDataTable extends DataTable
 {
 
     //to help with data testing and form settings
-    public $link;
-    public $htmlTag;
-    public $title;
-    public $resourceFolder;
+    public string $link;
+    public string $htmlTag;
+    public string $title;
+    public string $resourceFolder;
 
     /**
      * receive the value from the controller to parameterise the display of the table
@@ -59,7 +59,7 @@ class ConversationPropertyDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GitDetail $model
+     * @param \App\Models\ConversationProperty $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(ConversationProperty $model)
@@ -85,12 +85,12 @@ class ConversationPropertyDataTable extends DataTable
                     addRowFeatures(settings, json, "'.$this->link.'","")
                 }',
                 'initComplete' => 'function(settings, json) {
-                    
+
                     var maxColumn = 6
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [1]
                     var noSearchFields = [maxColumn]
-                
+
                     runAutoSearch(settings, json)
                     addFooterSearch(settings, json, dateFields ,exactSearchFields,noSearchFields)
                 }',
@@ -120,8 +120,8 @@ class ConversationPropertyDataTable extends DataTable
                 'searchable'=>true, 'printable'=>true, 'exportable'=>true,'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return getFormattedItem(data, \'long_id\'); // 
+                {
+                    return getFormattedItem(data, \'long_id\'); //
                  }
                  ';
                 }],
@@ -132,8 +132,8 @@ class ConversationPropertyDataTable extends DataTable
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
-                { 
-                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"        
+                {
+                    return moment(data).format("lll"); // "02 Nov 16 12:00AM"
                  }
                  ';
                 }],

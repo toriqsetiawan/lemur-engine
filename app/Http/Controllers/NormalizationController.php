@@ -3,27 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\NormalizationDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateNormalizationRequest;
 use App\Http\Requests\UpdateNormalizationRequest;
 use App\Models\Language;
 use App\Repositories\NormalizationRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Normalization;
 
 class NormalizationController extends AppBaseController
 {
-    /** @var  NormalizationRepository */
-    private $normalizationRepository;
+    private NormalizationRepository $normalizationRepository;
 
     //to help with data testing and form settings
-    public $link = 'normalizations';
-    public $htmlTag = 'normalizations';
-    public $title = 'Normalizations';
-    public $resourceFolder = 'normalizations';
+    public string $link = 'normalizations';
+    public string $htmlTag = 'normalizations';
+    public string $title = 'Normalizations';
+    public string $resourceFolder = 'normalizations';
 
     public function __construct(NormalizationRepository $normalizationRepo)
     {

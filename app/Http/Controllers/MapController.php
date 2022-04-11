@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\MapDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateMapRequest;
 use App\Http\Requests\UpdateMapRequest;
 use App\Repositories\MapRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Map;
 
 class MapController extends AppBaseController
 {
-    /** @var  MapRepository */
-    private $mapRepository;
+    private MapRepository $mapRepository;
 
     //to help with data testing and form settings
-    public $link = 'maps';
-    public $htmlTag = 'maps';
-    public $title = 'Maps';
-    public $resourceFolder = 'maps';
+    public string $link = 'maps';
+    public string $htmlTag = 'maps';
+    public string $title = 'Maps';
+    public string $resourceFolder = 'maps';
 
     public function __construct(MapRepository $mapRepo)
     {

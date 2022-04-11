@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\WordTransformationDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateWordTransformationRequest;
 use App\Http\Requests\UpdateWordTransformationRequest;
 use App\Http\Requests\UploadWordTransformationFileRequest;
@@ -11,7 +10,6 @@ use App\Models\Language;
 use App\Repositories\WordTransformationRepository;
 use App\Services\WordTransformationUploadService;
 use Exception;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -21,14 +19,13 @@ use App\Models\WordTransformation;
 
 class WordTransformationController extends AppBaseController
 {
-    /** @var  WordTransformationRepository */
-    private $wordTransformationRepository;
+    private WordTransformationRepository $wordTransformationRepository;
 
     //to help with data testing and form settings
-    public $link = 'wordTransformations';
-    public $htmlTag = 'word-transformations';
-    public $title = 'Word Transformations';
-    public $resourceFolder = 'word_transformations';
+    public string $link = 'wordTransformations';
+    public string $htmlTag = 'word-transformations';
+    public string $title = 'Word Transformations';
+    public string $resourceFolder = 'word_transformations';
 
     public function __construct(WordTransformationRepository $wordTransformationRepo)
     {

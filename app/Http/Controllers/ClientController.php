@@ -3,31 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ClientDataTable;
-use App\Http\Requests;
-use App\Http\Requests\CreateClientRequest;
-use App\Http\Requests\UpdateBotSlugRequest;
 use App\Http\Requests\UpdateClientRequest;
 use App\Http\Requests\UpdateClientSlugRequest;
-use App\Http\Requests\UpdateLanguageSlugRequest;
-use App\Models\Bot;
-use App\Models\Language;
 use App\Repositories\ClientRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\Client;
 
 class ClientController extends AppBaseController
 {
-    /** @var  ClientRepository */
-    private $clientRepository;
+    private ClientRepository $clientRepository;
 
     //to help with data testing and form settings
-    public $link = 'clients';
-    public $htmlTag = 'clients';
-    public $title = 'Clients';
-    public $resourceFolder = 'clients';
+    public string $link = 'clients';
+    public string $htmlTag = 'clients';
+    public string $title = 'Clients';
+    public string $resourceFolder = 'clients';
 
     public function __construct(ClientRepository $clientRepo)
     {

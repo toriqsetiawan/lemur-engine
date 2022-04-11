@@ -3,26 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\EmptyResponseDataTable;
-use App\Http\Requests;
 use App\Http\Requests\CreateEmptyResponseRequest;
 use App\Http\Requests\UpdateEmptyResponseRequest;
 use App\Repositories\EmptyResponseRepository;
 use Flash;
-use App\Http\Controllers\AppBaseController;
 use Illuminate\Auth\Access\AuthorizationException;
 use Response;
 use App\Models\EmptyResponse;
 
 class EmptyResponseController extends AppBaseController
 {
-    /** @var  EmptyResponseRepository */
-    private $emptyResponseRepository;
+    private EmptyResponseRepository $emptyResponseRepository;
 
     //to help with data testing and form settings
-    public $link = 'emptyResponses';
-    public $htmlTag = 'empty-responses';
-    public $title = 'Empty Responses';
-    public $resourceFolder = 'empty_responses';
+    public string $link = 'emptyResponses';
+    public string $htmlTag = 'empty-responses';
+    public string $title = 'Empty Responses';
+    public string $resourceFolder = 'empty_responses';
 
     public function __construct(EmptyResponseRepository $emptyResponseRepo)
     {
