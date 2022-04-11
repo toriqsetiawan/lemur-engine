@@ -66,8 +66,8 @@ class MachineLearnTag extends AimlTag
         $mlCategory->template = $template;
         $mlCategory->topic = LemurStr::normalizeForCategoryTable($this->learnTopic);
         $mlCategory->that = LemurStr::normalizeForCategoryTable($this->learnThat);
-        $mlCategory->texample_inputopic = $this->learnExampleInput;
-        $mlCategory->example_out = $this->learnExampleOutput;
+        $mlCategory->example_input = $this->learnExampleInput;
+        $mlCategory->example_output = $this->learnExampleOutput;
         $mlCategory->save();
 
     }
