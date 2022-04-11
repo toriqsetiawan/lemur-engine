@@ -3,7 +3,7 @@
 <!-- Category Group Slug Field -->
 <div class="form-group col-lg-6 col-md-6 col-sm-12 select2" data-test="category_group_id_div">
     {!! Form::label('category_group_slug', 'Category Group:', ['data-test'=>"category_group_slug_label"]) !!}
-    {!! Form::select('category_group_slug', $categoryGroupList, (!empty($category)&(!empty($category->categoryGroup))?$category->categoryGroup->slug:'user-defined-'.Auth::user()->slug), [  App\Models\WordSpelling::getFormValidation('category_group_id'), 'placeholder'=>'Please Select', 'class' => 'form-control allow-new select2', 'data-test'=>"$htmlTag-category_group_slug_select", 'id'=>"$htmlTag-category_group_slug_select-select"]) !!}
+    {!! Form::select('category_group_slug', $categoryGroupList, (!empty($category)&(!empty($category->categoryGroup))?$category->categoryGroup->slug:$defaultCategoryGroup), [  App\Models\WordSpelling::getFormValidation('category_group_id'), 'placeholder'=>'Please Select', 'class' => 'form-control allow-new select2', 'data-test'=>"$htmlTag-category_group_slug_select", 'id'=>"$htmlTag-category_group_slug_select-select"]) !!}
     <small class="help-block" data-test="help-block-select-default-file">
         <span>It is advisable that you save your custom AIML to your personalised 'user-defined-{!! Auth::user()->slug !!}' category group.</span>
     </small>
@@ -23,14 +23,14 @@
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="topic_div">
     {!! Form::label('topic', 'Topic:', ['data-test'=>"topic_label"]) !!}
-    {!! Form::text('topic', null, ['class' => 'form-control', App\Models\Category::getFormValidation('topic'),'id'=>"topic_field", 'data-test'=>"topic_field"] ) !!}
+    {!! Form::text('topic', $machineLearntCategory->topic, ['class' => 'form-control', App\Models\Category::getFormValidation('topic'),'id'=>"topic_field", 'data-test'=>"topic_field"] ) !!}
 </div>
 
 <div class="clearfix"></div>
 
 <div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="that_div">
     {!! Form::label('that', 'That:', ['data-test'=>"that_label"]) !!}
-    {!! Form::text('that', null, ['class' => 'form-control', App\Models\Category::getFormValidation('that'),'id'=>"that_field", 'data-test'=>"that_field"] ) !!}
+    {!! Form::text('that', $machineLearntCategory->that, ['class' => 'form-control', App\Models\Category::getFormValidation('that'),'id'=>"that_field", 'data-test'=>"that_field"] ) !!}
     <small class="help-block" data-test="help-block-that-field">
         <span>You do not need to add the enclosing &lt;that>&lt;/that> tags.</span>
     </small>

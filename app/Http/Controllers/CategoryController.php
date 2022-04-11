@@ -179,12 +179,24 @@ class CategoryController extends AppBaseController
 
         if(!isset($categoryGroupList['user-defined-'.Auth::user()->slug])){
             $categoryGroupList['user-defined-'.Auth::user()->slug]='user-defined-'.Auth::user()->slug;
+          }
+
+        if(!empty($machineLearntCategory->category_group_slug)){
+            if(!isset($categoryGroupList[$machineLearntCategory->category_group_slug])){
+                $categoryGroupList[$machineLearntCategory->category_group_slug]=$machineLearntCategory->category_group_slug;
+            }
+            $defaultCategoryGroup = $machineLearntCategory->category_group_slug;
+        }else{
+            $defaultCategoryGroup = '';
         }
+
+
 
         return view('categories.create_from_machine_learnt_category')->with(
             ['link'=>$this->link, 'htmlTag'=>$this->htmlTag,
                 'title'=>$this->title, 'resourceFolder'=>$this->resourceFolder,
                 'categoryGroupList'=>$categoryGroupList,
+                'defaultCategoryGroup'=>$defaultCategoryGroup,
                 'machineLearntCategory'=>$machineLearntCategory]
         );
     }
@@ -244,6 +256,8 @@ class CategoryController extends AppBaseController
                     EmptyResponse::findAndDeleteFromInput($input);
                 } elseif (isset($input['client_category_id'])) {
                     ClientCategory::findAndDeleteFromInput($input);
+                } elseif (isset($input['machine_learnt_category_id'])) {
+                    MachineLearntCategory::findAndDeleteFromInput($input);
                 }
             }
 

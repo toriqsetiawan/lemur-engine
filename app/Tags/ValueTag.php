@@ -55,6 +55,6 @@ class ValueTag extends AimlTag
         $parentObject->setAttributes($this->tagContents);
 
 
-        $this->tagContents=array();
+        $this->tagContents=[];
     }
 }

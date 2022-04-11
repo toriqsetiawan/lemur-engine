@@ -11,6 +11,8 @@ use App\Services\TalkService;
 use Exception;
 use Flash;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Response;
 use App\Models\Bot;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
@@ -30,8 +32,8 @@ class TalkAPIController extends AppBaseController
      * Initiate a talk to the bot...
      * @param CreateTalkRequest $request
      * @param TalkService $talkService
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|View
+     * @throws Exception
      */
     public function store(CreateTalkRequest $request, TalkService $talkService)
     {
@@ -59,8 +61,8 @@ class TalkAPIController extends AppBaseController
      * Initiate a talk to the bot...
      * @param CreateTalkRequest $request
      * @param TalkService $talkService
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Exception
+     * @return Factory|View
+     * @throws Exception
      * @deprecated you should now send meta requests to GET /api/meta/{botId} instead of using POST
      */
     public function old_meta(CreateTalkRequest $request, TalkService $talkService)
@@ -74,7 +76,7 @@ class TalkAPIController extends AppBaseController
      * @param $botSlug
      * @param CreateTalkRequest $request
      * @param TalkService $talkService
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function meta($botSlug, CreateTalkRequest $request, TalkService $talkService)
     {

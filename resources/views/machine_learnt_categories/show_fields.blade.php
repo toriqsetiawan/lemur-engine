@@ -58,6 +58,18 @@
     <p>{{ $machineLearntCategory->example_output }}</p>
 </div>
 
+<!-- Category Group Slug Field -->
+<div class="form-group">
+    {!! Form::label('category_group_slug', 'Category Group Slug:') !!}
+    <p>{{ $machineLearntCategory->category_group_slug }}</p>
+</div>
+
+<!-- Occurrences Field -->
+<div class="form-group">
+    {!! Form::label('occurrences', 'Occurrences:') !!}
+    <p>{{ $machineLearntCategory->occurrences }}</p>
+</div>
+
 <!-- Updated At Field -->
 <div class="form-group">
     {!! Form::label('updated_at', 'Updated:') !!}

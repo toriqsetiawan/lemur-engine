@@ -6,6 +6,7 @@ use App\Classes\AimlMatcher;
 use App\Classes\AimlParser;
 use App\Classes\LemurLog;
 use App\Exceptions\TagNotFoundException;
+use App\Models\Conversation;
 use App\Services\TalkService;
 use App\Tags\AimlTag;
 use Error;
@@ -16,12 +17,14 @@ class AimlTagFactory
 {
 
     /**
-     * @param $conversation
-     * @param $tagName
+     * @param Conversation $conversation
+     * @param string $tagName
      * @param array $attributes
+     *
      * @return AimlTag $tag
+     * @throws TagNotFoundException
      */
-    public static function create($conversation, $tagName, $attributes)
+    public static function create(Conversation $conversation, string $tagName = '', array $attributes = [])
     {
 
         try {
@@ -108,7 +111,7 @@ class AimlTagFactory
     }
 
 
-    public static function isHtmlTag($tagName)
+    public static function isHtmlTag($tagName): bool
     {
 
         if (isset(config('lemur_tag.html')[strtolower($tagName)])) {
@@ -117,7 +120,7 @@ class AimlTagFactory
         return false;
     }
 
-    public static function isRecursiveTag($tagName)
+    public static function isRecursiveTag($tagName): bool
     {
 
         if (isset(array_flip(config('lemur_tag.recursive'))[strtolower($tagName)])) {
@@ -141,7 +144,7 @@ class AimlTagFactory
      * @param $tagName
      * @return bool
      */
-    public static function isRecursiveCustomTag($tagName)
+    public static function isRecursiveCustomTag($tagName): bool
     {
 
         if (config()->has('customtags.lemur_customtag.recursive')) {

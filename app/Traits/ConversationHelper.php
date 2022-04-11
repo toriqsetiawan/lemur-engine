@@ -141,6 +141,8 @@ trait ConversationHelper
         if ($turn!==null) {
 
             $output = $turn->output;
+            $output = preg_replace('/<respondbutton[^>]*>([\s\S]*?)<\/respondbutton[^>]*>/', '', $output);
+            $output = trim($output);
             $output = str_replace("<br/>",".", $output);
             $output = strip_tags($output, "<a>");
             $output = str_replace("..",".", $output);

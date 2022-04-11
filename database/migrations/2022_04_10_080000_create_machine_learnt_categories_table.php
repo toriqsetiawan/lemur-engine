@@ -23,8 +23,10 @@ class CreateMachineLearntCategoriesTable extends Migration
             $table->text('template');
             $table->string('topic')->nullable();
             $table->string('that')->nullable();
-            $table->text('example_input');
-            $table->text('example_output');
+            $table->text('example_input')->nullable();
+            $table->text('example_output')->nullable();
+            $table->string('category_group_slug')->nullable();
+            $table->integer('occurrences')->default(1);
             $table->softDeletes();
             $table->timestamps();
             $table->index(['client_id', 'bot_id', 'pattern'], 'machine_learnt_categories_ibix_1');

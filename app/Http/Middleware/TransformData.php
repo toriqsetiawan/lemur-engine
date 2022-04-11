@@ -9,6 +9,7 @@ use App\Models\ClientCategory;
 use App\Models\Conversation;
 use App\Models\EmptyResponse;
 use App\Models\Language;
+use App\Models\MachineLearntCategory;
 use App\Models\Map;
 use App\Models\Section;
 use App\Models\Set;
@@ -98,6 +99,8 @@ class TransformData
                     $item = EmptyResponse::where('slug', $value)->firstOrFail();
                 } elseif ($key == 'client_category_id') {
                     $item = ClientCategory::where('slug', $value)->firstOrFail();
+                } elseif ($key == 'machine_learnt_category_id') {
+                    $item = MachineLearntCategory::where('slug', $value)->firstOrFail();
                 }
                 else {
                     if (!is_array($value)) {

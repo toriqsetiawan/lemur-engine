@@ -13,9 +13,9 @@ use SimpleXMLElement;
  */
 class HtmlTag extends AimlTag
 {
-    protected string $tagName;
-    protected $tagType;
-    protected $allowHtml;
+    protected string $tagName = '';
+    protected string $tagType; //single e.g. <br/> or wrapper e.g. <b>bold</b>
+    protected bool $allowHtml;
 
     /**
      * HtmlTag Constructor.

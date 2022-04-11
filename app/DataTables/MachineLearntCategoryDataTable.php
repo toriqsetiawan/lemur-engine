@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\ClientCategory;
+use App\Models\MachineLearntCategory;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
 
@@ -59,10 +60,10 @@ class MachineLearntCategoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\ClientCategory $model
+     * @param \App\Models\MachineLearntCategory $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(ClientCategory $model)
+    public function query(MachineLearntCategory $model)
     {
         return $model->dataTableQuery();
     }
@@ -86,7 +87,7 @@ class MachineLearntCategoryDataTable extends DataTable
                 }',
                 'initComplete' => 'function(settings, json) {
 
-                    var maxColumn = 10
+                    var maxColumn = 12
                     var dateFields = [maxColumn-1]
                     var exactSearchFields = [0,1]
                     var noSearchFields = [maxColumn]
@@ -115,7 +116,7 @@ class MachineLearntCategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            'id'=> ['name'=>'client_categories.id','data'=>'id','title'=>'#'],
+            'id'=> ['name'=>'machine_learnt_categories.id','data'=>'id','title'=>'#'],
             'bot'=> ['name'=>'bots.slug','data'=>'bot','title'=>'BotId'],
             'client'=> ['title'=>'ClientId'],
             'pattern',
@@ -124,6 +125,8 @@ class MachineLearntCategoryDataTable extends DataTable
             'that',
             'example_input',
             'example_output',
+            'category_group_slug',
+            'occurrences',
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
                 'defaultContent'=>'', 'exportable'=>false, 'render' =>
                 function () {

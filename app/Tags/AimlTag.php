@@ -17,11 +17,11 @@ use SimpleXMLElement;
 abstract class AimlTag
 {
 
-    protected array $attributes;
-    protected string $tagName;
+    protected array $attributes = [];
+    protected string $tagName = '';
     protected string $tagId;
     protected Conversation $conversation;
-    protected string $tagContents;
+    protected array $tagContents = [];
     protected array $tagSettings = [];
     protected bool $isTagValid=true;
 
@@ -32,9 +32,7 @@ abstract class AimlTag
      */
     public function __construct(Conversation $conversation, array $attributes = [])
     {
-
         $this->setAttributes($attributes);
-        $this->tagContents = [];
         $this->conversation = $conversation;
         $this->setTagId();
     }
@@ -94,34 +92,31 @@ abstract class AimlTag
     /**
      * @param array $attributes
      */
-    public function setAttributes($attributes)
+    public function setAttributes(array $attributes)
     {
-
-
-        foreach ($attributes as $index => $value) {
-            $this->attributes[$index]=$value;
+        if(!empty($attributes)){
+            foreach ($attributes as $index => $value) {
+                $this->attributes[$index]=$value;
+            }
         }
     }
 
 
     /**
-     * @param $attribute
+     * @param string $attribute
      * @param $value
      */
-    public function setAttribute($attribute, $value)
+    public function setAttribute(string $attribute, $value)
     {
-
-
         $this->attributes[$attribute]=$value;
     }
 
-    public function getAttributes()
+    public function getAttributes(): array
     {
-
         return $this->attributes;
     }
 
-    public function hasAttributes()
+    public function hasAttributes(): bool
     {
 
         if (!empty($this->attributes)) {
@@ -159,7 +154,6 @@ abstract class AimlTag
      */
     public function openTag($tagSettings)
     {
-
 
         LemurLog::info(
             __FUNCTION__,
@@ -199,20 +193,20 @@ abstract class AimlTag
 
         //if we are in learning mode we will do something else instead of evaluating the contents
         //it will turn it back into aiml for saving...
-        if (!empty($this->tagContents) || $this->tagContents =='0') {
+        if (!empty($this->tagContents)) {
             $contents = implode(" ", $this->tagContents);
 
-            if ($this->isInLearningMode()) {
+            if ($this->isInLearningMode() || $this->isInLiTag()) {
                 $contents = $this->buildAIMLIfInDoNotParseMode($contents);
             } elseif ($this->isInLiTag()) {
                 $contents = $this->buildAIMLIfInDoNotParseMode($contents);
             }
         } else {
-            $contents = $this->tagContents;
+            $contents = '';
         }
 
-        $this->tagContents = array();
-        $this->tagContents[]= $contents;
+        $this->tagContents = [];
+        $this->tagContents[] = $contents;
     }
 
     /**
@@ -258,14 +252,10 @@ abstract class AimlTag
         );
     }
 
-
-
     public function getTagContentsCompact()
     {
         return implode(" ", $this->tagContents);
     }
-
-
 
     /**
      * if we are in learning mode then the contents on a tag is not parsed
@@ -674,8 +664,7 @@ XML;
         $this->tagContents[]=$newResponse;
 
         $contents = LemurStr::cleanAndImplode($this->tagContents);
-        //echo "<br/>IN2a>>>>".$contents." (".$this->getTagId().")";
-        $this->tagContents = null;
+        $this->tagContents=[];
         $this->tagContents[]=$contents;
 
         $this->getTagStack()->overWrite($this);

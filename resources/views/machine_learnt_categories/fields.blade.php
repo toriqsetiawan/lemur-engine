@@ -105,4 +105,18 @@
     {!! Form::textarea('example_output', null, ['rows' => 2, 'class' => 'form-control', 'id'=>"example_output_field", 'data-test'=>"example_output_field", App\Models\MachineLearntCategory::getFormValidation('example_output')] ) !!}
 </div>
 
+<!-- Category Group Slug Field -->
+<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="example_output_div">
+    {!! Form::label('category_group_slug', 'Category Group Slug:', ['data-test'=>"category_group_slug"]) !!}
+    {!! Form::textarea('category_group_slug', null, ['rows' => 2, 'class' => 'form-control', 'id'=>"category_group_slug_field", 'data-test'=>"category_group_slug_field", App\Models\MachineLearntCategory::getFormValidation('category_group_slug')] ) !!}
+</div>
+
+<div class="clearfix"></div>
+
+<!-- Occurrences Field -->
+<div class="form-group col-lg-6 col-md-6 col-sm-12" data-test="occurrences_div">
+    {!! Form::label('occurrences', 'Occurrences:', ['data-test'=>"occurrences"]) !!}
+    {!! Form::textarea('occurrences', null, ['rows' => 2, 'class' => 'form-control', 'id'=>"occurrences_field", 'data-test'=>"occurrences_field", App\Models\MachineLearntCategory::getFormValidation('occurrences')] ) !!}
+</div>
+
 <div class="clearfix"></div>

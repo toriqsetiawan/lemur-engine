@@ -32,6 +32,8 @@ class MachineLearntCategoryRepository extends BaseRepository
         'that',
         'example_input',
         'example_output',
+        'occurrences',
+        'category_group_slug',
     ];
 
     /**

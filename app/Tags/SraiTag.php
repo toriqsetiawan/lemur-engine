@@ -28,7 +28,7 @@ class SraiTag extends AimlTag
     {
         parent::__construct($conversation, $attributes);
         $this->talkService = $talkService;
-        $this->sraiCount = $conversation->getVar('srai-count', 0);
+        $this->sraiCount = (int)$conversation->getVar('srai-count', 0);
         $this->maxSraiCount = $this->getMaxSraiCountFromConfig();
     }
 

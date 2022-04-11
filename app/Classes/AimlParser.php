@@ -207,9 +207,9 @@ class AimlParser
     public function startElement($parser, $name, array $attributes)
     {
         //clean the tag name
-        $tag_name = $this->cleanTagClassName($name);
+        $tagName = $this->cleanTagClassName($name);
         //set the tag class
-        $this->setTagClass($tag_name, $attributes);
+        $this->setTagClass($tagName, $attributes);
 
         //initialise
         $tagSettings=array();
@@ -262,17 +262,13 @@ class AimlParser
         }
     }
 
-
-    public function setTagClass($tag_name, $attributes)
+    public function setTagClass($tagName, $attributes)
     {
-
-        $this->currentTag =  AimlTagFactory::create($this->conversation, $tag_name, $attributes);
+        $this->currentTag =  AimlTagFactory::create($this->conversation, $tagName, $attributes);
     }
 
     public function getTagClass()
     {
-
-
         return $this->currentTag;
     }
 
@@ -282,10 +278,10 @@ class AimlParser
     }
 
 
-    public function isHtmlTag($tag_name)
+    public function isHtmlTag($tagName)
     {
 
-        if (isset(array_flip(config('lemur_tag.html'))[strtolower($tag_name)])) {
+        if (isset(array_flip(config('lemur_tag.html'))[strtolower($tagName)])) {
             return true;
         }
         return false;
@@ -367,9 +363,6 @@ class AimlParser
         if ($name=='TEMPLATE' && !$this->currentTag->isInLearningMode()) {
             $this->getTagStack()->decIndex($this->getTagId());
         }
-
-
-
 
         $this->currentTag = $this->getTagStack()->lastItem();
         if ($this->currentTag) {

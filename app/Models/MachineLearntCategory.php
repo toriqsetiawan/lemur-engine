@@ -13,7 +13,7 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @SWG\Definition(
  *      definition="MachineLearntCategory",
- *      required={"client_id", "bot_id", "turn_id", "slug", "pattern", "template", "topic", "that","example_input", "example_output"},
+ *      required={"client_id", "bot_id", "turn_id", "slug", "pattern", "template", "topic", "that","example_input", "example_output", "category_group_slug", "occurrences"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -74,6 +74,17 @@ use Spatie\Sluggable\SlugOptions;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="category_group_slug",
+ *          description="category_group_slug",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="occurrences",
+ *          description="occurrences",
+ *          type="integer",
+ *          format="int32"
+ *      ),
+ *      @SWG\Property(
  *          property="deleted_at",
  *          description="deleted_at",
  *          type="string",
@@ -120,7 +131,9 @@ class MachineLearntCategory extends Model
         'topic',
         'that',
         'example_input',
-        'example_output'
+        'example_output',
+        'category_group_slug',
+        'occurrences'
     ];
 
     /**
@@ -140,6 +153,8 @@ class MachineLearntCategory extends Model
         'that' => 'string',
         'example_input' => 'string',
         'example_output' => 'string',
+        'category_group_slug' => 'string',
+        'occurrences' => 'integer',
     ];
 
     /**
@@ -157,6 +172,8 @@ class MachineLearntCategory extends Model
         'that' => 'string',
         'example_input' => 'required|string|max:255',
         'example_output' => 'required|string',
+        'category_group_slug' => 'string',
+        'occurrences' => 'integer',
     ];
 
     /**
@@ -242,4 +259,9 @@ class MachineLearntCategory extends Model
     }
 
 
+    public static function findAndDeleteFromInput($input)
+    {
+        MachineLearntCategory::find($input['machine_learnt_category_id'])->delete();
+        Flash::success('Machine learnt category deleted successfully.');
+    }
 }
