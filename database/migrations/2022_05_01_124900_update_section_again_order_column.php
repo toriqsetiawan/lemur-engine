@@ -16,7 +16,7 @@ class UpdateSectionAgainOrderColumn extends Migration
     public function up()
     {
         Schema::table('sections', function (Blueprint $table) {
-            $table->integer('order')->default('1')->change();
+            $table->integer('order')->nullable()->default('1')->change();
         });
     }
 
