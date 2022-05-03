@@ -94,12 +94,19 @@ class BotPropertyController extends AppBaseController
             $this->botPropertyRepository->bulkCreate($input);
             Flash::success('Bot Properties updated and saved successfully.');
         } else {
+
+            $oinput = $input;
+
             //do we have a sectionId?
             if(empty($input['section_id']) && !empty($input['name'])){
                 $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
             }else{
                 $input['section_id'] = null;
             }
+
+
+            dd($input,$oinput);
+
 
             //does this record exist?
             $bpExists = BotProperty::where('name', $input['name'])->where('bot_id', $input['bot_id'])->withTrashed()->first();
