@@ -35,6 +35,8 @@
                         @php $collapseShow = 'collapse'; @endphp
                     @endif
 
+                        {{dd($allSections, $sectionGroup, $sectionName, $sectionSlug)}}
+
 
                 <!--open the previous collaspe box-->
                     <div class="box box-primary">
