@@ -221,7 +221,7 @@ class Section extends Model
         $miscSection->slug = null;
         $miscSection->name = 'Misc';
         $miscSection->order = 999;
-        $miscSection->default_state = 'closed';
+        $miscSection->default_state = 'open';
         $botPropertySections->push($miscSection);
 
         return $botPropertySections;
