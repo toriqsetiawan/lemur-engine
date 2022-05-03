@@ -103,7 +103,7 @@ class BotPropertyController extends AppBaseController
             }
 
             //does this record exist?
-            $bpExists = BotProperty::where('name', $input['name'])->where('bot_id', $input['bot_id']);
+            $bpExists = BotProperty::where('name', $input['name'])->where('bot_id', $input['bot_id'])->withTrashed()->first();
             if($bpExists){
                 $this->authorize('update', $bpExists);
                 if($bpExists->trashed()){
