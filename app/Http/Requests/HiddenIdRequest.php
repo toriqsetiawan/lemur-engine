@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\Language;
 use App\Models\Map;
+use App\Models\Section;
 use App\Models\Set;
 use App\Models\Turn;
 use App\Models\WordSpellingGroup;
@@ -66,6 +67,8 @@ class HiddenIdRequest extends FormRequest
                     $item = Conversation::findOrFail($value);
                 } elseif ($key == 'turn_id') {
                     $item = Turn::findOrFail($value);
+                } elseif ($key == 'section_id') {
+                    $item = Section::findOrFail($value);
                 } else {
                     if (!is_array($value)) {
                         throw new \Exception('Unknown id item: ' . $key);
