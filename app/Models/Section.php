@@ -217,8 +217,8 @@ class Section extends Model
         $botPropertySections = Section::where('type','BOT_PROPERTY')->orderBy('order')->get();
 
         $miscSection = new Section();
-        $miscSection->id = '';
-        $miscSection->slug = '';
+        $miscSection->id = null;
+        $miscSection->slug = null;
         $miscSection->name = 'Misc';
         $miscSection->order = 999;
         $miscSection->default_state = 'closed';
