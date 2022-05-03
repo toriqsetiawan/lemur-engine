@@ -41,8 +41,8 @@ class CreateBotPropertyRequest extends HiddenIdRequest
      */
     public function messages()
     {
-       /* return [
-            'name.unique' => 'Duplicate record - this bot property already exists - please update the existing item.',
-        ];*/
+        return [
+          //  'name.unique' => 'Duplicate record - this bot property already exists - please update the existing item.',
+        ];
     }
 }
