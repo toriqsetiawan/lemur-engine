@@ -27,12 +27,12 @@ class CreateBotPropertyRequest extends HiddenIdRequest
     {
         $rules = BotProperty::$rules;
 
-        $rules['name'] = [
+        /*$rules['name'] = [
             'required',
             Rule::unique('bot_properties')
                 ->where('bot_id', $this->bot_id)
                 ->whereNull('deleted_at')
-        ];
+        ];*/
         return $rules;
     }
 
@@ -41,8 +41,8 @@ class CreateBotPropertyRequest extends HiddenIdRequest
      */
     public function messages()
     {
-        return [
-            'name.unique' => 'Duplicate record - this bot name has already been taken.',
-        ];
+       /* return [
+            'name.unique' => 'Duplicate record - this bot property already exists - please update the existing item.',
+        ];*/
     }
 }
