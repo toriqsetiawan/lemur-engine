@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Bot;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class ChatMetaResource extends JsonResource
 {
@@ -55,8 +56,9 @@ class ChatMetaResource extends JsonResource
         $additionalBotProperties = $this->lemurTarAdditionalProperties;
 
         if(!empty($additionalBotProperties)){
-            foreach($additionalBotProperties as $additionalBotProperty)
-            $cleanFields[$additionalBotProperty->name]=$additionalBotProperty->value;
+            foreach($additionalBotProperties as $additionalBotProperty){
+                $cleanFields[$additionalBotProperty->name]=$additionalBotProperty->value;
+            }
         }
 
 
