@@ -63,10 +63,10 @@
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $name !!}_div'>
                                     <label for='{!! $name !!}_field' data-test='{!! $name !!}_label'>{!! $name !!}:</label>
                                     <div class='input-group'>
-                                    <input type='text' name='name[{!! $name !!}]' value='{!! $value !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
+                                    <input type='text' name='name[{!! $name !!}]' value='{!! $item['value'] !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
                                         <div class="input-group-btn">
                                             <button name="edit" class="btn btn-sm btn-info">Edit</button>
-                                            <a class='btn btn-danger delete-button openDeleteDataTableModal' data-id="{!! $id !!}"  data-message="{!! $title !!} ID: {!! $id !!}" data-test="delete-button">
+                                            <a class='btn btn-danger delete-button openDeleteDataTableModal' data-id="{!! $item['slug'] !!}"  data-message="Are you sure you want to delete the {!! $item['name']  !!} property? ID: {!! $item['slug']  !!}" data-test="delete-button">
                                                 <i class="glyphicon glyphicon-trash"></i>
                                             </a>
                                             <button name="delete" class="btn btn-sm btn-danger">Delete</button>
@@ -102,3 +102,4 @@
 </section>
 
 @include('layouts.by_bot_add_modal')
+@include('layouts.datatable_delete_modal')

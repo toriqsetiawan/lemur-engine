@@ -225,7 +225,9 @@ class BotProperty extends Model
                 $sectionSlugIds[$sectionSlug]['id']=($section->id??null);
                 $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
-            $cleanProperties[$sectionSlug][$property] = '';
+            $cleanProperties[$sectionSlug][$property]['name'] = '';
+            $cleanProperties[$sectionSlug][$property]['value'] = '';
+            $cleanProperties[$sectionSlug][$property]['slug'] = '';
         }
 
         $savedProperties = BotProperty::with('section')->where('bot_id', $botId)->get();
@@ -244,7 +246,9 @@ class BotProperty extends Model
                 $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
 
-            $cleanProperties[$sectionSlug][$property->name] = $property->value;
+            $cleanProperties[$sectionSlug][$property->name]['name'] = $property->name;
+            $cleanProperties[$sectionSlug][$property->name]['value'] = $property->value;
+            $cleanProperties[$sectionSlug][$property->name]['slug'] = $property->slug;
 
         }
         return $cleanProperties;
