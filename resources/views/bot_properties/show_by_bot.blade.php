@@ -75,25 +75,13 @@
                                 {!! Form::close() !!}
 
                         @endforeach
-
-    </div>
-    <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
                 @endif
     @endforeach
-
-
-
-
-
-
 @endif
-
-
-        {{dd($allSections,$botProperties)}}
-
-
 </div>
 </section>
 
