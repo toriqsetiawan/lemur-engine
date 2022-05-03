@@ -57,13 +57,15 @@
                                 {!! Form::open(['route' => 'botProperties.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
                                 {!! Form::hidden('bulk', 1) !!}
                                 {!! Form::hidden('bot_id', $bot->slug,['data-test'=>$htmlTag."-bot_id"] ) !!}
+                                {!! Form::hidden('section_id', $sectionSlug ) !!}
                                 {!! Form::hidden('redirect_url', url()->current(),['data-test'=>"$htmlTag-redirect-url"] ) !!}
 
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $name !!}_div'>
                                     <label for='{!! $name !!}_field' data-test='{!! $name !!}_label'>{!! $name !!}:</label>
                                     <div class='input-group'>
-                                    <input type='text' name='name[{!! $name !!}]' value='{!! $item['value'] !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
+
+                                        <input type='text' name='name[{!! $name !!}]' value='{!! $item['value'] !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field' data-validation="required">
                                         <div class="input-group-btn">
                                             <button name="edit" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> Save</button>
                                             <a class='btn btn-danger delete-button openDeleteDataTableModal' data-id="{!! $item['slug'] !!}"  data-message="Are you sure you want to delete the {!! $item['name']  !!} property? ID: {!! $item['slug']  !!}" data-test="delete-button">
