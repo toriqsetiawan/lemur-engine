@@ -198,7 +198,7 @@ class Section extends Model
 
         $miscSection = new Section();
         $miscSection->id = null;
-        $miscSection->slug = 'misc';
+        $miscSection->slug = null;
         $miscSection->name = 'Misc';
         $miscSection->order = 999;
         $miscSection->default_state = 'closed';
@@ -218,7 +218,7 @@ class Section extends Model
 
         $miscSection = new Section();
         $miscSection->id = null;
-        $miscSection->slug = 'misc';
+        $miscSection->slug = null;
         $miscSection->name = 'Misc';
         $miscSection->order = 999;
         $miscSection->default_state = 'closed';
