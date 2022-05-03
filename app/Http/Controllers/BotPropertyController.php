@@ -111,12 +111,12 @@ class BotPropertyController extends AppBaseController
                     $bpExists->save();
                 }
                 $botProperty = $this->botPropertyRepository->update($input, $bpExists->id);
+                Flash::success('Bot property updated successfully.');
             }else{
                 $botProperty = $this->botPropertyRepository->create($input);
+                Flash::success('Bot property created successfully.');
             }
 
-
-            Flash::success('Bot Property saved successfully.');
         }
 
         if (!empty($input['redirect_url'])) {
