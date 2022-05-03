@@ -121,8 +121,8 @@ class BotProperty extends Model
     public static $rules = [
         'bot_id' => 'required',
         'section_id' => 'required',
-        'name' => 'nullable',
-        'value' => 'required'
+        'name' => 'required',
+        'value' => 'nullable'
     ];
 
     /**
