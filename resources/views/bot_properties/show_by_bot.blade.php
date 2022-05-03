@@ -16,7 +16,6 @@
 
         @else
 
-{{dd($allSections,$botProperties)}}
             <!-- loop through all the sections in their 'order' and then populate with the items which exist for them -->
             @foreach($allSections as $sectionId => $sectionGroup)
 
@@ -92,6 +91,7 @@
 @endif
 
 
+        {{dd($allSections,$botProperties)}}
 
 
 </div>
