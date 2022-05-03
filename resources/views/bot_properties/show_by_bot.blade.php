@@ -65,12 +65,11 @@
                                     <div class='input-group'>
                                     <input type='text' name='name[{!! $name !!}]' value='{!! $item['value'] !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
                                         <div class="input-group-btn">
-                                            <button name="edit" class="btn btn-sm btn-info">Edit</button>
+                                            <button name="edit" class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> Save</button>
                                             <a class='btn btn-danger delete-button openDeleteDataTableModal' data-id="{!! $item['slug'] !!}"  data-message="Are you sure you want to delete the {!! $item['name']  !!} property? ID: {!! $item['slug']  !!}" data-test="delete-button">
                                                 <i class="glyphicon glyphicon-trash"></i>
                                             </a>
-                                            <button name="delete" class="btn btn-sm btn-danger">Delete</button>
-                                            <button type="reset" class="btn btn-default">Reset</button>
+                                            <button type="reset" class="btn btn-default"><i class="glyphicon glyphicon-refresh"></i> Reset</button>
                                         </div>
 
                                     </div>
