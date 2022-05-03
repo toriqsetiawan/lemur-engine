@@ -122,7 +122,7 @@ class BotProperty extends Model
         'bot_id' => 'required',
         'section_id' => 'required',
         'name' => 'required',
-        'value' => 'nullable'
+        'value' => 'required'
     ];
 
     /**
