@@ -62,8 +62,17 @@
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $name !!}_div'>
                                     <label for='{!! $name !!}_field' data-test='{!! $name !!}_label'>{!! $name !!}:</label>
+                                    <div class='input-group'>
                                     <input type='text' name='name[{!! $name !!}]' value='{!! $value !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
+                                    </div>
+                                    </div>
+
+
+                                <div class="input-group-btn">
+                                    <button name="edit" class="btn btn-sm btn-info">Edit</button>
+                                    <button name="delete" class="btn btn-sm btn-danger">Delete</button>
                                 </div>
+
 
 
                             @endforeach
