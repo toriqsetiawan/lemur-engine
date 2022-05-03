@@ -235,7 +235,7 @@ class BotProperty extends Model
         foreach ($savedProperties as $property) {
 
             if(empty($property->section->slug)){
-                $sectionSlug = null;
+                $sectionSlug = 'null';
             }else{
                 $sectionSlug = $property->section->slug;
             }
