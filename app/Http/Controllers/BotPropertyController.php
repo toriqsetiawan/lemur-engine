@@ -90,7 +90,6 @@ class BotPropertyController extends AppBaseController
     {
         $this->authorize('create', BotProperty::class);
         $input = $request->all();
-        dd($input);
         if (!empty($input['bulk'])) {
             $this->botPropertyRepository->bulkCreate($input);
             Flash::success('Bot Properties updated and saved successfully.');
@@ -105,8 +104,6 @@ class BotPropertyController extends AppBaseController
             //does this record exist?
             $bpExists = BotProperty::where('name', $input['name'])->where('bot_id', $input['bot_id'])->withTrashed()->first();
             if($bpExists){
-
-
 
                 $this->authorize('update', $bpExists);
                 if($bpExists->trashed()){
