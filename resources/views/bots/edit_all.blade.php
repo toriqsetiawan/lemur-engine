@@ -70,9 +70,7 @@
                           <!-- Slug Field Edit Modal -->
                       @include('layouts.edit_slug_modal')
 
-                      @push('scripts')
-                          {{ Html::script('js/select2.js') }}
-                      @endpush
+
 
                   @else
                        <!-- {!! $htmlTag !!} pane -->
@@ -81,11 +79,13 @@
                        <div class="clearfix"></div>
                       </div>
 
-                           @push('scripts')
-                               {{ Html::script('js/modalSelect2.js') }}
-                           @endpush
+
 
                   @endif
+                  @push('scripts')
+                      {{ Html::script('js/validation.js') }}
+                      {{ Html::script('js/modalSelect2.js') }}
+                  @endpush
                @include('bots.tabs_close')
           </div>
       </div>
