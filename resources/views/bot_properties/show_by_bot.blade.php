@@ -18,7 +18,7 @@
 
 
             <!-- loop through all the sections in their 'order' and then populate with the items which exist for them -->
-
+                {{dd($allSections)}}
             @foreach($allSections as $sectionId => $sectionGroup)
 
 
@@ -29,18 +29,11 @@
                     @if($sectionGroup['default_state'] == 'open')
                         @php $sectionShow = 'true'; @endphp
                         @php $collapseShow = 'collapse in'; @endphp
-
                     @else
                         @php $sectionShow = 'false'; @endphp
                         @php $collapseShow = 'collapse'; @endphp
                     @endif
-
-                        @if(strtolower($sectionName) == 'misc')
-                        {{dd($allSections, $sectionGroup, $sectionName, $sectionSlug)}}
-                        @endif
-
-
-                <!--open the previous collaspe box-->
+                    <!--open the previous collaspe box-->
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">{!! $sectionName !!} Section</h3>
