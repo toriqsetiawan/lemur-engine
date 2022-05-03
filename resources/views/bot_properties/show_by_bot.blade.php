@@ -52,7 +52,7 @@
 
 
 
-                        @foreach($botProperties[$sectionSlug] as $name => $value)
+                        @foreach($botProperties[$sectionSlug] as $name => item)
 
                                 {!! Form::open(['route' => 'botProperties.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
                                 {!! Form::hidden('bulk', 1) !!}
