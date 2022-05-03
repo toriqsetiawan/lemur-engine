@@ -15,10 +15,6 @@
             <div class="alert alert-info">There are no {!! strtolower($title) !!} associated with this bot </div>
 
         @else
-            {!! Form::open(['route' => 'botProperties.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
-            {!! Form::hidden('bulk', 1) !!}
-            {!! Form::hidden('bot_id', $bot->slug,['data-test'=>$htmlTag."-bot_id"] ) !!}
-            {!! Form::hidden('redirect_url', url()->current(),['data-test'=>"$htmlTag-redirect-url"] ) !!}
 
 
             <!-- loop through all the sections in their 'order' and then populate with the items which exist for them -->
@@ -58,6 +54,10 @@
 
                         @foreach($botProperties[$sectionSlug] as $name => $value)
 
+                                {!! Form::open(['route' => 'botProperties.store', 'data-test'=>$htmlTag.'-create-form', 'class'=>'validate', 'name'=>$htmlTag.'-create']) !!}
+                                {!! Form::hidden('bulk', 1) !!}
+                                {!! Form::hidden('bot_id', $bot->slug,['data-test'=>$htmlTag."-bot_id"] ) !!}
+                                {!! Form::hidden('redirect_url', url()->current(),['data-test'=>"$htmlTag-redirect-url"] ) !!}
 
 
                                 <div class='form-group col-md-4 col-sm-6 col-xs-12' data-test='{!! $name !!}_div'>
@@ -66,19 +66,20 @@
                                     <input type='text' name='name[{!! $name !!}]' value='{!! $value !!}' class='form-control' id='{!! $name !!}_value_field' data-test='{!! $name !!}_value_field'>
                                         <div class="input-group-btn">
                                             <button name="edit" class="btn btn-sm btn-info">Edit</button>
+                                            <a class='btn btn-danger delete-button openDeleteDataTableModal' data-id="{!! $id !!}"  data-message="{!! $title !!} ID: {!! $id !!}" data-test="delete-button">
+                                                <i class="glyphicon glyphicon-trash"></i>
+                                            </a>
                                             <button name="delete" class="btn btn-sm btn-danger">Delete</button>
+                                            <button type="reset" class="btn btn-default">Reset</button>
                                         </div>
 
                                     </div>
-                                    </div>
+                                </div>
 
 
+                                {!! Form::close() !!}
 
-
-
-
-
-                            @endforeach
+                        @endforeach
 
     </div>
     <!-- /.box-body -->
@@ -89,13 +90,8 @@
 
 
 
-<!-- Submit Field -->
-<div class="form-group col-sm-12">
-{!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-<button type="reset" class="btn btn-default">Reset</button>
-</div>
 
-{!! Form::close() !!}
+
 
 @endif
 
