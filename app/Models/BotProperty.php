@@ -222,7 +222,7 @@ class BotProperty extends Model
         foreach ($recommendedProperties as $property => $sectionSlug) {
             if(!isset($sectionSlugIds[$sectionSlug])){
                 $section = Section::where('slug',$sectionSlug)->where('type', 'BOT_PROPERTY')->first();
-                $sectionSlugIds[$sectionSlug]['id']=($section->id??null);
+                $sectionSlugIds[$sectionSlug]['id']=($section->id??'null');
                 $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
             $cleanProperties[$sectionSlug][$property]['name'] = '';
@@ -238,12 +238,6 @@ class BotProperty extends Model
                 $sectionSlug = 'null';
             }else{
                 $sectionSlug = $property->section->slug;
-            }
-
-            if(!isset($sectionSlugIds[$sectionSlug])){
-                $section = Section::where('slug',$sectionSlug)->where('type', 'BOT_PROPERTY')->first();
-                $sectionSlugIds[$sectionSlug]['id']=($section->id??null);
-                $sectionSlugIds[$sectionSlug]['name']=($section->name??'Misc');
             }
 
             $cleanProperties[$sectionSlug][$property->name]['name'] = $property->name;
