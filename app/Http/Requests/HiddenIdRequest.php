@@ -67,7 +67,7 @@ class HiddenIdRequest extends FormRequest
                     $item = Conversation::findOrFail($value);
                 } elseif ($key == 'turn_id') {
                     $item = Turn::findOrFail($value);
-                } elseif ($key == 'section_id') {
+                } elseif ($value !== null && $key == 'section_id') {
                     $item = Section::findOrFail($value);
                 } else {
                     if (!is_array($value)) {
