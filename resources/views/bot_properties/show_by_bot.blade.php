@@ -35,7 +35,9 @@
                         @php $collapseShow = 'collapse'; @endphp
                     @endif
 
+                        @if(strtolower($sectionName) == 'misc')
                         {{dd($allSections, $sectionGroup, $sectionName, $sectionSlug)}}
+                        @endif
 
 
                 <!--open the previous collaspe box-->
