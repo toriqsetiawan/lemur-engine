@@ -100,13 +100,9 @@ class BotPropertyController extends AppBaseController
             //do we have a sectionId?
             if(empty($input['section_id']) && !empty($input['name'])){
                 $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
-            }else{
+            }elseif(empty($input['section_id'])){
                 $input['section_id'] = null;
             }
-
-
-            dd($input,$oinput);
-
 
             //does this record exist?
             $bpExists = BotProperty::where('name', $input['name'])->where('bot_id', $input['bot_id'])->withTrashed()->first();
@@ -218,9 +214,10 @@ class BotPropertyController extends AppBaseController
 
         $input = $request->all();
 
+        //do we have a sectionId?
         if(empty($input['section_id']) && !empty($input['name'])){
             $input['section_id'] = $this->botPropertyRepository->getSectionId($input['name'], $input['bot_id']);
-        }else{
+        }elseif(empty($input['section_id'])){
             $input['section_id'] = null;
         }
 
