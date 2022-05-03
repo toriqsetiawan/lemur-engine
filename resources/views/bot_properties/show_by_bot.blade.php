@@ -18,7 +18,6 @@
 
 
             <!-- loop through all the sections in their 'order' and then populate with the items which exist for them -->
-                {{dd($allSections)}}
             @foreach($allSections as $sectionId => $sectionGroup)
 
 
