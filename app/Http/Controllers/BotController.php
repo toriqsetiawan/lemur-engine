@@ -671,20 +671,20 @@ class BotController extends AppBaseController
             "Expires"             => "0"
         );
 
-        $columns = array('botId', 'botName', 'clientId', 'conversationId', 'Referer', 'IP', 'TotalTurns');
+        $columns = array('BotId', 'BotName', 'ClientId', 'ConversationId', 'Referer', 'IP', 'TotalTurns');
 
         $callback = function() use($results, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
             foreach ($results as $result) {
-                $row['botId']  = $result->bot_id;
-                $row['botName']    = $result->bot_name;
-                $row['clientId']    = $result->client_id;
-                $row['conversationId']  = $result->conversation_id;
+                $row['BotId']  = $result->bot_id;
+                $row['BotName']    = $result->bot_name;
+                $row['ClientId']    = $result->client_id;
+                $row['ConversationId']  = $result->conversation_id;
                 $row['Referer']  = $result->referer;
                 $row['IP']  = $result->ip;
-                $row['totalTurns']  = $result->turns_total;
-                fputcsv($file, array($row['botId'], $row['botName'], $row['clientId'], $row['conversationId'], $row['Referer'], $row['IP'], $row['totalTurns']));
+                $row['TotalTurns']  = $result->turns_total;
+                fputcsv($file, array($row['BotId'], $row['BotName'], $row['ClientId'], $row['ConversationId'], $row['Referer'], $row['IP'], $row['TotalTurns']));
             }
             fclose($file);
         };
