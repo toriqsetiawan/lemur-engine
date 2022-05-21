@@ -677,10 +677,10 @@ class BotController extends AppBaseController
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
             foreach ($results as $result) {
-                $row['BotId']  = $result->bot_id;
+                $row['BotId']  = $result->bot_slug;
                 $row['BotName']    = $result->bot_name;
-                $row['ClientId']    = $result->client_id;
-                $row['ConversationId']  = $result->conversation_id;
+                $row['ClientId']    = $result->client_slug;
+                $row['ConversationId']  = $result->conversation_slug;
                 $row['Referer']  = $result->referer;
                 $row['IP']  = $result->ip;
                 $row['TotalTurns']  = $result->turns_total;
