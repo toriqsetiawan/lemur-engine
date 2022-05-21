@@ -63,7 +63,7 @@
                         </li>
 
                         <li class="nav-item">
-                        <a class="nav-link small" id="pills-conversation-download-link"  href="{!! url('/bot/logs/'.$bot->slug.'/'.$targetConversationSlug."/download") !!}" role="tab" aria-controls="pills-conversation-download-tab" aria-selected="false">Download</a>
+                        <a class="nav-link small" id="pills-conversation-download-link"  href="{!! url('/bot/logs/'.$bot->slug.'/'.$targetConversationSlug."/download") !!}" role="tab" aria-controls="pills-conversation-download-tab" aria-selected="false">Download Stats</a>
                         </li>
                     </ul>
 

@@ -398,6 +398,8 @@ Route::group(['prefix' => '/bot'], function () {
     ->middleware('auth:web');
     Route::GET('/stats/{botSlug}/list', 'BotController@stats')
     ->middleware('auth:web');
+    Route::POST('/stats/{botSlug}/download', 'BotController@stat_download')
+        ->middleware('auth:web');
     Route::GET('/{botSlug}/chat', 'BotController@chatForm')
     ->middleware('auth:web');
     Route::POST('/{botSlug}/chat', 'BotController@chat')
@@ -443,3 +445,4 @@ Route::GET('/categories/{categoryGroupSlug}/download/csv', 'CategoryController@d
     ->middleware('auth:web');
 Route::GET('/categories/{categoryGroupSlug}/download/aiml', 'CategoryController@downloadAiml')
     ->middleware('auth:web');
+

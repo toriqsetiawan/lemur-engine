@@ -132,7 +132,7 @@ class ConversationDataTable extends DataTable
                  ';
                 }],
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
-                'defaultContent'=>'', 'exportable'=>false, 'render' =>
+                'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
                 {
@@ -140,6 +140,7 @@ class ConversationDataTable extends DataTable
                  }
                  ';
                 }],
+            'created_at'=> ['name'=>'created_at','data'=>'created_at', 'title'=>'Created', 'visible'=>false],
         ];
     }
 

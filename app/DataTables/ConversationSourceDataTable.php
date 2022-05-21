@@ -139,7 +139,7 @@ class ConversationSourceDataTable extends DataTable
             'ip',
             'referer',
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
-                'defaultContent'=>'', 'exportable'=>false, 'render' =>
+                'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
                 {
@@ -147,6 +147,7 @@ class ConversationSourceDataTable extends DataTable
                  }
                  ';
                 }],
+            'created_at'=> ['name'=>'created_at','data'=>'created_at', 'title'=>'Created', 'visible'=>false],
         ];
     }
 
