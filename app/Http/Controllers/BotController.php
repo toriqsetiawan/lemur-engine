@@ -671,7 +671,7 @@ class BotController extends AppBaseController
             "Expires"             => "0"
         );
 
-        $columns = array('botId', 'botName', 'clientId', 'conversationId', 'Referer', 'IP');
+        $columns = array('botId', 'botName', 'clientId', 'conversationId', 'Referer', 'IP', 'TotalTurns');
 
         $callback = function() use($results, $columns) {
             $file = fopen('php://output', 'w');
@@ -683,7 +683,8 @@ class BotController extends AppBaseController
                 $row['conversationId']  = $result->conversation_id;
                 $row['Referer']  = $result->referer;
                 $row['IP']  = $result->ip;
-                fputcsv($file, array($row['botId'], $row['botName'], $row['clientId'], $row['conversationId'], $row['Referer'], $row['IP']));
+                $row['totalTurns']  = $result->turns_total;
+                fputcsv($file, array($row['botId'], $row['botName'], $row['clientId'], $row['conversationId'], $row['Referer'], $row['IP'], $row['totalTurns']));
             }
             fclose($file);
         };
