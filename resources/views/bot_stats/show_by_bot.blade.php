@@ -11,7 +11,7 @@
         <div class="clearfix"></div>
 
 
-        <div class="col-md-4">
+        <div class="col-md-2 col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Bot Rating</h3>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2 col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Today's Stats</h3>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-2 col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">All Time Stats</h3>
@@ -44,6 +44,34 @@
                 <div class="box-body">
                     <p>Conversation Count: {!! $allTimeConversationStat !!}</p>
                     <p>Turns Count: {!! $allTimeTurnStat !!}</p>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Download</h3>
+                </div>
+                <div class="box-body">
+                    <form method="POST" action="/bot/stats/{{$bot->slug}}/download" name="download_stats">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="date_from">Date From:</label>
+                                <input type="date" class="form-control" name="date_from" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="date_to">Date To:</label>
+                                <input type="date" class="form-control" name="date_to" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="save">Action:</label>
+                                <input type="submit" class="btn btn-success" name="action" value="Download CSV"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!-- /.box-body -->
             </div>

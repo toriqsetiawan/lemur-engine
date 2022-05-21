@@ -136,6 +136,7 @@ class WildcardDataTable extends DataTable
                  }
                  ';
                 }],
+            'created_at'=> ['name'=>'created_at','data'=>'created_at', 'title'=>'Created', 'visible'=>false],
         ];
     }
 

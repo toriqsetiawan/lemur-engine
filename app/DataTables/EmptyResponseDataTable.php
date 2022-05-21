@@ -127,7 +127,7 @@ class EmptyResponseDataTable extends DataTable
             'input'=> ['title'=>'Input'],
             'occurrences'=> ['title'=>'Occurrences'],
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
-                'defaultContent'=>'', 'exportable'=>false, 'render' =>
+                'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
                 {
@@ -135,6 +135,7 @@ class EmptyResponseDataTable extends DataTable
                  }
                  ';
                 }],
+            'created_at'=> ['name'=>'created_at','data'=>'created_at', 'title'=>'Created', 'visible'=>false],
         ];
     }
 

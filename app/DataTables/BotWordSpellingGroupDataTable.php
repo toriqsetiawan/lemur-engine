@@ -120,7 +120,7 @@ class BotWordSpellingGroupDataTable extends DataTable
             'word_spelling_group'=> ['title'=>'WordSpellingGroup'],
             'email'=> ['name'=>'users.email','data'=>'email','title'=>'Owner', 'exportable'=>false],
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
-                'defaultContent'=>'', 'exportable'=>false, 'render' =>
+                'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
                 {
@@ -128,6 +128,7 @@ class BotWordSpellingGroupDataTable extends DataTable
                  }
                  ';
                 }],
+            'created_at'=> ['name'=>'created_at','data'=>'created_at', 'title'=>'Created', 'visible'=>false],
         ];
     }
 

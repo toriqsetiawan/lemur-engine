@@ -118,7 +118,7 @@ class UserDataTable extends DataTable
             'name',
             'email',
             'updated_at'=> ['name'=>'updated_at','data'=>'updated_at', 'title'=>'Updated',
-                'defaultContent'=>'', 'exportable'=>false, 'render' =>
+                'defaultContent'=>'', 'render' =>
                 function () {
                     return 'function(data, type, full, meta)
                 {

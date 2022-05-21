@@ -22,6 +22,7 @@ use App\Repositories\BotPropertyRepository;
 use App\Repositories\BotRepository;
 use App\Services\BotStatsService;
 use App\Services\TalkService;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -627,6 +628,70 @@ class BotController extends AppBaseController
         );
     }
 
+    /**
+     * Display all the properties for this bot in the tab
+     *
+     * @param $id
+     * @param BotStatsService $botStatsService
+     * @return Response
+     */
+    public function stat_download(Request $request, $id, BotStatsService $botStatsService)
+    {
+        $bot = $this->botRepository->find($id);
+        if (empty($bot)) {
+            Flash::error('Bot not found');
+            return redirect(route('bots.index'));
+        }
+
+        $from = $request->post('date_from');
+        if(empty($from)){
+            $from = Carbon::now()->subDay(1);
+        }else{
+            $from = Carbon::parse($from);
+        }
+
+        $to = $request->post('date_to');
+        if(empty($to)){
+            $to = Carbon::now();
+        }else{
+            $to = Carbon::parse($to);
+        }
+        $results = $botStatsService->getTurnByBotByConversationStats($bot->id, $from, $to);
+
+        $filenameFrom = $from->format('YmdHis');
+        $filenameTo = $to->format('YmdHis');
+
+        $fileName = str_replace(' ','-','stats-'.$bot->slug.'-'.$filenameFrom.'-'.$filenameTo.'.csv');
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('botId', 'botName', 'clientId', 'conversationId', 'Referer', 'IP');
+
+        $callback = function() use($results, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($results as $result) {
+                $row['botId']  = $result->bot_id;
+                $row['botName']    = $result->bot_name;
+                $row['clientId']    = $result->client_id;
+                $row['conversationId']  = $result->conversation_id;
+                $row['Referer']  = $result->referer;
+                $row['IP']  = $result->ip;
+                fputcsv($file, array($row['botId'], $row['botName'], $row['clientId'], $row['conversationId'], $row['Referer'], $row['IP']));
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+
+    }
+
 
     /**
      * Display all the properties for this bot in the tab
@@ -658,18 +723,7 @@ class BotController extends AppBaseController
         //list of bots for forms (but in this view we only want the bot we are looking at)
         $botList = Bot::where('id', $bot->id)->pluck('name', 'slug');
 
-
-
-
-
-
-
-
-
         session(['target_bot' => $bot]);
-
-
-
 
         return view('bots.edit_all')->with([
             'bot'=> $bot,
@@ -691,13 +745,7 @@ class BotController extends AppBaseController
                 'todayTurnStat' =>   $botStatsService->getTodayTurnStats($bot),
                 'daysInMonthKey' => $botStatsService->getDaysInMonthKey(),
                 'monthsInYearKey' => $botStatsService->getMonthsInYearKey(),
-
                 ]
-
-
-
-
-
         );
     }
 

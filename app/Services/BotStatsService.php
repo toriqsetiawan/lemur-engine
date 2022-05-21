@@ -11,6 +11,7 @@ use App\Models\WordSpellingGroup;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BotStatsService
 {
@@ -94,6 +95,20 @@ class BotStatsService
             ->pluck('data','day');
         return $this->fillMonthByDayData($monthlyTurnStat);
 
+    }
+
+    public function getTurnByBotByConversationStats($botId, $fromDate, $toDate){
+        return Turn::select(DB::raw('count(turns.id) as turns_total'),'bots.slug as bot_id', 'bots.name as bot_name', 'clients.slug as client_id', 'conversations.slug as conversation_id', 'conversation_sources.referer', 'conversation_sources.ip')
+            ->where('conversations.bot_id', $botId)
+            ->where('turns.source', 'human')
+            ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
+            ->join('bots', 'bots.id', '=', 'conversations.bot_id')
+            ->join('clients', 'clients.id', '=', 'conversations.client_id')
+            ->join('conversation_sources', 'conversations.id', '=', 'conversation_sources.conversation_id')
+            ->whereDate('turns.created_at', '>=', $fromDate )
+            ->whereDate('turns.created_at', '<=', $toDate )
+            ->groupBy('bots.id', 'clients.id', 'conversations.id', 'conversation_sources.id')
+            ->get();
     }
 
     public function fillYearByMonthData($yearByMonthStat){
