@@ -207,11 +207,14 @@ trait ConversationHelper
     public function getTurnValue($field, $skip = 1, $default = '')
     {
 
+            $query = Turn::where('conversation_id', $this->id)
+                ->where('source', 'human')->latest('id')->skip($skip)->first();
 
-            //have had to use ..
-            $res = Turn::where('conversation_id', $this->id)
-                ->where('source', 'human')->latest('id')->skip($skip)->first()->$field;
-
+            if($query !== null){
+                $res = $query->$field;
+            }else{
+                $res = false;
+            }
 
             LemurLog::debug(
                 __METHOD__,
@@ -225,7 +228,7 @@ trait ConversationHelper
                 ]
             );
 
-        if (empty($res) && $res!==0 && $res!=='0') {
+        if (empty($res) && $res!==0 && $res!=='0' ) {
             return $default;
         }
 
