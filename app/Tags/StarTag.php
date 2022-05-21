@@ -34,9 +34,6 @@ class StarTag extends AimlTag
 
     public function closeTag()
     {
-
-
-
         LemurLog::debug(__FUNCTION__, [
                 'conversation_id'=>$this->conversation->id,
                 'turn_id'=>$this->conversation->currentTurnId(),

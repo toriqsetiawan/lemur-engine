@@ -7,6 +7,7 @@ use App\Classes\LemurStr;
 use App\Models\BotProperty;
 use App\Models\ConversationProperty;
 use App\Models\Turn;
+use App\Models\Wildcard;
 use Exception;
 
 trait ConversationHelper
@@ -117,6 +118,13 @@ trait ConversationHelper
     public function getTopic()
     {
         return $this->getGlobalProperty('topic');
+    }
+
+
+    public function getTopicStar($conversationId, $offset = 0)
+    {
+        return Wildcard::where('conversation_id', $conversationId)
+            ->where('type', 'topicstar')->latest('id')->skip($offset)->first();
     }
 
     public function getThat()
