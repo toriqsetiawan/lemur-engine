@@ -8,14 +8,14 @@ return [
     |
     */
     'portal' =>
-        ['id' => '1.8.0'],
+        ['id' => '1.9.0'],
     'bot' =>
         ['id' => '1.7.0'],
     'release' => [
-        'version' => '1.8.0',
-        'name' => 'RollerWorld',
-        'description' => 'Adding machine learning support in the admin area and a machine learning tag. Adding data to track conversation sources ',
-        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.8.0',
+        'version' => '1.9.0',
+        'name' => 'Worldwide Pitbulls',
+        'description' => 'Added dates to csv download and created a stats download button on the stats page ',
+        'url' => 'https://github.com/theramenrobotdiscocode/lemur-engine/releases/tag/v1.9.0',
     ],
 
 ];
