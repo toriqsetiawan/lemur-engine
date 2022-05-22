@@ -102,7 +102,7 @@ class BotStatsService
             ->join('conversations', 'conversations.id', '=', 'turns.conversation_id')
             ->join('bots', 'bots.id', '=', 'conversations.bot_id')
             ->join('clients', 'clients.id', '=', 'conversations.client_id')
-            ->join('conversation_sources', 'conversations.id', '=', 'conversation_sources.conversation_id')
+            ->leftjoin('conversation_sources', 'conversations.id', '=', 'conversation_sources.conversation_id')
             ->where('conversations.bot_id', $botId)
             ->where('turns.source', 'human')
             ->whereDate('turns.created_at', '>=', $fromDate )
